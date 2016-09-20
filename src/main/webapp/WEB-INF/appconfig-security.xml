@@ -8,22 +8,34 @@
 		http://www.springframework.org/schema/security/spring-security.xsd">
 
     <http auto-config="true">
-        <intercept-url pattern="/" access="hasRole('ROLE_USER')"/>
-        <intercept-url pattern="/welcome" access="hasRole('ROLE_USER')"/>
-        <form-login login-page="/login" default-target-url="/welcome" authentication-failure-url="/login?error" username-parameter="username" password-parameter="password"/>
+        <csrf disabled="true"/>
+
+        <headers>
+            <xss-protection />
+            <frame-options />
+            <cache-control />
+            <hsts />
+            <content-type-options />
+        </headers>
+
+        <intercept-url pattern="/" access="hasRole('ADMIN')" />
+        <intercept-url pattern="/admin" access="hasRole('ADMIN')" />
+        <intercept-url pattern="/task" access="hasRole('ADMIN')" />
+
+        <intercept-url pattern="/ticket" access="permitAll" />
+        <form-login login-page="/login" default-target-url="/admin/" authentication-failure-url="/login?error" username-parameter="email" password-parameter="password" />
         <logout logout-success-url="/login?logout" />
     </http>
 
     <authentication-manager alias="authenticationManager">
         <authentication-provider user-service-ref="userDetailsServiceImpl">
-            <password-encoder ref="encoder"></password-encoder>
+            <!--<password-encoder ref="encoder"></password-encoder>-->
         </authentication-provider>
     </authentication-manager>
 
-    <beans:bean id="userDetailsServiceImpl" class="com.hellokoding.account.service.UserDetailsServiceImpl"></beans:bean>
+    <beans:bean id="userDetailsServiceImpl" class="pl.natekrank.service.UserDetailsServiceImpl" />
 
-    <beans:bean id="encoder"
-          class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+    <beans:bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
         <beans:constructor-arg name="strength" value="11"/>
     </beans:bean>
 </beans:beans>

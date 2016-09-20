@@ -6,15 +6,42 @@
 
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <context:property-placeholder location="classpath:application.properties"/>
+
     <import resource="appconfig-mvc.xml"/>
-
     <import resource="appconfig-data.xml"/>
-
     <import resource="appconfig-security.xml"/>
 
     <!-- Scans within the base package of the application for @Component classes to configure as beans -->
-    <context:component-scan base-package="com.hellokoding.account.*"/>
+    <context:component-scan base-package="pl.natekrank" />
+    <context:component-scan base-package="pl.natekrank.repository" />
+    <context:component-scan base-package="pl.natekrank.model" />
+    <context:component-scan base-package="pl.natekrank.service" />
+    <context:component-scan base-package="pl.natekrank.validator" />
+    <context:component-scan base-package="pl.natekrank.web" />
 
-    <context:property-placeholder location="classpath:application.properties"/>
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="annotatedClasses">
+            <list>
+                <value>pl.natekrank.model.User</value>
+                <value>pl.natekrank.model.Role</value>
+                <value>pl.natekrank.model.Task</value>
+                <value>pl.natekrank.model.Question</value>
+                <value>pl.natekrank.model.Answer</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <value>
+                hibernate.dialect=org.hibernate.dialect.H2Dialect
+                hibernate.show_sql=true
+            </value>
+        </property>
+    </bean>
 
+    <!-- Configure the transaction manager bean -->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
 </beans>

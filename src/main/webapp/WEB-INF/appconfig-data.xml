@@ -10,6 +10,14 @@
     http://www.springframework.org/schema/tx
     http://www.springframework.org/schema/tx/spring-tx.xsd">
 
+    <!-- Enable annotation driven transaction management -->
+    <tx:annotation-driven/>
+
+    <!--
+      Configure Spring Data JPA and set the base package of the
+      repository interfaces
+    -->
+    <jpa:repositories base-package="pl.natekrank.repository"/>
 
     <!-- Configure the data source bean -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
@@ -22,7 +30,7 @@
     <!-- Configure the entity manager factory bean -->
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="packagesToScan" value="com.hellokoding.account.model"/>
+        <property name="packagesToScan" value="pl.natekrank.model"/>
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
         </property>
@@ -33,21 +41,5 @@
             </props>
         </property>
     </bean>
-
-    <!-- Configure the transaction manager bean -->
-    <bean id="transactionManager"
-          class="org.springframework.orm.jpa.JpaTransactionManager">
-        <property name="entityManagerFactory" ref="entityManagerFactory"/>
-    </bean>
-
-    <!-- Enable annotation driven transaction management -->
-    <tx:annotation-driven/>
-
-    <!--
-      Configure Spring Data JPA and set the base package of the
-      repository interfaces
-    -->
-
-    <jpa:repositories base-package="com.hellokoding.account.repository"/>
 
 </beans>
