@@ -17,5 +17,5 @@ public class Answer {
 
     @Column(name = "is_right")
     private boolean right;
-    private int order;
+    private int orderNum;
 }

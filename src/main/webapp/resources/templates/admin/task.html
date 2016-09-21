@@ -25,7 +25,10 @@
                 </div>
             </div>
             <div class="tab-pane" id="questions">
-                Questions
+                <div class="list-group">
+                    <a href class="list-group-item" ng-repeat="question in task.questions">{{ question.text }}</a>
+                </div>
+                <input ng-click="addNewQuestion(task)" type="button" value="Add">
             </div>
             <div class="tab-pane" id="tickets">
                 Tickets

@@ -1,7 +1,9 @@
 package pl.natekrank.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -22,6 +24,9 @@ public class Task {
     private Date created;
     private Date modified;
 
-    @OneToMany(mappedBy = "task", fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY)
+    @Cascade(value = {org.hibernate.annotations.CascadeType.ALL})
+    @JoinColumn(name = "task_id", nullable = false, insertable = false, updatable = false)
+    @JsonManagedReference
     private List<Question> questions;
 }

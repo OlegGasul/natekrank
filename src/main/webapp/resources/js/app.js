@@ -70,6 +70,10 @@ function TaskController($scope, $location, TicketsService, TaskService, task) {
         });
     }
 
+    $scope.addNewQuestion = function(task) {
+        $scope.task.questions.push({ task_id: task.id, text: 'New question' });
+    }
+
     $scope.createTicket = function(ticket) {
         TicketsService.createTicket();
     }

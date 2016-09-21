@@ -6,6 +6,7 @@ import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import pl.natekrank.model.Question;
 import pl.natekrank.model.Task;
 import pl.natekrank.model.User;
 import org.hibernate.SessionFactory;
@@ -26,7 +27,7 @@ public class TaskDAOImpl extends HibernateDaoSupport implements TaskDAO {
         session.setCacheMode(CacheMode.IGNORE);
 
         List<Task> list = session.createCriteria(Task.class).addOrder(Order.asc("id")).list();
-        for(Task task: list) {
+        for (Task task: list) {
             Hibernate.initialize(task.getQuestions());
         }
 
