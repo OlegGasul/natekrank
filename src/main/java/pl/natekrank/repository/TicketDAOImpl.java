@@ -1,33 +1,32 @@
 package pl.natekrank.repository;
 
-import com.sun.javafx.fxml.expression.Expression;
 import org.hibernate.CacheMode;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
-import pl.natekrank.model.Task;
-import pl.natekrank.model.User;
-import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.stereotype.Service;
+import pl.natekrank.model.Task;
+import pl.natekrank.model.Ticket;
 
 import java.util.List;
 
 @Service
-public class TaskDAOImpl extends HibernateDaoSupport implements TaskDAO {
-    public TaskDAOImpl(SessionFactory sessionfactory) {
+public class TicketDAOImpl extends HibernateDaoSupport implements TicketDAO {
+    public TicketDAOImpl(SessionFactory sessionfactory) {
         setSessionFactory(sessionfactory);
     }
 
     @Override
-    public List<Task> getAllTasks() {
+    public List<Ticket> getAllTickets() {
         Session session = getSessionFactory().openSession();
         session.setCacheMode(CacheMode.IGNORE);
 
-        List<Task> list = session.createCriteria(Task.class).addOrder(Order.asc("id")).list();
-        for(Task task: list) {
-            Hibernate.initialize(task.getQuestions());
+        List<Ticket> list = session.createCriteria(Ticket.class).addOrder(Order.asc("id")).list();
+        for(Ticket ticket: list) {
+            Hibernate.initialize(ticket.getTicketAnswers());
         }
 
         if (session.isOpen()) {
@@ -38,31 +37,31 @@ public class TaskDAOImpl extends HibernateDaoSupport implements TaskDAO {
     }
 
     @Override
-    public Task save(Task task) {
+    public Ticket save(Ticket ticket) {
         Session session = getSessionFactory().openSession();
         session.setCacheMode(CacheMode.IGNORE);
 
-        session.saveOrUpdate(task);
+        session.saveOrUpdate(ticket);
         session.flush();
 
         if (session.isOpen()) {
             session.close();
         }
 
-        return task;
+        return ticket;
     }
 
-    public Task getTask(Long id) {
+    public Ticket getTicket(Long id) {
         Session session = getSessionFactory().openSession();
         session.setCacheMode(CacheMode.IGNORE);
 
-        Task task = (Task) session.createCriteria(Task.class).add(Restrictions.eq("id", id)).setCacheable(false).uniqueResult();
-        Hibernate.initialize(task.getQuestions());
+        Ticket ticket = (Ticket) session.createCriteria(Ticket.class).add(Restrictions.eq("id", id)).setCacheable(false).uniqueResult();
+        Hibernate.initialize(ticket.getTicketAnswers());
 
         if (session.isOpen()) {
             session.close();
         }
 
-        return task;
+        return ticket;
     }
 }

@@ -15,17 +15,29 @@ public class TaskController {
     private TaskService taskService;
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Task> save(@RequestBody Task task) {
+    public ResponseEntity<Task> insert(@RequestBody Task task) {
         return new ResponseEntity<>(taskService.save(task), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ResponseEntity<List<Task>> list() {
+    @RequestMapping(value = "/{id}", method = RequestMethod.POST)
+    public ResponseEntity<Task> updatePost(@PathVariable Long id, @RequestBody Task task) {
+        task.setId(id);
+        return new ResponseEntity<>(taskService.save(task), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<Task> updatePut(@PathVariable Long id, @RequestBody Task task) {
+        task.setId(id);
+        return new ResponseEntity<>(taskService.save(task), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<List<Task>> getList() {
         return new ResponseEntity<>(taskService.getAllTasks(), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Task> getTask(@PathVariable Long id) {
-        return new ResponseEntity<>(taskService.getTask(id), HttpStatus.OK);
+    public ResponseEntity<Task> getTaskById(@PathVariable Long id) {
+        return new ResponseEntity<>(taskService.getTaskById(id), HttpStatus.OK);
     }
 }

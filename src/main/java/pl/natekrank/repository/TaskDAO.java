@@ -6,7 +6,7 @@ import pl.natekrank.model.User;
 import java.util.List;
 
 public interface TaskDAO {
-    List<Task> findTasks();
+    List<Task> getAllTasks();
     Task save(Task task);
     Task getTask(Long id);
 }

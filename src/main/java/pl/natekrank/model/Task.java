@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -17,6 +18,9 @@ public class Task {
     private String description;
     @Column(name = "owner_id", insertable = false, updatable = false)
     private Long owner_id;
+
+    private Date created;
+    private Date modified;
 
     @OneToMany(mappedBy = "task", fetch = FetchType.LAZY)
     private List<Question> questions;

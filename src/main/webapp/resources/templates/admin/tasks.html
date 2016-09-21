@@ -3,16 +3,18 @@
 <table class="table table-hover">
     <thead>
     <tr>
-        <th>#</th>
         <th>Task</th>
-        <th>{{message}}</th>
+        <th>Description</th>
+        <th>Created</th>
+        <th>Modified</th>
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="task in tasks track by task.id" ng-click="showTask(task)">
-        <th scope="row">1</th>
+    <tr ng-repeat="task in tasks" ng-click="showTask(task)">
         <td>{{task.id}}</td>
         <td>{{task.description}}</td>
+        <td>{{task.created}}</td>
+        <td>{{task.modified}}</td>
     </tr>
     </tbody>
 </table>

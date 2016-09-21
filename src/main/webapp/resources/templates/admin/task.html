@@ -1,7 +1,37 @@
-<div>
-    Id: {{task.id}}
-</div>
+<a href="#create-ticket/{{task.id}}">Create ticket</a>
 
-<div>
-    description: {{task.description}}
-</div>
+<form action="#">
+    <input type="hidden" name="id" ng-model="task.id" />
+
+    <div id="exTab2">
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a  href data-target="#general" data-toggle="tab">General</a>
+            </li>
+            <li>
+                <a href data-target="#questions" data-toggle="tab">Questions</a>
+            </li>
+            <li>
+                <a href data-target="#tickets" data-toggle="tab">Tickets</a>
+            </li>
+        </ul>
+
+        <div class="tab-content ">
+            <div class="tab-pane active" id="general">
+                <div id="description-group" class="form-group">
+                    <div>Description</div>
+                    <textarea name="description" ng-model="task.description"></textarea>
+                    <span class="help-block"></span>
+                </div>
+            </div>
+            <div class="tab-pane" id="questions">
+                Questions
+            </div>
+            <div class="tab-pane" id="tickets">
+                Tickets
+            </div>
+        </div>
+    </div>
+
+    <input ng-click="saveTask()" type="button" value="Save task">
+</form>

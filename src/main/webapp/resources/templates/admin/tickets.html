@@ -2,21 +2,19 @@
     <thead>
     <tr>
         <th>#</th>
-        <th>Task</th>
-        <th>Description</th>
         <th>User</th>
+        <th>Key</th>
         <th>Started</th>
         <th>Finished</th>
     </tr>
     </thead>
     <tbody>
-    <tr>
-        <th scope="row">1</th>
-        <td>Task1</td>
-        <td>Task description</td>
-        <td>test@gmail.com</td>
-        <td>-</td>
-        <td>-</td>
+    <tr ng-repeat="ticket in tickets" ng-click="showTicket(ticket)">
+        <th scope="row">{{ticket.id}}</th>
+        <td>{{ticket.email}}</td>
+        <td>{{ticket.ticketKey}}</td>
+        <td>{{ticket.started}}</td>
+        <td>{{ticket.finished}}</td>
     </tr>
     </tbody>
 </table>

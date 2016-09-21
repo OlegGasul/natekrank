@@ -13,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin</title>
+    <title>NatekRank - Admin</title>
 
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
 
@@ -28,11 +28,11 @@
 
     <script src="${contextPath}/resources/js/angular.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js"></script>
-    <script src="${contextPath}/resources/js/admin/app.js"></script>
+    <script src="${contextPath}/resources/js/app.js"></script>
 </head>
 
 <body>
-<div class="container" ng-controller="AdminController as ctrl">
+<div class="container" ng-controller="IndexController">
     <h2>NatekRank</h2>
 
     <c:if test="${pageContext.request.userPrincipal.name != null}">
@@ -43,12 +43,12 @@
         Welcome ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Logout</a>
     </c:if>
 
-    <ul class="nav nav-pills">
+    <ul class="nav nav-pills" ng-controller="IndexController">
         <li role="presentation" ng-class="getClass('/tasks')"><a href="#tasks">Tasks</a></li>
         <li role="presentation" ng-class="getClass('/tickets')"><a href="#tickets">Tickets</a></li>
     </ul>
 
-    <div class="container">
+    <div>
         <div ui-view="content"></div>
     </div>
 </div>

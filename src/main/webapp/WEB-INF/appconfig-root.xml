@@ -35,6 +35,7 @@
             <value>
                 hibernate.dialect=org.hibernate.dialect.H2Dialect
                 hibernate.show_sql=true
+                hibernate.cache.use_query_cache=false
             </value>
         </property>
     </bean>
