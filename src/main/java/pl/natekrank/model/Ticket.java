@@ -1,7 +1,9 @@
 package pl.natekrank.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -35,6 +37,9 @@ public class Ticket {
     @Column(name = "minutes_for_solving")
     private int minutesForSolving;
 
-    @OneToMany(mappedBy = "ticket")
+    @OneToMany(fetch = FetchType.LAZY)
+    @Cascade(value = {org.hibernate.annotations.CascadeType.ALL})
+    @JoinColumn(name = "ticket_id", nullable = false, insertable = false, updatable = false)
+    @JsonManagedReference
     private List<TicketAnswer> ticketAnswers;
 }

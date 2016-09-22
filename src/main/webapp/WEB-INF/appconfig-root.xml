@@ -36,6 +36,7 @@
                 hibernate.dialect=org.hibernate.dialect.H2Dialect
                 hibernate.show_sql=true
                 hibernate.cache.use_query_cache=false
+                hibernate.enable_lazy_load_no_trans=true
             </value>
         </property>
     </bean>

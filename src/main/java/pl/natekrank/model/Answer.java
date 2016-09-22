@@ -1,5 +1,6 @@
 package pl.natekrank.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
@@ -12,7 +13,15 @@ public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name="question_id", insertable = false, updatable = false)
+    @JsonBackReference
+    private Question question;
+
+    @Column(name = "question_id", insertable = false, updatable = false)
     private Long question_id;
+
     private String text;
 
     @Column(name = "is_right")
