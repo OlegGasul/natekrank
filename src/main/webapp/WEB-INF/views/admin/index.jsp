@@ -28,7 +28,6 @@
     <script src="${contextPath}/resources/js/lib/bootstrap.min.js"></script>
 
     <script src="${contextPath}/resources/js/lib/angular.min.js"></script>
-    <%--<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js"></script>--%>
     <script src="${contextPath}/resources/js/lib/angular-ui-router.js"></script>
     <script src="${contextPath}/resources/js/app.js"></script>
 </head>

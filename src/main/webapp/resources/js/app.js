@@ -74,6 +74,10 @@ function TaskController($scope, $location, TicketsService, TaskService, task) {
         $scope.task.questions.push({ task_id: task.id, text: 'New question' });
     }
 
+    $scope.showQuestion = function(id) {
+
+    }
+
     $scope.createTicket = function(ticket) {
         TicketsService.createTicket();
     }
@@ -127,20 +131,6 @@ app.config(function($stateProvider) {
                 }
             }
         })
-        .state('task', {
-            url: '/task/:id',
-            views: {
-                'content': {
-                    templateUrl: '/resources/templates/admin/task.html',
-                    controller: 'TaskController',
-                    resolve: {
-                        task: function($stateParams, TaskService) {
-                            return TaskService.getTask($stateParams.id);
-                        }
-                    }
-                }
-            }
-        })
         .state('createTask', {
             url: '/create-task',
             views: {
@@ -150,6 +140,20 @@ app.config(function($stateProvider) {
                     resolve: {
                         task: function($stateParams, TaskService) {
                             return {};
+                        }
+                    }
+                }
+            }
+        })
+        .state('task', {
+            url: '/task/:id',
+            views: {
+                'content': {
+                    templateUrl: '/resources/templates/admin/task.html',
+                    controller: 'TaskController',
+                    resolve: {
+                        task: function($stateParams, TaskService) {
+                            return TaskService.getTask($stateParams.id);
                         }
                     }
                 }

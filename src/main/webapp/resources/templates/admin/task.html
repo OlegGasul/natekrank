@@ -26,7 +26,7 @@
             </div>
             <div class="tab-pane" id="questions">
                 <div class="list-group">
-                    <a href class="list-group-item" ng-repeat="question in task.questions">{{ question.text }}</a>
+                    <a ng-class="active" href class="list-group-item" ng-repeat="question in task.questions" ng-click="showQuestion(question.id)">{{ question.text }}</a>
                 </div>
                 <input ng-click="addNewQuestion(task)" type="button" value="Add">
             </div>

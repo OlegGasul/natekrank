@@ -1,5 +1,6 @@
 package pl.natekrank.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,7 +22,9 @@ public class Task {
     @Column(name = "owner_id", insertable = false, updatable = false)
     private Long owner_id;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     private Date created;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     private Date modified;
 
     @OneToMany(fetch = FetchType.LAZY)
