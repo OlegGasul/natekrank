@@ -1,5 +1,6 @@
 package pl.natekrank.service;
 
+import pl.natekrank.model.Question;
 import pl.natekrank.model.Task;
 import pl.natekrank.model.User;
 

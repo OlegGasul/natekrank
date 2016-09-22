@@ -6,6 +6,8 @@ import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import pl.natekrank.model.Question;
 import pl.natekrank.model.Task;
 import pl.natekrank.model.User;
@@ -21,7 +23,11 @@ public class TaskDAOImpl extends HibernateDaoSupport implements TaskDAO {
         setSessionFactory(sessionfactory);
     }
 
+    @Autowired
+    private SessionFactory sessionFactory;
+
     @Override
+    @Transactional(readOnly = true)
     public List<Task> getAllTasks() {
         Session session = getSessionFactory().openSession();
         session.setCacheMode(CacheMode.IGNORE);

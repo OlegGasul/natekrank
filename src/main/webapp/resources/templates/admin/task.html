@@ -24,17 +24,36 @@
                     <span class="help-block"></span>
                 </div>
             </div>
+
             <div class="tab-pane" id="questions">
-                <div class="list-group">
-                    <a ng-class="active" href class="list-group-item" ng-repeat="question in task.questions" ng-click="showQuestion(question.id)">{{ question.text }}</a>
+                <div class="container">
+                    <div class="list-group" id="questions-list">
+                        <a ng-class="active" href class="list-group-item" ng-repeat="question in task.questions" data-question-id="{{question.id}}" ng-click="editQuestion(question)">{{ question.text }}</a>
+                    </div>
+                    <div id="question-content">
+                        <div ng-controller="QuestionController">
+                            <div class="modal-header">
+                                Question dialog
+                            </div>
+                            <div class="modal-body">
+                                <label for="txtText" />
+                                <textarea id="txtText" ng-model="question.text" />
+                            </div>
+                            <div class="modal-footer">
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <input ng-click="addNewQuestion(task)" type="button" value="Add">
+
+                <input class="btn btn-primary" ng-click="addNewQuestion(task)" type="button" value="Add">
             </div>
+
             <div class="tab-pane" id="tickets">
                 Tickets
             </div>
         </div>
     </div>
 
-    <input ng-click="saveTask()" type="button" value="Save task">
+    <input class="btn btn-primary" ng-click="saveTask()" type="button" value="Save task">
 </form>

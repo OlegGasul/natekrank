@@ -1,3 +1,13 @@
 #questions {
+    width: 100%;
+}
+
+#questions-list {
     width: 400px;
+    float: left;
+}
+
+#question-content {
+    width: 100%;
+    float: left;
 }

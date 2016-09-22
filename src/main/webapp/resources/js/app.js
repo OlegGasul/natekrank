@@ -55,6 +55,7 @@ function TasksController($scope, $location, TaskService, tasks) {
 
 function TaskController($scope, $location, TicketsService, TaskService, task) {
     $scope.task = task;
+    $scope.currentQuestion = {};
 
     function goTo(path) {
         $location.path(path);
@@ -74,12 +75,19 @@ function TaskController($scope, $location, TicketsService, TaskService, task) {
         $scope.task.questions.push({ task_id: task.id, text: 'New question' });
     }
 
-    $scope.showQuestion = function(id) {
-
+    $scope.editQuestion = function(question) {
+        console.dir(question);
+        angular.element(document.getElementById("question-content")).scope().question = question;
     }
 
     $scope.createTicket = function(ticket) {
         TicketsService.createTicket();
+    }
+}
+
+function QuestionController($scope) {
+    $scope.saveQuestion = function(item) {
+        alert('aveQuestion');
     }
 }
 
@@ -112,6 +120,7 @@ var app = angular
     .controller('TaskController', TaskController)
     .controller('TicketsController', TicketsController)
     .controller('TicketController', TicketController)
+    .controller('QuestionController', QuestionController)
     .factory('TaskService', TaskService)
     .factory('TicketsService', TicketsService);
 
