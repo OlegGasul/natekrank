@@ -28,7 +28,7 @@
             <div class="tab-pane" id="questions">
                 <div class="container">
                     <div class="list-group" id="questions-list">
-                        <a ng-class="active" href class="list-group-item" ng-repeat="question in task.questions" data-question-id="{{question.id}}" ng-click="editQuestion(question)">{{ question.text }}</a>
+                        <a ng-class="active" href class="list-group-item" ng-repeat="question in task.questions" ng-click="editQuestion(question)">{{ question.text }}</a>
                     </div>
                     <div id="question-content">
                         <div ng-controller="QuestionController">
@@ -38,6 +38,15 @@
                             <div class="modal-body">
                                 <label for="txtText" />
                                 <textarea id="txtText" ng-model="question.text" />
+
+                                <fieldset>
+                                    <legend>Answers</legend>
+                                    <div ng-repeat="answer in question.answers">
+                                        <input type="text" ng-model="answer.text" />
+                                        <input type="checkbox" ng-model="answer.right" />
+                                    </div>
+                                    <input class="btn btn-primary" ng-click="addNewAnswer(question)" type="button" value="Add new answer">
+                                </fieldset>
                             </div>
                             <div class="modal-footer">
 
@@ -46,7 +55,7 @@
                     </div>
                 </div>
 
-                <input class="btn btn-primary" ng-click="addNewQuestion(task)" type="button" value="Add">
+                <input class="btn btn-primary" ng-click="addNewQuestion(task)" type="button" value="Add new question">
             </div>
 
             <div class="tab-pane" id="tickets">
