@@ -57,6 +57,6 @@ public class UserController {
 
     @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
     public String welcome(Model model) {
-        return "user/welcome";
+        return "redirect:/admin";
     }
 }

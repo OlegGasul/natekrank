@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/admin/*")
 public class AdminController {
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String registration(Authentication authentication, Model model) {
+    @RequestMapping(method = RequestMethod.GET)
+    public String index(Authentication authentication, Model model) {
 
         return "admin/index";
     }
