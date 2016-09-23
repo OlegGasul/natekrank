@@ -3,11 +3,51 @@
 }
 
 #questions-list {
+    margin-top: 15px;
     width: 400px;
     float: left;
 }
 
 #question-content {
-    width: 100%;
+    margin-top: 15px;
+    margin-left: 20px;
     float: left;
+}
+
+#logo {
+    float: left;
+}
+
+.tab-pane {
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    border-radius: 0px 0px 5px 5px;
+    padding: 10px;
+}
+
+.nav-tabs {
+    margin-bottom: 0;
+}
+
+.task-tab-content {
+    min-height: 400px;
+}
+
+.control-buttons {
+    margin-top: 20px;
+    padding-right: 10px;
+}
+
+.input-small {
+    width: 100px;
+}
+
+.input-medium {
+    width: 400px;
+}
+
+.textarea-medium {
+    width: 600px;
+    height: 250px;
 }

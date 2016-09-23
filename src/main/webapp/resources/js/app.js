@@ -15,31 +15,35 @@ function TaskService($http) {
         return $http({ method: 'post', url: '/task', data: task });
     }
 
-    function createTicket(ticket) {
-        return $http({ method: 'post', url: '/ticket', data: ticket });
+    function createTestTaken(testTaken) {
+        return $http({ method: 'post', url: '/test-taken', data: ticket });
     }
 
     return {
         getTasks: getTasks,
         getTask: getTask,
         saveTask: saveTask,
-        createTicket: createTicket
+        createTestTaken: createTestTaken
     }
 }
 
-function TicketsService($http) {
-    function getTickets() {
-        return $http.get('/ticket').then(function(response) {
+function TestTakenService($http) {
+    function getTestsTaken() {
+        return $http.get('/tests').then(function(response) {
             return response.data;
         });
     }
 
     return {
-        getTickets: getTickets
+        getTestsTaken: getTestsTaken
     }
 }
 
 function IndexController($scope, $location, $http, TaskService) {
+    $scope.createTask = function() {
+        $location.path('/create-task');
+    };
+
     $scope.getClass = function (path) {
         return ($location.path().substr(0, path.length) === path) ? 'active' : '';
     };
@@ -53,7 +57,7 @@ function TasksController($scope, $location, TaskService, tasks) {
     }
 }
 
-function TaskController($scope, $location, TicketsService, TaskService, task) {
+function TaskController($scope, $location, TestTakenService, TaskService, task) {
     $scope.task = task;
 
     function goTo(path) {
@@ -70,7 +74,13 @@ function TaskController($scope, $location, TicketsService, TaskService, task) {
         });
     }
 
+    $scope.sendTest = function() {
+        goTo('/send-test/' + $scope.task.id);
+    }
+
     $scope.addNewQuestion = function(task) {
+        if (!$scope.task.questions)
+            $scope.task.questions = [];
         $scope.task.questions.push({ task_id: task.id, text: 'New question' });
     }
 
@@ -79,13 +89,15 @@ function TaskController($scope, $location, TicketsService, TaskService, task) {
         angular.element(document.getElementById("question-content")).scope().question = question;
     }
 
-    $scope.createTicket = function(ticket) {
-        TicketsService.createTicket();
+    $scope.createTestTaken = function(testTaken) {
+        TestTakenService.createTestTaken();
     }
 }
 
 function QuestionController($scope) {
     $scope.addNewAnswer = function(question) {
+        if (!question.answers)
+            question.answers = [];
         question.answers.push({ question_id: question.id, text: 'New answer' });
     }
 }
@@ -94,25 +106,10 @@ function AnswerController($scope) {
 
 }
 
-function TicketsController($scope, $location, TicketsService, tickets) {
-    $scope.tickets = tickets;
+function TestTakenController($scope, testsTaken) {
+    $scope.testsTaken = testsTaken;
+    $scope.showTest = function() {
 
-    $scope.showTicket = function(ticket) {
-        $location.path('/ticket/' + ticket.id);
-    }
-}
-
-function TicketController($scope, $location, TicketsService, ticket) {
-    $scope.ticket = ticket;
-
-    $scope.saveTicket = function() {
-        TaskService.saveTicket($scope.ticket).then(function successCallback(response) {
-            $scope.ticket = response.data;
-            goTo('/ticket/' + $scope.ticket.id);
-        }, function errorCallback(response) {
-            console.log('saveTicket error!');
-            console.dir(response);
-        });
     }
 }
 
@@ -121,12 +118,10 @@ var app = angular
     .controller('IndexController', IndexController)
     .controller('TasksController', TasksController)
     .controller('TaskController', TaskController)
-    .controller('TicketsController', TicketsController)
-    .controller('TicketController', TicketController)
     .controller('QuestionController', QuestionController)
     .controller('AnswerController', AnswerController)
     .factory('TaskService', TaskService)
-    .factory('TicketsService', TicketsService);
+    .factory('TestTakenService', TestTakenService);
 
 app.config(function($stateProvider) {
     $stateProvider
@@ -172,15 +167,24 @@ app.config(function($stateProvider) {
                 }
             }
         })
-        .state('tickets', {
-            url: '/tickets',
+        .state('test', {
+            url: '/send-test/:taskId',
             views: {
                 'content': {
-                    templateUrl: '/resources/templates/admin/tickets.html',
-                    controller: 'TicketsController',
+                    templateUrl: '/resources/templates/admin/testsTaken.html',
+                    controller: 'TestTakenController'
+                }
+            }
+        })
+        .state('tests', {
+            url: '/tests',
+            views: {
+                'content': {
+                    templateUrl: '/resources/templates/admin/testsTaken.html',
+                    controller: 'TestTakenController',
                     resolve: {
-                        tickets: function(TicketsService) {
-                            return TicketsService.getTickets();
+                        testsTaken: function(TestTakenService) {
+                            return TestTakenService.getTestsTaken();
                         }
                     }
                 }

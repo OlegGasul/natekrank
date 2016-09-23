@@ -6,19 +6,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import pl.natekrank.model.Ticket;
-import pl.natekrank.service.TicketService;
+import pl.natekrank.model.TestTaken;
+import pl.natekrank.service.TestService;
 
 import java.util.List;
 
 @Controller
-@RequestMapping("/ticket")
-public class TicketController {
+@RequestMapping("/tests")
+public class TestsController {
     @Autowired
-    private TicketService ticketService;
+    private TestService testService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<Ticket>> getList() {
-        return new ResponseEntity<>(ticketService.getAllTickets(), HttpStatus.OK);
+    public ResponseEntity<List<TestTaken>> getList() {
+        return new ResponseEntity<>(testService.getAllTickets(), HttpStatus.OK);
     }
 }

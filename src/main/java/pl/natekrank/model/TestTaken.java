@@ -1,5 +1,6 @@
 package pl.natekrank.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,22 +11,26 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "tickets")
+@Table(name = "tests_taken")
 @Getter
 @Setter
-public class Ticket {
+public class TestTaken {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String email;
 
-    @Column(name = "ticket_key")
-    private Date ticketKey;
+    private String sender;
+    private String email;
+    private boolean sent;
+
+    private String ticket;
 
     @Column(name = "due_to")
     private Date dueTo;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     private Date started;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     private Date finished;
 
     @Column(name = "first_name")
@@ -39,7 +44,7 @@ public class Ticket {
 
     @OneToMany(fetch = FetchType.LAZY)
     @Cascade(value = {org.hibernate.annotations.CascadeType.ALL})
-    @JoinColumn(name = "ticket_id", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "test_taken_id", nullable = false, insertable = false, updatable = false)
     @JsonManagedReference
-    private List<TicketAnswer> ticketAnswers;
+    private List<TestTakenAnswer> testTakenAnswers;
 }

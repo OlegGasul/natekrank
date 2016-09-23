@@ -18,12 +18,22 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    private String name;
     private String description;
+
     @Column(name = "owner_id", insertable = false, updatable = false)
     private Long owner_id;
 
+    @Column(name = "days_expired")
+    private int daysExpired;
+
+    @Column(name = "minutes_for_solving")
+    private int minutesForSolving;
+
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     private Date created;
+
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     private Date modified;
 

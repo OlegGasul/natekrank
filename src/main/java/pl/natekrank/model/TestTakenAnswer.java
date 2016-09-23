@@ -6,18 +6,18 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "ticket_answers")
+@Table(name = "tests_taken_answers")
 @Getter
 @Setter
-public class TicketAnswer {
+public class TestTakenAnswer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="ticket_id", insertable = false, updatable = false)
+    @JoinColumn(name="test_taken_id", insertable = false, updatable = false)
     @JsonBackReference
-    private Ticket ticket;
+    private TestTaken ticket;
 
     @ManyToOne
     @JoinColumn(name="question_id", insertable = false, updatable = false)
@@ -32,7 +32,7 @@ public class TicketAnswer {
     @Column(name = "question_id", insertable = false, updatable = false)
     private Long question_id;
     @Column(name = "ticket_id", insertable = false, updatable = false)
-    private Long ticket_id;
+    private Long test_taken_id;
     @Column(name = "selected_answer_id", insertable = false, updatable = false)
     private Long selected_answer_id;
 }

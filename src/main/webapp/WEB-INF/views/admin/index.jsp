@@ -6,6 +6,8 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="app">
 <head>
+    <link rel="apple-touch-icon" href="${contextPath}/resources/images/favicon.ico">
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -34,19 +36,24 @@
 
 <body>
 <div class="container" ng-controller="IndexController">
-    <h2>NatekRank</h2>
+    <div class="container">
+        <div id="logo">
+            <img src="${contextPath}/resources/images/small-logo.png" border="0" />
+            <h2>NatekRank</h2>
+        </div>
 
-    <c:if test="${pageContext.request.userPrincipal.name != null}">
-        <form id="logoutForm" method="POST" action="${contextPath}/logout">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        </form>
+        <c:if test="${pageContext.request.userPrincipal.name != null}">
+            <form id="logoutForm" method="POST" action="${contextPath}/logout">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            </form>
 
-        Welcome ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Logout</a>
-    </c:if>
+            ${pageContext.request.userPrincipal.name} | <a href="#" onclick="document.forms['logoutForm'].submit()">Logout</a>
+        </c:if>
+    </div>
 
     <ul class="nav nav-pills" ng-controller="IndexController">
-        <li role="presentation" ng-class="getClass('/tasks')"><a href="#tasks">Tasks</a></li>
-        <li role="presentation" ng-class="getClass('/tickets')"><a href="#tickets">Tickets</a></li>
+        <li role="presentation" ng-class="getClass('/tasks')"><a href="#tasks">Task defenitions</a></li>
+        <li role="presentation" ng-class="getClass('/tests')"><a href="#tests">Tests taken</a></li>
     </ul>
 
     <div>

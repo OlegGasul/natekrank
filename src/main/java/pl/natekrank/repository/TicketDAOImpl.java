@@ -8,8 +8,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.stereotype.Service;
-import pl.natekrank.model.Task;
-import pl.natekrank.model.Ticket;
+import pl.natekrank.model.TestTaken;
 
 import java.util.List;
 
@@ -20,13 +19,13 @@ public class TicketDAOImpl extends HibernateDaoSupport implements TicketDAO {
     }
 
     @Override
-    public List<Ticket> getAllTickets() {
+    public List<TestTaken> getAllTickets() {
         Session session = getSessionFactory().openSession();
         session.setCacheMode(CacheMode.IGNORE);
 
-        List<Ticket> list = session.createCriteria(Ticket.class).addOrder(Order.asc("id")).list();
-        for(Ticket ticket: list) {
-            Hibernate.initialize(ticket.getTicketAnswers());
+        List<TestTaken> list = session.createCriteria(TestTaken.class).addOrder(Order.asc("id")).list();
+        for(TestTaken testTaken: list) {
+            Hibernate.initialize(testTaken.getTestTakenAnswers());
         }
 
         if (session.isOpen()) {
@@ -37,7 +36,7 @@ public class TicketDAOImpl extends HibernateDaoSupport implements TicketDAO {
     }
 
     @Override
-    public Ticket save(Ticket ticket) {
+    public TestTaken save(TestTaken ticket) {
         Session session = getSessionFactory().openSession();
         session.setCacheMode(CacheMode.IGNORE);
 
@@ -51,17 +50,17 @@ public class TicketDAOImpl extends HibernateDaoSupport implements TicketDAO {
         return ticket;
     }
 
-    public Ticket getTicket(Long id) {
+    public TestTaken getTicket(Long id) {
         Session session = getSessionFactory().openSession();
         session.setCacheMode(CacheMode.IGNORE);
 
-        Ticket ticket = (Ticket) session.createCriteria(Ticket.class).add(Restrictions.eq("id", id)).setCacheable(false).uniqueResult();
-        Hibernate.initialize(ticket.getTicketAnswers());
+        TestTaken testTaken = (TestTaken) session.createCriteria(TestTaken.class).add(Restrictions.eq("id", id)).setCacheable(false).uniqueResult();
+        Hibernate.initialize(testTaken.getTestTakenAnswers());
 
         if (session.isOpen()) {
             session.close();
         }
 
-        return ticket;
+        return testTaken;
     }
 }

@@ -1,12 +1,11 @@
 package pl.natekrank.repository;
 
-import pl.natekrank.model.Task;
-import pl.natekrank.model.Ticket;
+import pl.natekrank.model.TestTaken;
 
 import java.util.List;
 
 public interface TicketDAO {
-    List<Ticket> getAllTickets();
-    Ticket save(Ticket task);
-    Ticket getTicket(Long id);
+    List<TestTaken> getAllTickets();
+    TestTaken save(TestTaken task);
+    TestTaken getTicket(Long id);
 }
