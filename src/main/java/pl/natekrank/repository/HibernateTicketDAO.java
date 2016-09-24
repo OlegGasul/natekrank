@@ -13,8 +13,8 @@ import pl.natekrank.model.TestTaken;
 import java.util.List;
 
 @Service
-public class TicketDAOImpl extends HibernateDaoSupport implements TicketDAO {
-    public TicketDAOImpl(SessionFactory sessionfactory) {
+public class HibernateTicketDAO extends HibernateDaoSupport implements TicketDAO {
+    public HibernateTicketDAO(SessionFactory sessionfactory) {
         setSessionFactory(sessionfactory);
     }
 

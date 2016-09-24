@@ -18,8 +18,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class TaskDAOImpl extends HibernateDaoSupport implements TaskDAO {
-    public TaskDAOImpl(SessionFactory sessionfactory) {
+public class HibernateTaskDAO extends HibernateDaoSupport implements TaskDAO {
+    public HibernateTaskDAO(SessionFactory sessionfactory) {
         setSessionFactory(sessionfactory);
     }
 
