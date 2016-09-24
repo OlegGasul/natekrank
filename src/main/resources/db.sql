@@ -188,12 +188,12 @@ VALUES('test@natek.pl', '1', 'Test', 'Test', true);
 INSERT INTO user_roles(user_id, role)
 VALUES(1, 'ROLE_ADMIN');
 
-INSERT INTO tasks(owner_id, description, days_expired, minutes_for_solving)
-VALUES(1, 'Task #1', 7, 90);
-INSERT INTO tasks(owner_id, description, days_expired, minutes_for_solving)
-VALUES(1, 'Task #2', 7, 90);
-INSERT INTO tasks(owner_id, description, days_expired, minutes_for_solving)
-VALUES(1, 'Task #3', 7, 90);
+INSERT INTO tasks(owner_id, name, description, days_expired, minutes_for_solving)
+VALUES(1, 'Task #1', 'Task #1 description', 7, 90);
+INSERT INTO tasks(owner_id, name, description, days_expired, minutes_for_solving)
+VALUES(1, 'Task #2', 'Task #2 description', 7, 90);
+INSERT INTO tasks(owner_id, name, description, days_expired, minutes_for_solving)
+VALUES(1, 'Task #3', 'Task #3 description', 7, 90);
 
 INSERT INTO tests_taken(task_id, ticket, email, first_name, last_name, minutes_for_solving)
 VALUES(1, 'ABCDEF', 'oleg.gasul@gmail.com', 'Oleg', 'Gasiul', 90);

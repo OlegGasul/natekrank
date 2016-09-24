@@ -60,6 +60,9 @@ function TasksController($scope, $location, TaskService, tasks) {
 function TaskController($scope, $location, TestTakenService, TaskService, task) {
     $scope.task = task;
 
+    $scope.selectedQuestion = null;
+    angular.element(document.getElementById("question-content")).scope().question = null;
+
     function goTo(path) {
         $location.path(path);
     }
@@ -78,15 +81,31 @@ function TaskController($scope, $location, TestTakenService, TaskService, task) 
         goTo('/send-test/' + $scope.task.id);
     }
 
-    $scope.addNewQuestion = function(task) {
+    $scope.addNewQuestion = function() {
         if (!$scope.task.questions)
             $scope.task.questions = [];
         $scope.task.questions.push({ task_id: task.id, text: 'New question' });
+
+        var lastQuestion = $scope.task.questions[$scope.task.questions.length - 1];
+        $scope.selectedQuestion = lastQuestion;
+        angular.element(document.getElementById("question-content")).scope().question = lastQuestion;
     }
 
     $scope.editQuestion = function(question) {
-        console.dir(question);
         angular.element(document.getElementById("question-content")).scope().question = question;
+        $scope.selectedQuestion = question;
+    }
+
+    $scope.getClass = function(question) {
+        return $scope.selectedQuestion == question ? 'active' : '';
+    };
+
+    $scope.removeSelectedQuestions = function() {
+        for (var i = $scope.task.questions.length - 1; i >= 0; i--) {
+            if ($scope.task.questions[i].selected) {
+                $scope.task.questions.splice(i, 1);
+            }
+        }
     }
 
     $scope.createTestTaken = function(testTaken) {
@@ -99,6 +118,14 @@ function QuestionController($scope) {
         if (!question.answers)
             question.answers = [];
         question.answers.push({ question_id: question.id, text: 'New answer' });
+    }
+
+    $scope.removeSelectedAnswers = function() {
+        for (var i = $scope.question.answers.length - 1; i >= 0; i--) {
+            if ($scope.question.answers[i].selected) {
+                $scope.question.answers.splice(i, 1);
+            }
+        }
     }
 }
 

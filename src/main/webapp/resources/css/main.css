@@ -4,11 +4,12 @@
 
 #questions-list {
     margin-top: 15px;
-    width: 400px;
+    width: 284px;
     float: left;
 }
 
 #question-content {
+    width: 800px;
     margin-top: 15px;
     margin-left: 20px;
     float: left;
@@ -50,4 +51,23 @@
 .textarea-medium {
     width: 600px;
     height: 250px;
+}
+
+.text-answer {
+    width: 450px;
+    height: 100%;
+}
+
+a.active {
+    background-color: #337ab7;
+}
+
+.cell-checkbox {
+    float: left;
+    width: 21px;
+}
+
+.cell-question {
+    float: left;
+    width: 255px;
 }
