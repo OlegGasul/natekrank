@@ -33,6 +33,9 @@ public class TestTaken {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     private Date finished;
 
+    @Column(name = "sender_notified")
+    private boolean senderNotified;
+
     @Column(name = "first_name")
     private String firstName;
 
