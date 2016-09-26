@@ -1,5 +1,6 @@
 package pl.natekrank.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
@@ -19,11 +20,21 @@ public class TestTaken {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name="task_id")
+    @JsonBackReference
+    private Task task;
+
+    @Column(name = "task_id", insertable = false, updatable = false)
+    private Long taskId;
+
     private String sender;
     private String email;
+    private String message;
     private boolean sent;
 
-    private String ticket;
+    @Column(name = "test_key")
+    private String testKey;
 
     @Column(name = "due_to")
     private Date dueTo;
@@ -48,6 +59,6 @@ public class TestTaken {
     @OneToMany(fetch = FetchType.LAZY)
     @Cascade(value = {org.hibernate.annotations.CascadeType.ALL})
     @JoinColumn(name = "test_taken_id", nullable = false, insertable = false, updatable = false)
-    @JsonManagedReference
+//    @JsonManagedReference(value = "test-test_answer")
     private List<TestTakenAnswer> testTakenAnswers;
 }

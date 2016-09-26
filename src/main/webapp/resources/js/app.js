@@ -15,15 +15,10 @@ function TaskService($http) {
         return $http({ method: 'post', url: '/task', data: task });
     }
 
-    function createTestTaken(testTaken) {
-        return $http({ method: 'post', url: '/test-taken', data: ticket });
-    }
-
     return {
         getTasks: getTasks,
         getTask: getTask,
-        saveTask: saveTask,
-        createTestTaken: createTestTaken
+        saveTask: saveTask
     }
 }
 
@@ -34,8 +29,13 @@ function TestTakenService($http) {
         });
     }
 
+    function sendTest(test) {
+        return $http({ method: 'post', url: '/test', data: test });
+    }
+
     return {
-        getTestsTaken: getTestsTaken
+        getTestsTaken: getTestsTaken,
+        sendTest: sendTest
     }
 }
 
@@ -133,10 +133,18 @@ function AnswerController($scope) {
 
 }
 
-function TestTakenController($scope, testsTaken) {
+function TestsTakenController($scope, testsTaken) {
     $scope.testsTaken = testsTaken;
     $scope.showTest = function() {
 
+    }
+}
+
+function TestTakenController($scope, TestTakenService, test) {
+    $scope.test = test;
+
+    $scope.sendTest = function() {
+        TestTakenService.sendTest($scope.test);
     }
 }
 
@@ -147,6 +155,8 @@ var app = angular
     .controller('TaskController', TaskController)
     .controller('QuestionController', QuestionController)
     .controller('AnswerController', AnswerController)
+    .controller('TestsTakenController', TestsTakenController)
+    .controller('TestTakenController', TestTakenController)
     .factory('TaskService', TaskService)
     .factory('TestTakenService', TestTakenService);
 
@@ -198,8 +208,13 @@ app.config(function($stateProvider) {
             url: '/send-test/:taskId',
             views: {
                 'content': {
-                    templateUrl: '/resources/templates/admin/testsTaken.html',
-                    controller: 'TestTakenController'
+                    templateUrl: '/resources/templates/admin/testTaken.html',
+                    controller: 'TestTakenController',
+                    resolve: {
+                        test: function($stateParams) {
+                            return { message: 'Default message', taskId: $stateParams.taskId };
+                        }
+                    }
                 }
             }
         })

@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.stereotype.Service;
 import pl.natekrank.model.TestTaken;
@@ -13,10 +14,13 @@ import pl.natekrank.model.TestTaken;
 import java.util.List;
 
 @Service
-public class HibernateTicketDAO extends HibernateDaoSupport implements TicketDAO {
-    public HibernateTicketDAO(SessionFactory sessionfactory) {
+public class HibernateTestTakenDAO extends HibernateDaoSupport implements TestTakenDAO {
+    public HibernateTestTakenDAO(SessionFactory sessionfactory) {
         setSessionFactory(sessionfactory);
     }
+
+    @Autowired
+    private TaskDAO taskDAO;
 
     @Override
     public List<TestTaken> getAllTickets() {
@@ -36,21 +40,23 @@ public class HibernateTicketDAO extends HibernateDaoSupport implements TicketDAO
     }
 
     @Override
-    public TestTaken save(TestTaken ticket) {
+    public TestTaken save(TestTaken testTaken) {
         Session session = getSessionFactory().openSession();
         session.setCacheMode(CacheMode.IGNORE);
 
-        session.saveOrUpdate(ticket);
+        testTaken.setTask(taskDAO.getTask(testTaken.getTaskId()));
+
+        session.saveOrUpdate(testTaken);
         session.flush();
 
         if (session.isOpen()) {
             session.close();
         }
 
-        return ticket;
+        return testTaken;
     }
 
-    public TestTaken getTicket(Long id) {
+    public TestTaken getTestTaken(Long id) {
         Session session = getSessionFactory().openSession();
         session.setCacheMode(CacheMode.IGNORE);
 

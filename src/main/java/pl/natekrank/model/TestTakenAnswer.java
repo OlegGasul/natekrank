@@ -16,17 +16,15 @@ public class TestTakenAnswer {
 
     @ManyToOne
     @JoinColumn(name="test_taken_id", insertable = false, updatable = false)
-    @JsonBackReference
-    private TestTaken ticket;
+//    @JsonBackReference(value = "test_answer-test")
+    private TestTaken testTaken;
 
     @ManyToOne
     @JoinColumn(name="question_id", insertable = false, updatable = false)
-    @JsonBackReference
     private Question question;
 
     @ManyToOne
     @JoinColumn(name="selected_answer_id", insertable = false, updatable = false)
-    @JsonBackReference
     private Answer selectedAnswer;
 
     @Column(name = "question_id", insertable = false, updatable = false)

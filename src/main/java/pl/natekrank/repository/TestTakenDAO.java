@@ -4,8 +4,8 @@ import pl.natekrank.model.TestTaken;
 
 import java.util.List;
 
-public interface TicketDAO {
+public interface TestTakenDAO {
     List<TestTaken> getAllTickets();
     TestTaken save(TestTaken task);
-    TestTaken getTicket(Long id);
+    TestTaken getTestTaken(Long id);
 }
