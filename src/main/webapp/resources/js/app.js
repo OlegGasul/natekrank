@@ -211,8 +211,14 @@ app.config(function($stateProvider) {
                     templateUrl: '/resources/templates/admin/testTaken.html',
                     controller: 'TestTakenController',
                     resolve: {
-                        test: function($stateParams) {
-                            return { message: 'Default message', taskId: $stateParams.taskId };
+                        test: function($stateParams, TaskService) {
+                            return TaskService.getTask($stateParams.taskId).then(function(task) {
+                                return {
+                                    taskId: $stateParams.taskId,
+                                    daysExpired: task.daysExpired,
+                                    minutesForSolving: task.minutesForSolving
+                                };
+                            });
                         }
                     }
                 }
