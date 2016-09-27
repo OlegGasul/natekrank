@@ -1,4 +1,4 @@
-package pl.natekrank.web;
+package pl.natekrank.web.rest;
 
 import org.springframework.web.bind.annotation.*;
 import pl.natekrank.model.Question;
@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 @RestController
-@RequestMapping("/task")
+@RequestMapping("/rest/task")
 public class TaskController {
     @Autowired
     private TaskService taskService;

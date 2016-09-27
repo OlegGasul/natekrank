@@ -57,6 +57,6 @@ public class Survey {
 
     @OneToMany(fetch = FetchType.LAZY)
     @Cascade(value = {org.hibernate.annotations.CascadeType.ALL})
-    @JoinColumn(name = "test_taken_id", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "survey_id", nullable = false, insertable = false, updatable = false)
     private List<SurveyAnswer> surveyAnswers;
 }

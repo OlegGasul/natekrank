@@ -35,7 +35,7 @@
 </head>
 
 <body>
-<div class="container" ng-controller="IndexController">
+<div class="container" ng-controller="IndexController" ng-init="init('${pageContext.request.userPrincipal.name}')">
     <div class="container">
         <div id="logo">
             <img src="${contextPath}/resources/images/small-logo.png" border="0" />

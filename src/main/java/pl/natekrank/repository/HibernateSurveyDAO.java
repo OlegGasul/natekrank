@@ -74,7 +74,7 @@ public class HibernateSurveyDAO extends HibernateDaoSupport implements SurveyDAO
         Session session = getSessionFactory().openSession();
         session.setCacheMode(CacheMode.IGNORE);
 
-        Survey survey = (Survey) session.createCriteria(Survey.class).add(Restrictions.eq("testKey", testKey)).setCacheable(false).uniqueResult();
+        Survey survey = (Survey) session.createCriteria(Survey.class).add(Restrictions.eq("surveyKey", testKey)).setCacheable(false).uniqueResult();
         Hibernate.initialize(survey.getSurveyAnswers());
 
         if (session.isOpen()) {
@@ -82,5 +82,22 @@ public class HibernateSurveyDAO extends HibernateDaoSupport implements SurveyDAO
         }
 
         return survey;
+    }
+
+    @Override
+    public List<Survey> getQueueSurveys() {
+        Session session = getSessionFactory().openSession();
+        session.setCacheMode(CacheMode.IGNORE);
+
+        List<Survey> list = session.createCriteria(Survey.class)
+            .add(Restrictions.eq("sent", false))
+            .addOrder(Order.asc("id"))
+            .list();
+
+        if (session.isOpen()) {
+            session.close();
+        }
+
+        return list;
     }
 }

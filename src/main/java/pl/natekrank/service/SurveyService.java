@@ -7,4 +7,6 @@ import java.util.List;
 public interface SurveyService {
     Survey save(Survey survey);
     List<Survey> getAllSurveys();
+    Survey getSurveyById(Long id);
+    Survey getSurveyByKey(String surveyKey);
 }

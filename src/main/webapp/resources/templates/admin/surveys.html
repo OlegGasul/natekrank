@@ -9,12 +9,12 @@
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="test in testsTaken" ng-click="showTest(test)">
-        <th scope="row">{{test.id}}</th>
-        <td>{{test.email}}</td>
-        <td>{{test.ticketKey}}</td>
-        <td>{{test.started}}</td>
-        <td>{{test.finished}}</td>
+    <tr ng-repeat="survey in surveys" ng-click="showSurvey(survey)">
+        <th scope="row">{{survey.id}}</th>
+        <td>{{survey.email}}</td>
+        <td>{{survey.surveyKey}}</td>
+        <td>{{survey.started}}</td>
+        <td>{{survey.finished}}</td>
     </tr>
     </tbody>
 </table>

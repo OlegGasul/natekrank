@@ -1,18 +1,18 @@
 function TaskService($http) {
     function getTasks() {
-        return $http.get('/task').then(function(response) {
+        return $http.get('/rest/task').then(function(response) {
             return response.data;
         });
     }
 
     function getTask(id) {
-        return $http.get('/task/' + id).then(function(response) {
+        return $http.get('/rest/task/' + id).then(function(response) {
             return response.data;
         });
     }
 
     function saveTask(task) {
-        return $http({ method: 'post', url: '/task', data: task });
+        return $http({ method: 'post', url: '/rest/task', data: task });
     }
 
     return {
@@ -24,22 +24,33 @@ function TaskService($http) {
 
 function SurveyService($http) {
     function getSurveys() {
-        return $http.get('/survey').then(function(response) {
+        return $http.get('/rest/survey').then(function(response) {
             return response.data;
         });
     }
 
-    function createSurvey(survey) {
-        return $http({ method: 'post', url: '/survey', data: survey });
+    function getSurvey(surveyId) {
+        return $http.get('/rest/survey/' + surveyId).then(function(response) {
+            return response.data;
+        });
+    }
+
+    function saveSurvey(survey) {
+        return $http({ method: 'post', url: '/rest/survey', data: survey });
     }
 
     return {
-        getTestsTaken: getSurveys,
-        createSurvey: createSurvey
+        getSurveys: getSurveys,
+        saveSurvey: saveSurvey,
+        getSurvey: getSurvey
     }
 }
 
-function IndexController($scope, $location, $http, TaskService) {
+function IndexController($rootScope, $scope, $location, $http, TaskService) {
+    $scope.init = function(email) {
+        $rootScope.email = email;
+    }
+
     $scope.createTask = function() {
         $location.path('/create-task');
     };
@@ -63,14 +74,10 @@ function TaskController($scope, $location, TaskService, task) {
     $scope.selectedQuestion = null;
     angular.element(document.getElementById("question-content")).scope().question = null;
 
-    function goTo(path) {
-        $location.path(path);
-    }
-
     $scope.saveTask = function() {
         TaskService.saveTask($scope.task).then(function successCallback(response) {
             $scope.task = response.data;
-            goTo('/task/' + $scope.task.id);
+            $location.path('/task/' + $scope.task.id);
         }, function errorCallback(response) {
             console.log('saveTask error!');
             console.dir(response);
@@ -78,7 +85,7 @@ function TaskController($scope, $location, TaskService, task) {
     }
 
     $scope.createSurvey = function() {
-        goTo('/create-survey/' + $scope.task.id);
+        $location.path('/create-survey/' + $scope.task.id);
     }
 
     $scope.addNewQuestion = function() {
@@ -136,11 +143,16 @@ function SurveysController($scope, surveys) {
     }
 }
 
-function SurveyController($scope, SurveyService, survey) {
+function SurveyController($rootScope, $scope, $location, SurveyService, survey) {
     $scope.survey = survey;
 
-    $scope.createSurvey = function() {
-        SurveyService.createSurvey($scope.survey);
+    $scope.saveSurvey = function() {
+        $scope.survey.sender =  $rootScope.email;
+
+        SurveyService.saveSurvey($scope.survey).then(function successCallback(response) {
+            $scope.survey = response.data;
+            $location.path('/survey/' + $scope.survey.id);
+        });
     }
 }
 
@@ -225,10 +237,24 @@ app.config(function($stateProvider) {
             views: {
                 'content': {
                     templateUrl: '/resources/templates/admin/surveys.html',
-                    controller: 'SurveyController',
+                    controller: 'SurveysController',
                     resolve: {
                         surveys: function(SurveyService) {
-                            return SurveyService.getTestsTaken();
+                            return SurveyService.getSurveys();
+                        }
+                    }
+                }
+            }
+        })
+        .state('survey', {
+            url: '/survey/:surveyId',
+            views: {
+                'content': {
+                    templateUrl: '/resources/templates/admin/survey.html',
+                    controller: 'SurveysController',
+                    resolve: {
+                        survey: function($stateParams, SurveyService) {
+                            return SurveyService.getSurvey($stateParams.surveyId);
                         }
                     }
                 }
