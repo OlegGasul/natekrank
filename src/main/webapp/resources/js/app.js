@@ -22,20 +22,20 @@ function TaskService($http) {
     }
 }
 
-function TestTakenService($http) {
-    function getTestsTaken() {
-        return $http.get('/tests').then(function(response) {
+function SurveyService($http) {
+    function getSurveys() {
+        return $http.get('/survey').then(function(response) {
             return response.data;
         });
     }
 
-    function sendTest(test) {
-        return $http({ method: 'post', url: '/test', data: test });
+    function createSurvey(survey) {
+        return $http({ method: 'post', url: '/survey', data: survey });
     }
 
     return {
-        getTestsTaken: getTestsTaken,
-        sendTest: sendTest
+        getTestsTaken: getSurveys,
+        createSurvey: createSurvey
     }
 }
 
@@ -57,7 +57,7 @@ function TasksController($scope, $location, TaskService, tasks) {
     }
 }
 
-function TaskController($scope, $location, TestTakenService, TaskService, task) {
+function TaskController($scope, $location, TaskService, task) {
     $scope.task = task;
 
     $scope.selectedQuestion = null;
@@ -77,8 +77,8 @@ function TaskController($scope, $location, TestTakenService, TaskService, task) 
         });
     }
 
-    $scope.sendTest = function() {
-        goTo('/send-test/' + $scope.task.id);
+    $scope.createSurvey = function() {
+        goTo('/create-survey/' + $scope.task.id);
     }
 
     $scope.addNewQuestion = function() {
@@ -107,10 +107,6 @@ function TaskController($scope, $location, TestTakenService, TaskService, task) 
             }
         }
     }
-
-    $scope.createTestTaken = function(testTaken) {
-        TestTakenService.createTestTaken();
-    }
 }
 
 function QuestionController($scope) {
@@ -133,18 +129,18 @@ function AnswerController($scope) {
 
 }
 
-function TestsTakenController($scope, testsTaken) {
-    $scope.testsTaken = testsTaken;
-    $scope.showTest = function() {
+function SurveysController($scope, surveys) {
+    $scope.surveys = surveys;
+    $scope.showSurvey = function() {
 
     }
 }
 
-function TestTakenController($scope, TestTakenService, test) {
-    $scope.test = test;
+function SurveyController($scope, SurveyService, survey) {
+    $scope.survey = survey;
 
-    $scope.sendTest = function() {
-        TestTakenService.sendTest($scope.test);
+    $scope.createSurvey = function() {
+        SurveyService.createSurvey($scope.survey);
     }
 }
 
@@ -155,10 +151,10 @@ var app = angular
     .controller('TaskController', TaskController)
     .controller('QuestionController', QuestionController)
     .controller('AnswerController', AnswerController)
-    .controller('TestsTakenController', TestsTakenController)
-    .controller('TestTakenController', TestTakenController)
+    .controller('SurveysController', SurveysController)
+    .controller('SurveyController', SurveyController)
     .factory('TaskService', TaskService)
-    .factory('TestTakenService', TestTakenService);
+    .factory('SurveyService', SurveyService);
 
 app.config(function($stateProvider) {
     $stateProvider
@@ -204,14 +200,14 @@ app.config(function($stateProvider) {
                 }
             }
         })
-        .state('test', {
-            url: '/send-test/:taskId',
+        .state('createSurvey', {
+            url: '/create-survey/:taskId',
             views: {
                 'content': {
-                    templateUrl: '/resources/templates/admin/testTaken.html',
-                    controller: 'TestTakenController',
+                    templateUrl: '/resources/templates/admin/survey.html',
+                    controller: 'SurveyController',
                     resolve: {
-                        test: function($stateParams, TaskService) {
+                        survey: function($stateParams, TaskService) {
                             return TaskService.getTask($stateParams.taskId).then(function(task) {
                                 return {
                                     taskId: $stateParams.taskId,
@@ -224,15 +220,15 @@ app.config(function($stateProvider) {
                 }
             }
         })
-        .state('tests', {
-            url: '/tests',
+        .state('surveys', {
+            url: '/surveys',
             views: {
                 'content': {
-                    templateUrl: '/resources/templates/admin/testsTaken.html',
-                    controller: 'TestTakenController',
+                    templateUrl: '/resources/templates/admin/surveys.html',
+                    controller: 'SurveyController',
                     resolve: {
-                        testsTaken: function(TestTakenService) {
-                            return TestTakenService.getTestsTaken();
+                        surveys: function(SurveyService) {
+                            return SurveyService.getTestsTaken();
                         }
                     }
                 }

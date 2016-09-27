@@ -29,8 +29,8 @@
                 <value>pl.natekrank.model.Task</value>
                 <value>pl.natekrank.model.Question</value>
                 <value>pl.natekrank.model.Answer</value>
-                <value>pl.natekrank.model.TestTaken</value>
-                <value>pl.natekrank.model.TestTakenAnswer</value>
+                <value>pl.natekrank.model.Survey</value>
+                <value>pl.natekrank.model.SurveyAnswer</value>
             </list>
         </property>
         <property name="hibernateProperties">

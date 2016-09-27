@@ -22,7 +22,8 @@
         <intercept-url pattern="/admin" access="hasRole('ADMIN')" />
         <intercept-url pattern="/task" access="hasRole('ADMIN')" />
 
-        <intercept-url pattern="/ticket" access="permitAll" />
+        <intercept-url pattern="/survey" access="permitAll" />
+
         <form-login login-page="/login" default-target-url="/admin/" authentication-failure-url="/login?error" username-parameter="email" password-parameter="password" />
         <logout logout-success-url="/login?logout" />
     </http>
