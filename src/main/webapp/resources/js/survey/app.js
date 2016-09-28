@@ -28,7 +28,7 @@ function SurveyController($rootScope, $scope, $location, SurveyService) {
     }
 
     $scope.start = function() {
-        $location.url("./start");
+        $location.url("?start=1");
     };
 }
 

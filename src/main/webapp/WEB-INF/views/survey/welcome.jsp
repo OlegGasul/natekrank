@@ -47,7 +47,7 @@
     <input class="btn btn-primary" ng-click="start()" type="button" value="Start test">
 </div>
 <!-- /container -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="${contextPath}/resources/js/lib/jquery.min.js"></script>
 <script src="${contextPath}/resources/js/lib/bootstrap.min.js"></script>
 </body>
 </html>
