@@ -50,14 +50,14 @@
     </bean>
 
     <task:scheduled-tasks scheduler="myScheduler">
-        <task:scheduled ref="surveyScheduler" method="processSurveys" fixed-delay="5000" />
+        <task:scheduled ref="surveyScheduler" method="processSurveys" cron="" fixed-delay="5000" />
     </task:scheduled-tasks>
 
     <task:scheduler id="myScheduler"/>
 
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-        <property name="host" value="smtp.gmail.com" />
-        <property name="port" value="587" />
+        <property name="host" value="aspmx.l.google.com" />
+        <property name="port" value="25" />
         <property name="username" value="oleg.gasul@gmail.com" />
 		<property name="password" value="anacondaOLEg1982Oleg#" />
 

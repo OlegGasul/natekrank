@@ -15,7 +15,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>NatekRank - Admin</title>
+    <title>NatekRank - Survey</title>
 
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="${contextPath}/resources/css/main.css" rel="stylesheet">
@@ -26,40 +26,28 @@
     <script src="${contextPath}/resources/js/lib/respond.min.js"></script>
     <![endif]-->
 
-    <script src="${contextPath}/resources/js/lib/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="${contextPath}/resources/js/lib/bootstrap.min.js"></script>
 
     <script src="${contextPath}/resources/js/lib/angular.min.js"></script>
     <script src="${contextPath}/resources/js/lib/angular-ui-router.js"></script>
-    <script src="${contextPath}/resources/js/admin/app.js"></script>
+    <script src="${contextPath}/resources/js/survey/app.js"></script>
 </head>
 
 <body>
-<div class="container" ng-controller="IndexController" ng-init="init('${pageContext.request.userPrincipal.name}')">
-    <div class="container">
-        <div id="logo">
-            <img src="${contextPath}/resources/images/small-logo.png" border="0" />
-            <h2>NatekRank</h2>
-        </div>
+<div class="container" ng-controller="SurveyController">
 
-        <c:if test="${pageContext.request.userPrincipal.name != null}">
-            <form id="logoutForm" method="POST" action="${contextPath}/logout">
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            </form>
+    <h2>Welcome ${survey.firstName} ${survey.lastName}</h2>
 
-            ${pageContext.request.userPrincipal.name} | <a href="#" onclick="document.forms['logoutForm'].submit()">Logout</a>
-        </c:if>
-    </div>
+    <p>
+        We offer you to pass this Test. You will have only ${survey.minutesForSolving} minutes.
+        When you be ready please push button "Start test".
+    </p>
 
-    <ul class="nav nav-pills" ng-controller="IndexController">
-        <li role="presentation" ng-class="getClass('/tasks')"><a href="#tasks">Task defenitions</a></li>
-        <li role="presentation" ng-class="getClass('/surveys')"><a href="#surveys">Tests taken</a></li>
-    </ul>
-
-    <div>
-        <div ui-view="content"></div>
-    </div>
+    <input class="btn btn-primary" ng-click="start()" type="button" value="Start test">
 </div>
-
+<!-- /container -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="${contextPath}/resources/js/lib/bootstrap.min.js"></script>
 </body>
 </html>

@@ -192,6 +192,3 @@ VALUES(1, 'ROLE_ADMIN');
 
 INSERT INTO tasks(owner_id, name, description, days_expired, minutes_for_solving)
 VALUES(1, 'Task #1', 'Task #1 description', 7, 90);
-
-INSERT INTO surveys(task_id, survey_key, sender, email, first_name, last_name, minutes_for_solving)
-VALUES(1, '12345678', 'oleg.gasul@gmail.com', 'oleg.gasul@gmail.com', 'Oleg', 'Gasiul', 90);

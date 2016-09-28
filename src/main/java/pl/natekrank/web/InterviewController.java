@@ -3,10 +3,7 @@ package pl.natekrank.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import pl.natekrank.model.Survey;
 import pl.natekrank.model.User;
@@ -20,8 +17,8 @@ public class InterviewController {
     private SurveyService surveyService;
 
     @RequestMapping(value = "/{surveyKey}", method = RequestMethod.GET)
-    public String index(@PathVariable("surveyKey") String testKey, Model model) {
-        Survey survey = surveyService.getSurveyByKey(testKey);
+    public String index(@PathVariable("surveyKey") String surveyKey, @RequestParam("start") String start, Model model) {
+        Survey survey = surveyService.getSurveyByKey(surveyKey);
         if (survey == null) {
             return error(model, "Survey does't exists.");
         }
@@ -31,7 +28,13 @@ public class InterviewController {
 
         model.addAttribute("survey", survey);
 
-        return "survey/welcome";
+
+
+        if ("1".equals(start) || survey.getStarted() != null) {
+            return "survey/survey";
+        } else {
+            return "survey/welcome";
+        }
     }
 
     public String error(Model model, String errorMessage) {
