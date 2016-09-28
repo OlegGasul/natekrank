@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -11,25 +12,15 @@ import java.util.List;
 @Getter
 @Setter
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "user_id")
     private Long id;
     private String email;
     private String password;
-    private String passwordConfirm;
-    private List<Role> roles;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    public Long getId() {
-        return id;
-    }
-
     @Transient
-    public String getPasswordConfirm() {
-        return passwordConfirm;
-    }
+    private String passwordConfirm;
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy="user_id")
+    private List<Role> roles = new ArrayList<>();
 
-    @OneToMany(fetch=FetchType.EAGER, cascade = {CascadeType.ALL}, mappedBy="user_id")
-    public List<Role> getRoles() {
-        return roles;
-    }
 }
