@@ -37,14 +37,14 @@
 <body>
 <div class="container" ng-controller="SurveyController">
 
-    <h2>Welcome ${survey.firstName} ${survey.lastName}</h2>
+    <h2>Welcome!</h2>
 
     <p>
-        We offer you to pass this Test. You will have only ${survey.minutesForSolving} minutes.
+        We offer you to pass this Test. You will have only 90 minutes.
         When you be ready please push button "Start test".
     </p>
 
-    <input class="btn btn-primary" ng-click="start()" type="button" value="Start test">
+    <a href="?start=1">Start test</a>
 </div>
 <!-- /container -->
 <script src="${contextPath}/resources/js/lib/jquery.min.js"></script>

@@ -59,4 +59,6 @@ public class Survey {
     @Cascade(value = {org.hibernate.annotations.CascadeType.ALL})
     @JoinColumn(name = "survey_id", nullable = false, insertable = false, updatable = false)
     private List<SurveyAnswer> surveyAnswers;
+
+    private Double score;
 }

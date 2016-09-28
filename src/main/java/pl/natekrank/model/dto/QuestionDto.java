@@ -9,5 +9,7 @@ import java.util.List;
 @Getter
 @Setter
 public class QuestionDto {
-    private List<Answer> answers;
+    private Long id;
+    private List<AnswerDto> answers;
+    private boolean multiSelect;
 }

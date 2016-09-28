@@ -12,15 +12,15 @@ import pl.natekrank.model.User;
 import pl.natekrank.service.SurveyService;
 
 @Controller
-@RequestMapping("/result/{surveyKey}")
+@RequestMapping("/result")
 public class ResultController {
     @Autowired
     private SurveyService surveyService;
 
-    @RequestMapping(method = RequestMethod.GET)
-    public String result(@PathVariable("testKey") String testKey, Model model) {
-        Survey survey = surveyService.getSurveyByKey(testKey);
+    @RequestMapping(value = "/{surveyKey}", method = RequestMethod.GET)
+    public String result(@PathVariable("surveyKey") String surveyKey, Model model) {
+        Survey survey = surveyService.getSurveyByKey(surveyKey);
 
-        return "result/index";
+        return "survey/result";
     }
 }

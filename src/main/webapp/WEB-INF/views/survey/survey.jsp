@@ -35,19 +35,52 @@
 </head>
 
 <body>
-<div class="container" ng-controller="SurveyController">
 
-    <h2>Welcome ${survey.firstName} ${survey.lastName}</h2>
+<div class="container" ng-controller="SurveyController" ng-init='init(${survey})'>
+    <div class="container">
+        <div id="logo">
+            <img src="${contextPath}/resources/images/small-logo.png" border="0" />
+            <h2>NatekRank</h2>
+        </div>
+    </div>
 
-    <p>
-        We offer you to pass this Test. You will have only ${survey.minutesForSolving} minutes.
-        When you be ready please push button "Start test".
-    </p>
+    <div class="container">
+        <div class="list-group" id="questions-list">
+            <div ng-repeat="question in survey.task.questions track by $index">
+                <div class="cell-question">
+                    <li role="presentation" ng-click="selectQuestion(question)" ng-class="getClass(question)" href class="list-group-item">
+                        {{$index + 1}}
+                    </li>
+                </div>
+            </div>
+        </div>
 
-    <input class="btn btn-primary" ng-click="start()" type="button" value="Start test">
+        <div id="question-content" ng-show="selectedQuestion" ng-controller="QuestionController">
+            <div>
+                <form>
+                    <div ng-repeat="answer in question.answers track by $index" ng-show="question.multiSelect">
+                        <input id="checkbox{{$index}}" type="checkbox" ng-model="answer.checked" />
+                        <label for="checkbox{{$index}}">{{answer.text}}</label>
+                    </div>
+                    <div ng-repeat="answer in question.answers track by $index" ng-show="!question.multiSelect">
+                        <input id="radio{{$index}}" name="answer" type="radio" ng-model="answer.checked" />
+                        <label for="radio{{$index}}">{{answer.text}}</label>
+                    </div>
+
+                    <div class="control-buttons">
+                        <input class="btn btn-primary" ng-click="prevQuestion(question)" type="button" value="Prev">
+                        <input class="btn btn-primary" ng-click="submitQuestion(question)" type="button" value="Submit">
+                        <input class="btn btn-primary" ng-click="nextQuestion(question)" type="button" value="Next">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <input class="btn btn-primary" ng-click="submitTest()" type="button" value="Submit test">
 </div>
 <!-- /container -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="${contextPath}/resources/js/lib/jquery.min.js"></script>
 <script src="${contextPath}/resources/js/lib/bootstrap.min.js"></script>
 </body>
 </html>

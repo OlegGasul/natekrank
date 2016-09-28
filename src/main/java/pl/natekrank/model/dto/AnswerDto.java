@@ -6,4 +6,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AnswerDto {
+    private Long id;
+    private String text;
+    private int orderNum;
+    private boolean checked = false;
 }
