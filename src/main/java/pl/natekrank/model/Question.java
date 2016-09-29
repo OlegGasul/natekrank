@@ -23,7 +23,7 @@ public class Question {
     @JsonBackReference
     private Task task;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER)
     @Cascade(value = {org.hibernate.annotations.CascadeType.ALL})
     @JoinColumn(name = "question_id", nullable = false, insertable = false, updatable = false)
     @JsonManagedReference
