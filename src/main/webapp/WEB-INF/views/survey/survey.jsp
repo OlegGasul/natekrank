@@ -58,12 +58,15 @@
         <div id="question-content" ng-show="selectedQuestion" ng-controller="QuestionController">
             <div>
                 <form>
+                    <div>
+                        {{question.text}}
+                    </div>
                     <div ng-repeat="answer in question.answers track by $index" ng-show="question.multiSelect">
-                        <input id="checkbox{{$index}}" type="checkbox" ng-model="answer.checked" />
+                        <input id="checkbox{{$index}}" type="checkbox" ng-model="answer.checked" ng-change="changeAnswer(answer)" />
                         <label for="checkbox{{$index}}">{{answer.text}}</label>
                     </div>
                     <div ng-repeat="answer in question.answers track by $index" ng-show="!question.multiSelect">
-                        <input id="radio{{$index}}" name="answer" type="radio" ng-model="answer.checked" />
+                        <input id="radio{{$index}}" name="answer" type="radio" ng-value="true" ng-model="answer.checked" ng-change="changeAnswer(answer)" />
                         <label for="radio{{$index}}">{{answer.text}}</label>
                     </div>
 
@@ -77,7 +80,7 @@
         </div>
     </div>
 
-    <input class="btn btn-primary" ng-click="submitTest()" type="button" value="Submit test">
+    <input class="btn btn-primary" ng-click="submitSurvey()" type="button" value="Submit test">
 </div>
 <!-- /container -->
 <script src="${contextPath}/resources/js/lib/jquery.min.js"></script>

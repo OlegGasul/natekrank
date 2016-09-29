@@ -3,14 +3,11 @@ package pl.natekrank.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.natekrank.helpers.SurveyHelper;
-import pl.natekrank.model.Question;
-import pl.natekrank.model.Survey;
-import pl.natekrank.model.Task;
+import pl.natekrank.model.*;
 import pl.natekrank.model.dto.QuestionDto;
 import pl.natekrank.model.dto.SurveyDto;
 import pl.natekrank.model.dto.TaskDto;
 import pl.natekrank.repository.SurveyDAO;
-import pl.natekrank.repository.TaskDAO;
 
 import java.util.Date;
 import java.util.LinkedList;
@@ -58,18 +55,36 @@ public class SurveyServiceImpl implements SurveyService {
     public Survey submitSurvey(SurveyDto surveyDto) {
         Survey survey = surveyDAO.getSurvey(surveyDto.getSurveyKey());
         Task task = survey.getTask();
-        survey.setSurveyAnswers(new LinkedList<>());
+
 
         TaskDto surveyTask = surveyDto.getTask();
+        List<SurveyAnswer> surveyAnswers = new LinkedList<>();
 
         List<Question> questions = task.getQuestions();
         for (Question question : questions) {
+
             QuestionDto questionDto = surveyTask.getQuestions()
-                .stream()
-                .filter(q -> q.getId() == question.getId())
-                .findFirst().get();
+                    .stream()
+                    .filter(q -> q.getId().equals(question.getId()))
+                    .findFirst().get();
+
+            questionDto.getAnswers().stream()
+                    .filter(answerDto -> answerDto.isChecked())
+                    .forEach(answerDto -> {
+                        Answer answer = question.getAnswers().stream()
+                                .filter(a -> answerDto.getId().equals(a.getId()))
+                                .findFirst().get();
+
+                        SurveyAnswer surveyAnswer = new SurveyAnswer();
+                        surveyAnswer.setSurvey(survey);
+                        surveyAnswer.setQuestion(question);
+                        surveyAnswer.setSelectedAnswer(answer);
+                        surveyAnswers.add(surveyAnswer);
+                    });
         }
 
-        return survey;
+        survey.setSurveyAnswers(surveyAnswers);
+
+        return surveyDAO.save(survey);
     }
 }

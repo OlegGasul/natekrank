@@ -12,4 +12,5 @@ public class QuestionDto {
     private Long id;
     private List<AnswerDto> answers;
     private boolean multiSelect;
+    private String text;
 }

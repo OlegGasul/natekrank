@@ -66,13 +66,23 @@ function SurveyController($rootScope, $scope, $location, SurveyService) {
     }
 
     $scope.submitSurvey = function() {
-        SurveyService.submitSurvey($scope.survey);
-        location.href = "/result/";
+        SurveyService.submitSurvey($scope.survey).then(function() {
+            location.href = "/result/" + $scope.survey.surveyKey;
+        });
     };
 }
 
 function QuestionController($rootScope, $scope, $location, SurveyService) {
-
+    $scope.changeAnswer = function(answer) {
+        if (!$scope.question.multiSelect) {
+            for (var i in $scope.question.answers) {
+                var ans = $scope.question.answers[i];
+                if (ans != answer) {
+                    ans.checked = false;
+                }
+            }
+        }
+    }
 }
 
 var app = angular

@@ -19,8 +19,8 @@
         </headers>
 
         <intercept-url pattern="/" access="hasRole('ADMIN')" />
-        <intercept-url pattern="/admin" access="hasRole('ADMIN')" />
-        <intercept-url pattern="/rest" access="hasRole('ADMIN')" />
+        <intercept-url pattern="/admin/**" access="hasRole('ADMIN')" />
+        <intercept-url pattern="/rest/**" access="hasRole('ADMIN')" />
 
         <intercept-url pattern="/survey" access="permitAll" />
 
