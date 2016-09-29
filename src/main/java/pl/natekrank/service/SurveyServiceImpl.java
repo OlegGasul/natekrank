@@ -56,7 +56,6 @@ public class SurveyServiceImpl implements SurveyService {
         Survey survey = surveyDAO.getSurvey(surveyDto.getSurveyKey());
         Task task = survey.getTask();
 
-
         TaskDto surveyTask = surveyDto.getTask();
         List<SurveyAnswer> surveyAnswers = new LinkedList<>();
 

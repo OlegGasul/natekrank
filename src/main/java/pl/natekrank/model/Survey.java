@@ -56,7 +56,7 @@ public class Survey {
     @Column(name = "minutes_for_solving")
     private int minutesForSolving;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
     @Cascade(value = {org.hibernate.annotations.CascadeType.ALL})
     @JoinColumn(name = "survey_id", nullable = false, insertable = false, updatable = false)
     @JsonManagedReference

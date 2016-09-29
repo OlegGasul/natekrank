@@ -21,10 +21,12 @@ public class SurveyAnswer {
 
     @ManyToOne
     @JoinColumn(name="question_id", insertable = false, updatable = false)
+    @JsonBackReference
     private Question question;
 
     @ManyToOne
     @JoinColumn(name="selected_answer_id", insertable = false, updatable = false)
+    @JsonBackReference
     private Answer selectedAnswer;
 
     @Column(name = "survey_id", insertable = false, updatable = false)
