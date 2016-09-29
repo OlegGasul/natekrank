@@ -27,10 +27,10 @@ public class SurveyAnswer {
     @JoinColumn(name="selected_answer_id", insertable = false, updatable = false)
     private Answer selectedAnswer;
 
-    @Column(name = "question_id", insertable = false, updatable = false)
-    private Long question_id;
     @Column(name = "survey_id", insertable = false, updatable = false)
     private Long survey_id;
+    @Column(name = "question_id", insertable = false, updatable = false)
+    private Long question_id;
     @Column(name = "selected_answer_id", insertable = false, updatable = false)
     private Long selected_answer_id;
 }
