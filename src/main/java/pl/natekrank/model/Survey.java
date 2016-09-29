@@ -2,6 +2,7 @@ package pl.natekrank.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Cascade;
@@ -58,6 +59,7 @@ public class Survey {
     @OneToMany(fetch = FetchType.LAZY)
     @Cascade(value = {org.hibernate.annotations.CascadeType.ALL})
     @JoinColumn(name = "survey_id", nullable = false, insertable = false, updatable = false)
+    @JsonManagedReference
     private List<SurveyAnswer> surveyAnswers;
 
     private Double score;

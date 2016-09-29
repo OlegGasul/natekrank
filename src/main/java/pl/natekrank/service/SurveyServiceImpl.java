@@ -62,13 +62,10 @@ public class SurveyServiceImpl implements SurveyService {
 
         List<Question> questions = task.getQuestions();
         for (Question question : questions) {
-
-            QuestionDto questionDto = surveyTask.getQuestions()
+            surveyTask.getQuestions()
                     .stream()
                     .filter(q -> q.getId().equals(question.getId()))
-                    .findFirst().get();
-
-            questionDto.getAnswers().stream()
+                    .findFirst().get().getAnswers().stream()
                     .filter(answerDto -> answerDto.isChecked())
                     .forEach(answerDto -> {
                         Answer answer = question.getAnswers().stream()

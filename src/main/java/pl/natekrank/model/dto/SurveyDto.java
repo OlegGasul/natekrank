@@ -1,5 +1,6 @@
 package pl.natekrank.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 import pl.natekrank.model.SurveyAnswer;
@@ -11,7 +12,10 @@ import java.util.List;
 @Setter
 public class SurveyDto {
     private Long id;
+
+    @JsonManagedReference
     private TaskDto task;
+
     private int minutesForSolving;
     private Date dueTo;
     private String surveyKey;

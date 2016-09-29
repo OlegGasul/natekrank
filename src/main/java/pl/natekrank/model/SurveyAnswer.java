@@ -16,6 +16,7 @@ public class SurveyAnswer {
 
     @ManyToOne
     @JoinColumn(name="survey_id", insertable = false, updatable = false)
+    @JsonBackReference
     private Survey survey;
 
     @ManyToOne
