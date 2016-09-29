@@ -1,19 +1,14 @@
 package pl.natekrank.model.dto;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
-import pl.natekrank.model.SurveyAnswer;
-
 import java.util.Date;
-import java.util.List;
 
 @Getter
 @Setter
 public class SurveyDto {
     private Long id;
 
-    @JsonManagedReference
     private TaskDto task;
 
     private int minutesForSolving;
