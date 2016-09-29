@@ -20,13 +20,11 @@ public class SurveyAnswer {
     private Survey survey;
 
     @ManyToOne
-    @JoinColumn(name="question_id", insertable = false, updatable = false)
-    @JsonBackReference
+    @JoinColumn(name="question_id")
     private Question question;
 
     @ManyToOne
-    @JoinColumn(name="selected_answer_id", insertable = false, updatable = false)
-    @JsonBackReference
+    @JoinColumn(name="selected_answer_id")
     private Answer selectedAnswer;
 
     @Column(name = "survey_id", insertable = false, updatable = false)

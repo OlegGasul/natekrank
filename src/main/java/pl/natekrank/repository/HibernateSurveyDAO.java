@@ -75,7 +75,9 @@ public class HibernateSurveyDAO extends HibernateDaoSupport implements SurveyDAO
         session.setCacheMode(CacheMode.IGNORE);
 
         Survey survey = (Survey) session.createCriteria(Survey.class).add(Restrictions.eq("surveyKey", testKey)).setCacheable(false).uniqueResult();
-        Hibernate.initialize(survey.getSurveyAnswers());
+        if (survey != null) {
+            Hibernate.initialize(survey.getSurveyAnswers());
+        }
 
         if (session.isOpen()) {
             session.close();
