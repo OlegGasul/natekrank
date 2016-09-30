@@ -14,4 +14,5 @@ public class SurveyDto {
     private int minutesForSolving;
     private Date dueTo;
     private String surveyKey;
+    private int score;
 }

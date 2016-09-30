@@ -20,6 +20,7 @@ public class ResultController {
     @RequestMapping(value = "/{surveyKey}", method = RequestMethod.GET)
     public String result(@PathVariable("surveyKey") String surveyKey, Model model) {
         Survey survey = surveyService.getSurveyByKey(surveyKey);
+        model.addAttribute("survey", survey);
 
         return "survey/result";
     }

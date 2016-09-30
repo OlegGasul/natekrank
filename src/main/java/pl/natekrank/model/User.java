@@ -1,5 +1,6 @@
 package pl.natekrank.model;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,6 +12,7 @@ import java.util.List;
 @Table(name = "users")
 @Getter
 @Setter
+@EqualsAndHashCode(exclude = "id")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

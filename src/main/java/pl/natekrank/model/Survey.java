@@ -3,6 +3,7 @@ package pl.natekrank.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Cascade;
@@ -15,6 +16,7 @@ import java.util.List;
 @Table(name = "surveys")
 @Getter
 @Setter
+@EqualsAndHashCode(exclude = "id")
 public class Survey {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -62,5 +64,5 @@ public class Survey {
     @JsonManagedReference
     private List<SurveyAnswer> surveyAnswers;
 
-    private Double score;
+    private Integer score;
 }

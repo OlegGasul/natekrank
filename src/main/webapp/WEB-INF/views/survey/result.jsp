@@ -38,8 +38,8 @@
 <div class="container" ng-controller="SurveyController">
 
     <h2>Result</h2>
-
     <p>
+        Your score: ${survey.score} %
     </p>
 </div>
 <!-- /container -->

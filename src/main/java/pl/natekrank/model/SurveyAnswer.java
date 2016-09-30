@@ -1,6 +1,7 @@
 package pl.natekrank.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import javax.persistence.*;
 @Table(name = "survey_answers")
 @Getter
 @Setter
+@EqualsAndHashCode(exclude = "id")
 public class SurveyAnswer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

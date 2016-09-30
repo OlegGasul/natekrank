@@ -2,6 +2,7 @@ package pl.natekrank.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.*;
@@ -16,6 +17,7 @@ import java.util.List;
 @Table(name = "tasks")
 @Getter
 @Setter
+@EqualsAndHashCode(exclude = "id")
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

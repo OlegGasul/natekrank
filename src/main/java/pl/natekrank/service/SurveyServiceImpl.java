@@ -12,6 +12,9 @@ import pl.natekrank.repository.SurveyDAO;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 @Service
 public class SurveyServiceImpl implements SurveyService {
@@ -56,6 +59,9 @@ public class SurveyServiceImpl implements SurveyService {
         Survey survey = surveyDAO.getSurvey(surveyDto.getSurveyKey());
         Task task = survey.getTask();
 
+        survey.getSurveyAnswers().clear();
+        Survey surveyEx = surveyDAO.save(survey);
+
         TaskDto surveyTask = surveyDto.getTask();
         List<SurveyAnswer> surveyAnswers = new LinkedList<>();
 
@@ -72,15 +78,29 @@ public class SurveyServiceImpl implements SurveyService {
                                 .findFirst().get();
 
                         SurveyAnswer surveyAnswer = new SurveyAnswer();
-                        surveyAnswer.setSurvey(survey);
+                        surveyAnswer.setSurvey(surveyEx);
                         surveyAnswer.setQuestion(question);
                         surveyAnswer.setSelectedAnswer(answer);
                         surveyAnswers.add(surveyAnswer);
                     });
         }
 
-        survey.setSurveyAnswers(surveyAnswers);
+        surveyEx.setSurveyAnswers(surveyAnswers);
 
-        return surveyDAO.save(survey);
+        Map<Answer, Boolean> surveyMap = surveyAnswers.stream()
+                .collect(Collectors.toMap(surveyAnswer -> surveyAnswer.getSelectedAnswer(), surveyAnswer -> true));
+
+        final AtomicInteger rightQuestions = new AtomicInteger();
+        task.getQuestions().stream().forEach(question -> {
+            if (question.getAnswers().stream()
+                    .filter(answer -> (answer.isRight() && !surveyMap.containsKey(answer)) || (!answer.isRight() && surveyMap.containsKey(answer)))
+                    .count() == 0) {
+                rightQuestions.incrementAndGet();
+            }
+        });
+
+        surveyEx.setScore((int)((rightQuestions.get() * 100.0f) / task.getQuestions().size()));
+
+        return surveyDAO.save(surveyEx);
     }
 }
