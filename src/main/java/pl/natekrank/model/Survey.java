@@ -9,6 +9,7 @@ import lombok.Setter;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -35,8 +36,8 @@ public class Survey {
     private String message;
     private boolean sent;
 
-    @Column(name = "survey_key")
-    private String surveyKey;
+    @Column(name = "token")
+    private String token;
 
     @Column(name = "due_to")
     private Date dueTo;
@@ -62,7 +63,7 @@ public class Survey {
     @Cascade(value = {org.hibernate.annotations.CascadeType.ALL})
     @JoinColumn(name = "survey_id", nullable = false, insertable = false, updatable = false)
     @JsonManagedReference
-    private List<SurveyAnswer> surveyAnswers;
+    private List<SurveyAnswer> surveyAnswers = new ArrayList<>();
 
     private Integer score;
 }

@@ -8,11 +8,9 @@ import java.util.Date;
 @Setter
 public class SurveyDto {
     private Long id;
-
     private TaskDto task;
-
     private int minutesForSolving;
     private Date dueTo;
-    private String surveyKey;
+    private String token;
     private int score;
 }

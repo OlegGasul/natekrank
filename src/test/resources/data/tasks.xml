@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <tasks id = "0" name="T0" days_expired="2" minutes_for_solving="120"/>
+
+    <questions id="0" task_id="0" text="Q0" ORDERNUM="0" multiselect = "true"/>
+
+    <answers id="0" question_id="0" text="Q0A0" ORDERNUM = "0"/>
+    <answers id="1" question_id="0" text="Q0A1" ORDERNUM="1"/>
+    <answers id="2" question_id="0" text="Q0A2" ORDERNUM="2"/>
+
+
+</dataset>

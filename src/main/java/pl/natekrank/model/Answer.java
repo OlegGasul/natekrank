@@ -21,12 +21,13 @@ public class Answer {
     @JsonBackReference
     private Question question;
 
-    @Column(name = "question_id", insertable = false, updatable = false)
-    private Long question_id;
+//    @Column(name = "question_id", insertable = false, updatable = false)
+//    private Long question_id;
 
     private String text;
 
     @Column(name = "is_right")
     private boolean right;
+
     private int orderNum;
 }

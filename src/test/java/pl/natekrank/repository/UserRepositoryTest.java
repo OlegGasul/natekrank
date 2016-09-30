@@ -8,6 +8,7 @@ import pl.natekrank.model.builder.ModelBuilderFactory;
 import pl.natekrank.model.builder.UserBuilder;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.unitils.reflectionassert.ReflectionAssert.assertReflectionEquals;
@@ -23,14 +24,15 @@ public class UserRepositoryTest extends BaseRepositoryTest {
 
 
     @Test
-    @DatabaseSetup("users.xml")
+    @DatabaseSetup("classpath:data/users.xml")
     public void shouldFindAllRoles() throws Exception{
         //given
         List<User> expected = Arrays.asList(getBuilder(UserBuilder.class)
                 .withId(0)
                 .withEmail("user@user.com")
                 .withPassword("Guest")
-                .withPasswordConfirm("Guest")
+//                .withPasswordConfirm("Guest")
+                .withRoles(Collections.emptyList())
                 .build());
 
         //when

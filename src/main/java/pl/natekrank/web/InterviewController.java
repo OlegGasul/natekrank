@@ -23,15 +23,15 @@ public class InterviewController {
     @Autowired
     private SurveyService surveyService;
 
-    @RequestMapping(value = "/{surveyKey}", method = RequestMethod.POST)
-    public String submitSurvey(@PathVariable("surveyKey") String surveyKey, @RequestBody SurveyDto survey) {
+    @RequestMapping(value = "/{token}", method = RequestMethod.POST)
+    public String submitSurvey(@PathVariable("token") String token, @RequestBody SurveyDto survey) {
         surveyService.submitSurvey(survey);
         return "survey/result";
     }
 
-    @RequestMapping(value = "/{surveyKey}", method = RequestMethod.GET)
-    public String index(@PathVariable("surveyKey") String surveyKey, @RequestParam(value = "start", required = false) String start, Model model) {
-        Survey survey = surveyService.getSurveyByKey(surveyKey);
+    @RequestMapping(value = "/{token}", method = RequestMethod.GET)
+    public String index(@PathVariable("token") String token, @RequestParam(value = "start", required = false) String start, Model model) {
+        Survey survey = surveyService.getSurveyByToken(token);
         if (survey == null) {
             return error(model, "Survey does't exists.");
         }

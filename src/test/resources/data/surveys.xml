@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <surveys id="0" token = "T0" email="user@user.com" sender="Guest"  message = "Test" sent = "false" minutes_for_solving = "120" sender_notified="false"/>
+    <surveys id="1" token = "T1" email="user1@user.com" sender="Guest1"  message = "Test" sent = "true" minutes_for_solving = "120" sender_notified="false"/>
+    <surveys id="2" token = "T2" email="user2@user.com" sender="Guest2" message = "Test" sent = "false" minutes_for_solving = "120" sender_notified="false"/>
+    <surveys id="3" token = "T3" email="user3@user.com" sender="Guest3" message = "Test" sent = "true" minutes_for_solving = "120" sender_notified="false"/>
+    <surveys id="4" token = "T4" email="user4@user.com" sender="Guest4" message = "Test" sent = "false" minutes_for_solving = "120" sender_notified="false"/>
+</dataset>

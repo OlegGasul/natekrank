@@ -14,15 +14,8 @@
 
     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
-        <property name="annotatedClasses">
-            <list>
-                <value>pl.natekrank.model.User</value>
-                <value>pl.natekrank.model.Role</value>
-                <!--<value>pl.natekrank.model.Task</value>-->
-                <!--<value>pl.natekrank.model.Question</value>-->
-                <!--<value>pl.natekrank.model.Answer</value>-->
-            </list>
-        </property>
+        <property name="packagesToScan" value="pl.natekrank.model" />
+
         <property name="hibernateProperties">
             <value>
                 hibernate.dialect=org.hibernate.dialect.HSQLDialect

@@ -1,6 +1,5 @@
 package pl.natekrank.service;
 
-import pl.natekrank.model.Task;
 import pl.natekrank.model.Survey;
 import pl.natekrank.model.dto.SurveyDto;
 
@@ -10,7 +9,8 @@ public interface SurveyService {
     Survey save(Survey survey);
     List<Survey> getAllSurveys();
     Survey getSurveyById(Long id);
-    Survey getSurveyByKey(String surveyKey);
+    Survey getSurveyByToken(String token);
     Survey startSurvey(Survey survey);
     Survey submitSurvey(SurveyDto surveyDto);
+
 }

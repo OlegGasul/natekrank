@@ -7,7 +7,7 @@ public class SurveyHelper {
     private static SecureRandom rnd = new SecureRandom();
     private static int keyLength = 8;
 
-    public static String generateKey() {
+    public static String generateToken() {
         StringBuilder sb = new StringBuilder();
         for( int i = 0; i < keyLength; i++ )
             sb.append(AB.charAt( rnd.nextInt(AB.length())));

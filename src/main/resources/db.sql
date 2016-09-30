@@ -108,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `natekrank`.`surveys` (
   `id` INT NOT NULL AUTO_INCREMENT COMMENT '',
   `task_id` INT NULL COMMENT '',
   `sender` VARCHAR(255) NULL COMMENT '',
-  `survey_key` VARCHAR(8) NULL COMMENT '',
+  `token` VARCHAR(8) NULL COMMENT '',
   `email` VARCHAR(255) NULL COMMENT '',
   `message` TEXT NULL COMMENT '',
   `sent` TINYINT(1) NULL DEFAULT 0 COMMENT '',

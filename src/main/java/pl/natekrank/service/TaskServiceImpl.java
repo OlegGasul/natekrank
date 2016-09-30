@@ -1,12 +1,11 @@
 package pl.natekrank.service;
 
-import pl.natekrank.model.Question;
-import pl.natekrank.model.Task;
-import pl.natekrank.repository.TaskDAO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.natekrank.model.Task;
+import pl.natekrank.repository.TaskRepository;
 
 import java.util.Date;
 import java.util.List;
@@ -16,11 +15,11 @@ public class TaskServiceImpl implements TaskService {
     private static final Logger LOGGER = LoggerFactory.getLogger(TaskServiceImpl.class);
 
     @Autowired
-    private TaskDAO taskDAO;
+    private TaskRepository repository;
 
     @Override
     public List<Task> getAllTasks() {
-        return taskDAO.getAllTasks();
+        return repository.findAll();
     }
 
     @Override
@@ -31,11 +30,11 @@ public class TaskServiceImpl implements TaskService {
         }
         task.setModified(modified);
 
-        return taskDAO.save(task);
+        return repository.save(task);
     }
 
     @Override
     public Task getTaskById(Long id) {
-        return taskDAO.getTask(id);
+        return repository.findOne(id);
     }
 }

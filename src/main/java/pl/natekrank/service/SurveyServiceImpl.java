@@ -7,7 +7,7 @@ import pl.natekrank.model.*;
 import pl.natekrank.model.dto.QuestionDto;
 import pl.natekrank.model.dto.SurveyDto;
 import pl.natekrank.model.dto.TaskDto;
-import pl.natekrank.repository.SurveyDAO;
+import pl.natekrank.repository.SurveyRepository;
 
 import java.util.Date;
 import java.util.LinkedList;
@@ -19,36 +19,36 @@ import java.util.stream.Collectors;
 @Service
 public class SurveyServiceImpl implements SurveyService {
     @Autowired
-    private SurveyDAO surveyDAO;
+    private SurveyRepository surveyRepository;
 
     @Override
     public Survey save(Survey survey) {
-        if (survey.getSurveyKey() == null) {
-            survey.setSurveyKey(SurveyHelper.generateKey());
+        if (survey.getToken() == null) {
+            survey.setToken(SurveyHelper.generateToken());
         }
-        return surveyDAO.save(survey);
+        return surveyRepository.save(survey);
     }
 
     @Override
     public List<Survey> getAllSurveys() {
-        return surveyDAO.getAllSurveys();
+        return surveyRepository.findAll();
     }
 
     @Override
     public Survey getSurveyById(Long id) {
-        return surveyDAO.getSurvey(id);
+        return surveyRepository.findOne(id);
     }
 
     @Override
-    public Survey getSurveyByKey(String surveyKey) {
-        return surveyDAO.getSurvey(surveyKey);
+    public Survey getSurveyByToken(String token) {
+        return surveyRepository.findByToken(token);
     }
 
     @Override
     public Survey startSurvey(Survey survey) {
         if (survey.getStarted() == null) {
             survey.setStarted(new Date());
-            survey = surveyDAO.save(survey);
+            survey = surveyRepository.save(survey);
         }
 
         return survey;
@@ -56,11 +56,11 @@ public class SurveyServiceImpl implements SurveyService {
 
     @Override
     public Survey submitSurvey(SurveyDto surveyDto) {
-        Survey survey = surveyDAO.getSurvey(surveyDto.getSurveyKey());
+        Survey survey = surveyRepository.findByToken(surveyDto.getToken());
         Task task = survey.getTask();
 
         survey.getSurveyAnswers().clear();
-        Survey surveyEx = surveyDAO.save(survey);
+        Survey surveyEx = surveyRepository.save(survey);
 
         TaskDto surveyTask = surveyDto.getTask();
         List<SurveyAnswer> surveyAnswers = new LinkedList<>();
@@ -101,6 +101,6 @@ public class SurveyServiceImpl implements SurveyService {
 
         surveyEx.setScore((int)((rightQuestions.get() * 100.0f) / task.getQuestions().size()));
 
-        return surveyDAO.save(surveyEx);
+        return surveyRepository.save(surveyEx);
     }
 }

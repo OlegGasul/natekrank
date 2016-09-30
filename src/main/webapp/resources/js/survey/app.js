@@ -1,6 +1,6 @@
 function SurveyService($http) {
     function submitSurvey(survey) {
-        return $http({ method: 'post', url: '/survey/' + survey.surveyKey, data: survey });
+        return $http({ method: 'post', url: '/survey/' + survey.token, data: survey });
     }
 
     return {
@@ -67,7 +67,7 @@ function SurveyController($rootScope, $scope, $location, SurveyService) {
 
     $scope.submitSurvey = function() {
         SurveyService.submitSurvey($scope.survey).then(function() {
-            location.href = "/result/" + $scope.survey.surveyKey;
+            location.href = "/result/" + $scope.survey.token;
         });
     };
 }

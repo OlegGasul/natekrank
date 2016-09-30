@@ -17,11 +17,10 @@ public class ResultController {
     @Autowired
     private SurveyService surveyService;
 
-    @RequestMapping(value = "/{surveyKey}", method = RequestMethod.GET)
-    public String result(@PathVariable("surveyKey") String surveyKey, Model model) {
-        Survey survey = surveyService.getSurveyByKey(surveyKey);
+    @RequestMapping(value = "/{token}", method = RequestMethod.GET)
+    public String result(@PathVariable("token") String token, Model model) {
+        Survey survey = surveyService.getSurveyByToken(token);
         model.addAttribute("survey", survey);
-
         return "survey/result";
     }
 }

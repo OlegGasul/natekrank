@@ -31,8 +31,8 @@ public class Question {
     @JsonManagedReference
     private List<Answer> answers;
 
-    @Column(name = "task_id", insertable = false, updatable = false)
-    private Long task_id;
+//    @Column(name = "task_id", insertable = false, updatable = false)
+//    private Long task_id;
 
     private String text;
 
