@@ -8,12 +8,14 @@ import org.springframework.mail.MailException;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import pl.natekrank.model.Survey;
 import pl.natekrank.repository.SurveyRepository;
 
 import java.util.List;
 
 @Component("surveyScheduler")
+@Transactional
 public class SurveyScheduler {
     private static final Logger LOGGER = LoggerFactory.getLogger(SurveyScheduler.class);
 

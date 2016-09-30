@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 @RestController
-@Transactional
 @RequestMapping("/rest/task")
 public class TaskController {
     @Autowired
