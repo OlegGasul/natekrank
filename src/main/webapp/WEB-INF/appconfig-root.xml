@@ -49,9 +49,9 @@
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
 
-    <!--<task:scheduled-tasks scheduler="myScheduler">-->
-        <!--<task:scheduled ref="surveyScheduler" method="processSurveys" cron="" fixed-delay="5000" />-->
-    <!--</task:scheduled-tasks>-->
+    <task:scheduled-tasks scheduler="myScheduler">
+        <task:scheduled ref="surveyScheduler" method="processSurveys" cron="" fixed-delay="5000" />
+    </task:scheduled-tasks>
 
     <task:scheduler id="myScheduler"/>
 

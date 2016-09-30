@@ -1,5 +1,6 @@
 package pl.natekrank.web.rest;
 
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import pl.natekrank.model.Question;
 import pl.natekrank.model.Task;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 @RestController
+@Transactional
 @RequestMapping("/rest/task")
 public class TaskController {
     @Autowired
