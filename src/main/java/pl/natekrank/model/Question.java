@@ -25,14 +25,14 @@ public class Question {
     @JsonBackReference
     private Task task;
 
-    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY)
     @Cascade(value = {org.hibernate.annotations.CascadeType.ALL})
     @JoinColumn(name = "question_id", nullable = false, insertable = false, updatable = false)
     @JsonManagedReference
     private List<Answer> answers;
 
-//    @Column(name = "task_id", insertable = false, updatable = false)
-//    private Long task_id;
+    @Column(name = "task_id", insertable = false, updatable = false)
+    private Long task_id;
 
     private String text;
 

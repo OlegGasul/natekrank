@@ -3,6 +3,7 @@ package pl.natekrank.web.rest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import pl.natekrank.model.Survey;
 import pl.natekrank.model.Task;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/rest/survey")
+@Transactional
 public class SurveyController {
     @Autowired
     private SurveyService surveyService;

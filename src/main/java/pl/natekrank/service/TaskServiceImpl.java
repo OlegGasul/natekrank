@@ -12,7 +12,6 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-@Transactional
 public class TaskServiceImpl implements TaskService {
     private static final Logger LOGGER = LoggerFactory.getLogger(TaskServiceImpl.class);
 

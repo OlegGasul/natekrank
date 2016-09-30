@@ -10,6 +10,7 @@ import org.hibernate.annotations.*;
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -41,9 +42,24 @@ public class Task {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     private Date modified;
 
-    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY)
     @Cascade(value = {org.hibernate.annotations.CascadeType.ALL})
     @JoinColumn(name = "task_id", nullable = false, insertable = false, updatable = false)
     @JsonManagedReference
     private List<Question> questions;
+
+    private void clearQuestions() {
+        this.questions.clear();
+    }
+
+    private void addQuestions(Collection<Question> questions) {
+        this.questions.addAll(questions);
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.clearQuestions();
+        if (questions != null) {
+            this.addQuestions(questions);
+        }
+    }
 }

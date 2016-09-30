@@ -9,9 +9,7 @@ import lombok.Setter;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "surveys")
@@ -63,7 +61,22 @@ public class Survey {
     @Cascade(value = {org.hibernate.annotations.CascadeType.ALL})
     @JoinColumn(name = "survey_id", nullable = false, insertable = false, updatable = false)
     @JsonManagedReference
-    private List<SurveyAnswer> surveyAnswers = new ArrayList<>();
+    private List<SurveyAnswer> surveyAnswers = new LinkedList<>();
+
+    private void clearSurveyAnswers() {
+        this.surveyAnswers.clear();
+    }
+
+    private void addSurveyAnswers(Collection<SurveyAnswer> surveyAnswers) {
+        this.surveyAnswers.addAll(surveyAnswers);
+    }
+
+    public void setSurveyAnswers(List<SurveyAnswer> surveyAnswers) {
+        this.clearSurveyAnswers();
+        if (surveyAnswers != null) {
+            this.addSurveyAnswers(surveyAnswers);
+        }
+    }
 
     private Integer score;
 }

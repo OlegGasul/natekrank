@@ -9,6 +9,7 @@ import pl.natekrank.model.dto.QuestionDto;
 import pl.natekrank.model.dto.SurveyDto;
 import pl.natekrank.model.dto.TaskDto;
 import pl.natekrank.repository.SurveyRepository;
+import pl.natekrank.repository.TaskRepository;
 
 import java.util.Date;
 import java.util.LinkedList;
@@ -23,12 +24,19 @@ public class SurveyServiceImpl implements SurveyService {
     @Autowired
     private SurveyRepository surveyRepository;
 
+    @Autowired
+    private TaskRepository taskRepository;
+
     @Override
     public Survey save(Survey survey) {
         if (survey.getToken() == null) {
             survey.setToken(SurveyHelper.generateToken());
         }
-        return surveyRepository.save(survey);
+
+        Task task = taskRepository.getOne(survey.getTaskId());
+        survey.setTask(task);
+
+        return surveyRepository.saveAndFlush(survey);
     }
 
     @Override
@@ -50,7 +58,7 @@ public class SurveyServiceImpl implements SurveyService {
     public Survey startSurvey(Survey survey) {
         if (survey.getStarted() == null) {
             survey.setStarted(new Date());
-            survey = surveyRepository.save(survey);
+            survey = surveyRepository.saveAndFlush(survey);
         }
 
         return survey;
@@ -60,9 +68,6 @@ public class SurveyServiceImpl implements SurveyService {
     public Survey submitSurvey(SurveyDto surveyDto) {
         Survey survey = surveyRepository.findByToken(surveyDto.getToken());
         Task task = survey.getTask();
-
-        survey.getSurveyAnswers().clear();
-        Survey surveyEx = surveyRepository.save(survey);
 
         TaskDto surveyTask = surveyDto.getTask();
         List<SurveyAnswer> surveyAnswers = new LinkedList<>();
@@ -80,14 +85,14 @@ public class SurveyServiceImpl implements SurveyService {
                                 .findFirst().get();
 
                         SurveyAnswer surveyAnswer = new SurveyAnswer();
-                        surveyAnswer.setSurvey(surveyEx);
+                        surveyAnswer.setSurvey(survey);
                         surveyAnswer.setQuestion(question);
                         surveyAnswer.setSelectedAnswer(answer);
                         surveyAnswers.add(surveyAnswer);
                     });
         }
 
-        surveyEx.setSurveyAnswers(surveyAnswers);
+        survey.setSurveyAnswers(surveyAnswers);
 
         Map<Answer, Boolean> surveyMap = surveyAnswers.stream()
                 .collect(Collectors.toMap(surveyAnswer -> surveyAnswer.getSelectedAnswer(), surveyAnswer -> true));
@@ -101,8 +106,8 @@ public class SurveyServiceImpl implements SurveyService {
             }
         });
 
-        surveyEx.setScore((int)((rightQuestions.get() * 100.0f) / task.getQuestions().size()));
+        survey.setScore((int)((rightQuestions.get() * 100.0f) / task.getQuestions().size()));
 
-        return surveyRepository.save(surveyEx);
+        return surveyRepository.saveAndFlush(survey);
     }
 }

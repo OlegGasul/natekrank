@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/rest/task")
+@Transactional
 public class TaskController {
     @Autowired
     private TaskService taskService;
