@@ -20,34 +20,7 @@
     <context:component-scan base-package="pl.natekrank.validator" />
     <context:component-scan base-package="pl.natekrank.web" />
 
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-        <property name="dataSource" ref="dataSource" />
-        <property name="annotatedClasses">
-            <list>
-                <value>pl.natekrank.model.User</value>
-                <value>pl.natekrank.model.Role</value>
-                <value>pl.natekrank.model.Task</value>
-                <value>pl.natekrank.model.Question</value>
-                <value>pl.natekrank.model.Answer</value>
-                <value>pl.natekrank.model.Survey</value>
-                <value>pl.natekrank.model.SurveyAnswer</value>
-            </list>
-        </property>
-        <property name="hibernateProperties">
-            <value>
-                hibernate.dialect=org.hibernate.dialect.H2Dialect
-                hibernate.show_sql=true
-                hibernate.cache.use_query_cache=false
-                hibernate.enable_lazy_load_no_trans=true
-            </value>
-        </property>
-    </bean>
 
-    <!-- Configure the transaction manager bean -->
-    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-        <property name="dataSource" ref="dataSource" />
-        <property name="sessionFactory" ref="sessionFactory" />
-    </bean>
 
     <task:scheduled-tasks scheduler="myScheduler">
         <task:scheduled ref="surveyScheduler" method="processSurveys" cron="" fixed-delay="5000" />
