@@ -112,7 +112,7 @@ public class SurveyServiceImpl implements SurveyService {
         survey.getTask().getQuestions().stream().forEach(question -> {
             if (question.getAnswers().stream()
                     .filter(answer -> {
-                        boolean isPresent = survey.getSurveyAnswers().stream().filter(sa -> sa.getId().equals(answer.getId())).findFirst().isPresent();
+                        boolean isPresent = survey.getSurveyAnswers().stream().filter(sa -> sa.getSelectedAnswer().equals(answer)).findFirst().isPresent();
                         return (answer.isRight() && !isPresent) || (!answer.isRight() && isPresent);
                     })
                     .count() == 0) {
