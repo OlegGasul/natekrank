@@ -90,18 +90,6 @@ public class SurveyServiceImpl implements SurveyService {
         survey.setSurveyAnswers(surveyAnswers);
         surveyRepository.save(survey);
 
-        final AtomicInteger rightQuestions = new AtomicInteger();
-        task.getQuestions().stream().forEach(question -> {
-            if (question.getAnswers().stream()
-                    .filter(answer -> {
-                        boolean isPresent = survey.getSurveyAnswers().stream().filter(sa -> sa.getId().equals(answer.getId())).findFirst().isPresent();
-                        return (answer.isRight() && !isPresent) || (!answer.isRight() && isPresent);
-                    })
-                    .count() == 0) {
-                rightQuestions.incrementAndGet();
-            }
-        });
-
         survey.setScore(calculateScore(survey));
 
         return surveyRepository.saveAndFlush(survey);
