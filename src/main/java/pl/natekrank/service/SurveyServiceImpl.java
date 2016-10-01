@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.natekrank.helpers.SurveyHelper;
 import pl.natekrank.model.*;
-import pl.natekrank.model.dto.QuestionDto;
 import pl.natekrank.model.dto.SurveyDto;
 import pl.natekrank.model.dto.TaskDto;
 import pl.natekrank.repository.SurveyRepository;
@@ -84,23 +83,20 @@ public class SurveyServiceImpl implements SurveyService {
                                 .filter(a -> answerDto.getId().equals(a.getId()))
                                 .findFirst().get();
 
-                        SurveyAnswer surveyAnswer = new SurveyAnswer();
-                        surveyAnswer.setSurvey(survey);
-                        surveyAnswer.setQuestion(question);
-                        surveyAnswer.setSelectedAnswer(answer);
-                        surveyAnswers.add(surveyAnswer);
+                        surveyAnswers.add(new SurveyAnswer(survey, question, answer));
                     });
         }
 
         survey.setSurveyAnswers(surveyAnswers);
-
-        Map<Answer, Boolean> surveyMap = surveyAnswers.stream()
-                .collect(Collectors.toMap(surveyAnswer -> surveyAnswer.getSelectedAnswer(), surveyAnswer -> true));
+        surveyRepository.save(survey);
 
         final AtomicInteger rightQuestions = new AtomicInteger();
         task.getQuestions().stream().forEach(question -> {
             if (question.getAnswers().stream()
-                    .filter(answer -> (answer.isRight() && !surveyMap.containsKey(answer)) || (!answer.isRight() && surveyMap.containsKey(answer)))
+                    .filter(answer -> {
+                        boolean isPresent = survey.getSurveyAnswers().stream().filter(sa -> sa.getId().equals(answer.getId())).findFirst().isPresent();
+                        return (answer.isRight() && !isPresent) || (!answer.isRight() && isPresent);
+                    })
                     .count() == 0) {
                 rightQuestions.incrementAndGet();
             }

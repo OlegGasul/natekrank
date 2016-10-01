@@ -35,4 +35,13 @@ public class SurveyAnswer {
     private Long question_id;
     @Column(name = "selected_answer_id", insertable = false, updatable = false)
     private Long selected_answer_id;
+
+    public SurveyAnswer() {
+    }
+
+    public SurveyAnswer(Survey survey, Question question, Answer answer) {
+        this.survey = survey;
+        this.question = question;
+        this.selectedAnswer = answer;
+    }
 }

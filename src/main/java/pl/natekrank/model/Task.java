@@ -2,6 +2,7 @@ package pl.natekrank.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Collection;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 @Entity
@@ -46,7 +48,7 @@ public class Task {
     @Cascade(value = {org.hibernate.annotations.CascadeType.ALL})
     @JoinColumn(name = "task_id", nullable = false, insertable = false, updatable = false)
     @JsonManagedReference
-    private List<Question> questions;
+    private List<Question> questions = new LinkedList<>();
 
     private void clearQuestions() {
         this.questions.clear();

@@ -8,6 +8,8 @@ import lombok.Setter;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 
 @Entity
@@ -29,7 +31,22 @@ public class Question {
     @Cascade(value = {org.hibernate.annotations.CascadeType.ALL})
     @JoinColumn(name = "question_id", nullable = false, insertable = false, updatable = false)
     @JsonManagedReference
-    private List<Answer> answers;
+    private List<Answer> answers = new LinkedList<>();
+
+    private void clearAnswers() {
+        this.answers.clear();
+    }
+
+    private void addAnswers(Collection<Answer> answers) {
+        this.answers.addAll(answers);
+    }
+
+    public void setAnswers(List<Answer> answers) {
+        this.clearAnswers();
+        if (answers != null) {
+            this.addAnswers(answers);
+        }
+    }
 
     @Column(name = "task_id", insertable = false, updatable = false)
     private Long task_id;
