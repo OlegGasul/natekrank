@@ -102,8 +102,24 @@ public class SurveyServiceImpl implements SurveyService {
             }
         });
 
-        survey.setScore((int)((rightQuestions.get() * 100.0f) / task.getQuestions().size()));
+        survey.setScore(calculateScore(survey));
 
         return surveyRepository.saveAndFlush(survey);
+    }
+
+    private int calculateScore(Survey survey) {
+        final AtomicInteger rightQuestions = new AtomicInteger();
+        survey.getTask().getQuestions().stream().forEach(question -> {
+            if (question.getAnswers().stream()
+                    .filter(answer -> {
+                        boolean isPresent = survey.getSurveyAnswers().stream().filter(sa -> sa.getId().equals(answer.getId())).findFirst().isPresent();
+                        return (answer.isRight() && !isPresent) || (!answer.isRight() && isPresent);
+                    })
+                    .count() == 0) {
+                rightQuestions.incrementAndGet();
+            }
+        });
+
+        return (int)((rightQuestions.get() * 100.0f) / survey.getTask().getQuestions().size());
     }
 }
