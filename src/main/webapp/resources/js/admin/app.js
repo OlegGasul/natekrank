@@ -1,18 +1,18 @@
 function TaskService($http) {
     function getTasks() {
-        return $http.get('/rest/task').then(function(response) {
+        return $http.get(_contextPath + '/rest/task').then(function(response) {
             return response.data;
         });
     }
 
     function getTask(id) {
-        return $http.get('/rest/task/' + id).then(function(response) {
+        return $http.get(_contextPath + '/rest/task/' + id).then(function(response) {
             return response.data;
         });
     }
 
     function saveTask(task) {
-        return $http({ method: 'post', url: '/rest/task', data: task });
+        return $http({ method: 'post', url: _contextPath + '/rest/task', data: task });
     }
 
     return {
@@ -24,19 +24,19 @@ function TaskService($http) {
 
 function SurveyService($http) {
     function getSurveys() {
-        return $http.get('/rest/survey').then(function(response) {
+        return $http.get(_contextPath + '/rest/survey').then(function(response) {
             return response.data;
         });
     }
 
     function getSurvey(surveyId) {
-        return $http.get('/rest/survey/' + surveyId).then(function(response) {
+        return $http.get(_contextPath + '/rest/survey/' + surveyId).then(function(response) {
             return response.data;
         });
     }
 
     function saveSurvey(survey) {
-        return $http({ method: 'post', url: '/rest/survey', data: survey });
+        return $http({ method: 'post', url: _contextPath + '/rest/survey', data: survey });
     }
 
     return {
@@ -174,7 +174,7 @@ app.config(function($stateProvider) {
             url: '/tasks',
             views: {
                 'content': {
-                    templateUrl: '/resources/templates/admin/tasks.html',
+                    templateUrl: _contextPath + '/resources/templates/admin/tasks.html',
                     controller: 'TasksController',
                     resolve: {
                         tasks: function(TaskService) {
@@ -188,7 +188,7 @@ app.config(function($stateProvider) {
             url: '/create-task',
             views: {
                 'content': {
-                    templateUrl: '/resources/templates/admin/task.html',
+                    templateUrl: _contextPath + '/resources/templates/admin/task.html',
                     controller: 'TaskController',
                     resolve: {
                         task: function($stateParams, TaskService) {
@@ -202,7 +202,7 @@ app.config(function($stateProvider) {
             url: '/task/:id',
             views: {
                 'content': {
-                    templateUrl: '/resources/templates/admin/task.html',
+                    templateUrl: _contextPath + '/resources/templates/admin/task.html',
                     controller: 'TaskController',
                     resolve: {
                         task: function($stateParams, TaskService) {
@@ -216,7 +216,7 @@ app.config(function($stateProvider) {
             url: '/create-survey/:taskId',
             views: {
                 'content': {
-                    templateUrl: '/resources/templates/admin/survey.html',
+                    templateUrl: _contextPath + '/resources/templates/admin/survey.html',
                     controller: 'SurveyController',
                     resolve: {
                         survey: function($stateParams, TaskService) {
@@ -236,7 +236,7 @@ app.config(function($stateProvider) {
             url: '/surveys',
             views: {
                 'content': {
-                    templateUrl: '/resources/templates/admin/surveys.html',
+                    templateUrl: _contextPath + '/resources/templates/admin/surveys.html',
                     controller: 'SurveysController',
                     resolve: {
                         surveys: function(SurveyService) {
@@ -250,7 +250,7 @@ app.config(function($stateProvider) {
             url: '/survey/:surveyId',
             views: {
                 'content': {
-                    templateUrl: '/resources/templates/admin/survey.html',
+                    templateUrl: _contextPath + '/resources/templates/admin/survey.html',
                     controller: 'SurveysController',
                     resolve: {
                         survey: function($stateParams, SurveyService) {

@@ -23,13 +23,13 @@ USE `natekrank` ;
 DROP TABLE IF EXISTS `natekrank`.`users` ;
 
 CREATE TABLE IF NOT EXISTS `natekrank`.`users` (
-  `id` INT NOT NULL AUTO_INCREMENT COMMENT '',
-  `email` LONGTEXT NULL COMMENT '',
-  `password` VARCHAR(45) NULL COMMENT '',
-  `first_name` VARCHAR(1024) NULL COMMENT '',
-  `last_name` VARCHAR(1024) NULL COMMENT '',
-  `enabled` TINYINT(1) NULL COMMENT '',
-  PRIMARY KEY (`id`)  COMMENT '')
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `email` LONGTEXT NULL,
+  `password` VARCHAR(45) NULL,
+  `first_name` VARCHAR(1024) NULL,
+  `last_name` VARCHAR(1024) NULL,
+  `enabled` TINYINT(1) NULL,
+  PRIMARY KEY (`id`)  )
   ENGINE = InnoDB;
 
 
@@ -39,16 +39,16 @@ CREATE TABLE IF NOT EXISTS `natekrank`.`users` (
 DROP TABLE IF EXISTS `natekrank`.`tasks` ;
 
 CREATE TABLE IF NOT EXISTS `natekrank`.`tasks` (
-  `id` INT NOT NULL AUTO_INCREMENT COMMENT '',
-  `owner_id` INT NULL COMMENT '',
-  `name` VARCHAR(255) NULL COMMENT '',
-  `description` TEXT NULL COMMENT '',
-  `days_expired` INT NULL COMMENT '',
-  `minutes_for_solving` INT NULL COMMENT '',
-  `created` DATETIME NULL COMMENT '',
-  `modified` DATETIME NULL COMMENT '',
-  PRIMARY KEY (`id`)  COMMENT '',
-  INDEX `owner_id_idx` (`owner_id` ASC)  COMMENT '',
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `owner_id` INT NULL,
+  `name` VARCHAR(255) NULL,
+  `description` TEXT NULL,
+  `days_expired` INT NULL,
+  `minutes_for_solving` INT NULL,
+  `created` DATETIME NULL,
+  `modified` DATETIME NULL,
+  PRIMARY KEY (`id`) ,
+  INDEX `owner_id_idx` (`owner_id` ASC) ,
   CONSTRAINT `owner_id`
   FOREIGN KEY (`owner_id`)
   REFERENCES `natekrank`.`users` (`id`)
@@ -63,13 +63,13 @@ CREATE TABLE IF NOT EXISTS `natekrank`.`tasks` (
 DROP TABLE IF EXISTS `natekrank`.`questions` ;
 
 CREATE TABLE IF NOT EXISTS `natekrank`.`questions` (
-  `id` INT NOT NULL AUTO_INCREMENT COMMENT '',
-  `task_id` INT NULL COMMENT '',
-  `text` TEXT NULL COMMENT '',
-  `multiselect` TINYINT(1) NULL COMMENT '',
-  `orderNum` INT NULL COMMENT '',
-  PRIMARY KEY (`id`)  COMMENT '',
-  INDEX `task_id_idx` (`task_id` ASC)  COMMENT '',
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `task_id` INT NULL,
+  `text` TEXT NULL,
+  `multiselect` TINYINT(1) NULL,
+  `orderNum` INT NULL,
+  PRIMARY KEY (`id`) ,
+  INDEX `task_id_idx` (`task_id` ASC) ,
   CONSTRAINT `task_id`
   FOREIGN KEY (`task_id`)
   REFERENCES `natekrank`.`tasks` (`id`)
@@ -84,13 +84,13 @@ CREATE TABLE IF NOT EXISTS `natekrank`.`questions` (
 DROP TABLE IF EXISTS `natekrank`.`answers` ;
 
 CREATE TABLE IF NOT EXISTS `natekrank`.`answers` (
-  `id` INT NOT NULL AUTO_INCREMENT COMMENT '',
-  `question_id` INT NULL COMMENT '',
-  `text` VARCHAR(2048) NULL COMMENT '',
-  `is_right` TINYINT(1) NULL COMMENT '',
-  `orderNum` INT NULL COMMENT '',
-  PRIMARY KEY (`id`)  COMMENT '',
-  INDEX `question_id_idx` (`question_id` ASC)  COMMENT '',
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `question_id` INT NULL,
+  `text` VARCHAR(2048) NULL,
+  `is_right` TINYINT(1) NULL,
+  `orderNum` INT NULL,
+  PRIMARY KEY (`id`) ,
+  INDEX `question_id_idx` (`question_id` ASC) ,
   CONSTRAINT `question_id`
   FOREIGN KEY (`question_id`)
   REFERENCES `natekrank`.`questions` (`id`)
@@ -105,23 +105,23 @@ CREATE TABLE IF NOT EXISTS `natekrank`.`answers` (
 DROP TABLE IF EXISTS `natekrank`.`surveys` ;
 
 CREATE TABLE IF NOT EXISTS `natekrank`.`surveys` (
-  `id` INT NOT NULL AUTO_INCREMENT COMMENT '',
-  `task_id` INT NULL COMMENT '',
-  `sender` VARCHAR(255) NULL COMMENT '',
-  `token` VARCHAR(8) NULL COMMENT '',
-  `email` VARCHAR(255) NULL COMMENT '',
-  `message` TEXT NULL COMMENT '',
-  `sent` TINYINT(1) NULL DEFAULT 0 COMMENT '',
-  `first_name` VARCHAR(1024) NULL COMMENT '',
-  `last_name` VARCHAR(1024) NULL COMMENT '',
-  `due_to` DATETIME NULL COMMENT '',
-  `minutes_for_solving` INT NULL COMMENT '',
-  `started` DATETIME NULL DEFAULT NULL COMMENT '',
-  `finished` DATETIME NULL DEFAULT NULL COMMENT '',
-  `sender_notified` TINYINT(1) NULL DEFAULT 0 COMMENT '',
-  `score` DOUBLE NULL COMMENT '',
-  PRIMARY KEY (`id`)  COMMENT '',
-  INDEX `idx_survey_task_id` (`task_id` ASC)  COMMENT '',
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `task_id` INT NULL,
+  `sender` VARCHAR(255) NULL,
+  `token` VARCHAR(8) NULL,
+  `email` VARCHAR(255) NULL,
+  `message` TEXT NULL,
+  `sent` TINYINT(1) NULL DEFAULT 0,
+  `first_name` VARCHAR(1024) NULL,
+  `last_name` VARCHAR(1024) NULL,
+  `due_to` DATETIME NULL,
+  `minutes_for_solving` INT NULL,
+  `started` DATETIME NULL DEFAULT NULL,
+  `finished` DATETIME NULL DEFAULT NULL,
+  `sender_notified` TINYINT(1) NULL DEFAULT 0,
+  `score` DOUBLE NULL,
+  PRIMARY KEY (`id`) ,
+  INDEX `idx_survey_task_id` (`task_id` ASC) ,
   CONSTRAINT `fk_survey_task_id`
   FOREIGN KEY (`task_id`)
   REFERENCES `natekrank`.`tasks` (`id`)
@@ -136,14 +136,14 @@ CREATE TABLE IF NOT EXISTS `natekrank`.`surveys` (
 DROP TABLE IF EXISTS `natekrank`.`survey_answers` ;
 
 CREATE TABLE IF NOT EXISTS `natekrank`.`survey_answers` (
-  `id` INT NOT NULL AUTO_INCREMENT COMMENT '',
-  `question_id` INT NULL COMMENT '',
-  `survey_id` INT NULL COMMENT '',
-  `selected_answer_id` INT NULL COMMENT '',
-  PRIMARY KEY (`id`)  COMMENT '',
-  INDEX `idx_survey_id` (`survey_id` ASC)  COMMENT '',
-  INDEX `idx_answer_id` (`selected_answer_id` ASC)  COMMENT '',
-  INDEX `idx_question_id` (`question_id` ASC)  COMMENT '',
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `question_id` INT NULL,
+  `survey_id` INT NULL,
+  `selected_answer_id` INT NULL,
+  PRIMARY KEY (`id`) ,
+  INDEX `idx_survey_id` (`survey_id` ASC) ,
+  INDEX `idx_answer_id` (`selected_answer_id` ASC) ,
+  INDEX `idx_question_id` (`question_id` ASC) ,
   CONSTRAINT `fk_sv_ticket_id`
   FOREIGN KEY (`survey_id`)
   REFERENCES `natekrank`.`surveys` (`id`)
@@ -168,11 +168,11 @@ CREATE TABLE IF NOT EXISTS `natekrank`.`survey_answers` (
 DROP TABLE IF EXISTS `natekrank`.`user_roles` ;
 
 CREATE TABLE IF NOT EXISTS `natekrank`.`user_roles` (
-  `id` INT NOT NULL AUTO_INCREMENT COMMENT '',
-  `user_id` INT NULL COMMENT '',
-  `role` VARCHAR(45) NULL COMMENT '',
-  PRIMARY KEY (`id`)  COMMENT '',
-  INDEX `fk_roles_user_id_idx` (`user_id` ASC)  COMMENT '',
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `user_id` INT NULL,
+  `role` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`) ,
+  INDEX `fk_roles_user_id_idx` (`user_id` ASC) ,
   CONSTRAINT `fk_roles_user_id`
   FOREIGN KEY (`user_id`)
   REFERENCES `natekrank`.`users` (`id`)

@@ -61,5 +61,9 @@
     </div>
 </div>
 
+<script>
+    var _contextPath = "${contextPath}";
+</script>
+
 </body>
 </html>

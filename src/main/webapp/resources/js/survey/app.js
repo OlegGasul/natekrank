@@ -1,6 +1,6 @@
 function SurveyService($http) {
     function submitSurvey(survey) {
-        return $http({ method: 'post', url: '/survey/' + survey.token, data: survey });
+        return $http({ method: 'post', url: _contextPath + '/survey/' + survey.token, data: survey });
     }
 
     return {
