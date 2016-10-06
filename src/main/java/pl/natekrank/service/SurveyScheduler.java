@@ -57,6 +57,7 @@ public class SurveyScheduler {
         builder.append(message)
                 .append("\n")
                 .append(servletContext.getContextPath())
+                .append(environment.getProperty("mail.url"))
                 .append("/survey/" + survey.getToken());
         return builder.toString();
     }
