@@ -3,6 +3,7 @@ package pl.natekrank.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.env.Environment;
 import org.springframework.mail.MailException;
@@ -26,9 +27,11 @@ public class SurveyScheduler {
     @Autowired
     private MailSender mailSender;
     @Autowired
-    private Environment environment;
-    @Autowired
     private ServletContext servletContext;
+    @Value("${mail.url}")
+    private String applicationUrl;
+    @Value("${mail.subject}")
+    private String mailSubject;
 
     public void processSurveys() {
         List<Survey> surveys = repository.findBySentIsFalseOrderByIdAsc();
@@ -37,7 +40,7 @@ public class SurveyScheduler {
                 SimpleMailMessage message = new SimpleMailMessage();
                 message.setFrom(survey.getSender());
                 message.setTo(survey.getEmail());
-                message.setSubject("Test");
+                message.setSubject(mailSubject);
                 message.setText(createMessageWithLink(survey));
 
                 mailSender.send(message);
@@ -56,8 +59,8 @@ public class SurveyScheduler {
         StringBuilder builder = new StringBuilder();
         builder.append(message)
                 .append("\n")
+                .append(applicationUrl)
                 .append(servletContext.getContextPath())
-                .append(environment.getProperty("mail.url"))
                 .append("/survey/" + survey.getToken());
         return builder.toString();
     }
