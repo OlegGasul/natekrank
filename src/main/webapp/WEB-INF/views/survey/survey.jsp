@@ -85,5 +85,10 @@
 <!-- /container -->
 <script src="${contextPath}/resources/js/lib/jquery.min.js"></script>
 <script src="${contextPath}/resources/js/lib/bootstrap.min.js"></script>
+
+<script>
+    var _contextPath = "${contextPath}";
+</script>
+
 </body>
 </html>
