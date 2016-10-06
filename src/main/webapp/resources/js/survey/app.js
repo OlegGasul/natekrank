@@ -67,7 +67,7 @@ function SurveyController($rootScope, $scope, $location, SurveyService) {
 
     $scope.submitSurvey = function() {
         SurveyService.submitSurvey($scope.survey).then(function() {
-            location.href = "/result/" + $scope.survey.token;
+            location.href = _contextPath + "/result/" + $scope.survey.token;
         });
     };
 }
