@@ -1,3 +1,5 @@
+/* globals angular, _contextPath */
+
 function SurveyService($http) {
     function submitSurvey(survey) {
         return $http({ method: 'post', url: _contextPath + '/survey/' + survey.token, data: survey });
@@ -16,18 +18,18 @@ function SurveyController($rootScope, $scope, $location, SurveyService) {
 
         var firstQuestion = $scope.survey.task.questions[0];
         $scope.selectQuestion(firstQuestion);
-    }
+    };
 
     $scope.start = function() {
 
     };
 
     $scope.getClass = function(question) {
-        return question.selected ? "active" : "";
+        return question.selected ? 'active' : '';
     };
 
     function injectQuestion(question) {
-        angular.element(document.getElementById("question-content")).scope().question = question;
+        angular.element(document.getElementById('question-content')).scope().question = question;
     }
 
     $scope.selectQuestion = function(question) {
@@ -40,7 +42,7 @@ function SurveyController($rootScope, $scope, $location, SurveyService) {
         if ($scope.selectedQuestion)
             $scope.selectedQuestion.selected = false;
         $scope.selectedQuestion = question;
-    }
+    };
 
     function getQuestion(question, incr) {
         var questions = $scope.survey.task.questions;
@@ -55,19 +57,19 @@ function SurveyController($rootScope, $scope, $location, SurveyService) {
 
     $scope.prevQuestion = function(question) {
         $scope.selectQuestion(getQuestion(question, -1));
-    }
+    };
 
     $scope.nextQuestion = function(question) {
         $scope.selectQuestion(getQuestion(question, 1));
-    }
+    };
 
     $scope.submitQuestion = function(question) {
         $scope.selectQuestion(getQuestion(question, 1));
-    }
+    };
 
     $scope.submitSurvey = function() {
         SurveyService.submitSurvey($scope.survey).then(function() {
-            location.href = _contextPath + "/result/" + $scope.survey.token;
+            location.href = _contextPath + '/result/' + $scope.survey.token;
         });
     };
 }

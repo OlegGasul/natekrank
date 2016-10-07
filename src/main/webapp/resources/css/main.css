@@ -71,3 +71,11 @@ a.active {
     float: left;
     width: 255px;
 }
+
+.taskList {
+
+}
+
+.taskList tbody tr {
+    cursor: pointer;
+}

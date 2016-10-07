@@ -1,3 +1,5 @@
+/* globals angular, _contextPath */
+
 function TaskService($http) {
     function getTasks() {
         return $http.get(_contextPath + '/rest/task').then(function(response) {
@@ -49,7 +51,7 @@ function SurveyService($http) {
 function IndexController($rootScope, $scope, $location, $http, TaskService) {
     $scope.init = function(email) {
         $rootScope.email = email;
-    }
+    };
 
     $scope.createTask = function() {
         $location.path('/create-task');
@@ -72,7 +74,7 @@ function TaskController($scope, $location, TaskService, task) {
     $scope.task = task;
 
     $scope.selectedQuestion = null;
-    angular.element(document.getElementById("question-content")).scope().question = null;
+    angular.element(document.getElementById('question-content')).scope().question = null;
 
     $scope.saveTask = function() {
         TaskService.saveTask($scope.task).then(function successCallback(response) {
@@ -82,11 +84,11 @@ function TaskController($scope, $location, TaskService, task) {
             console.log('saveTask error!');
             console.dir(response);
         });
-    }
+    };
 
     $scope.createSurvey = function() {
         $location.path('/create-survey/' + $scope.task.id);
-    }
+    };
 
     $scope.addNewQuestion = function() {
         if (!$scope.task.questions)
@@ -95,13 +97,13 @@ function TaskController($scope, $location, TaskService, task) {
 
         var lastQuestion = $scope.task.questions[$scope.task.questions.length - 1];
         $scope.selectedQuestion = lastQuestion;
-        angular.element(document.getElementById("question-content")).scope().question = lastQuestion;
-    }
+        angular.element(document.getElementById('question-content')).scope().question = lastQuestion;
+    };
 
     $scope.editQuestion = function(question) {
-        angular.element(document.getElementById("question-content")).scope().question = question;
+        angular.element(document.getElementById('question-content')).scope().question = question;
         $scope.selectedQuestion = question;
-    }
+    };
 
     $scope.getClass = function(question) {
         return $scope.selectedQuestion == question ? 'active' : '';
@@ -121,7 +123,7 @@ function QuestionController($scope) {
         if (!question.answers)
             question.answers = [];
         question.answers.push({ question_id: question.id, text: 'New answer' });
-    }
+    };
 
     $scope.removeSelectedAnswers = function() {
         for (var i = $scope.question.answers.length - 1; i >= 0; i--) {
