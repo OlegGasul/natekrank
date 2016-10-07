@@ -68,11 +68,12 @@
                                 </label>
                             </div>
 
-                            <fieldset>
-                                <legend>Answers</legend>
-                                <div ng-repeat="answer in question.answers">
-                                    <input ng-model="answer.selected" type="checkbox"/>
-
+                            <fieldset class="answers">
+                                <legend>
+                                    Answers
+                                    <button class="btn btn-primary" ng-click="addNewAnswer(question)" type="button">Add new</button>
+                                </legend>
+                                <div ng-repeat="answer in question.answers" class="answers-item">
                                     <div class="form-group">
                                         <label>Answer text</label>
                                         <textarea ng-model="answer.text" class="form-control input-large" rows="2"></textarea>
@@ -84,11 +85,7 @@
                                             Correct answer
                                         </label>
                                     </div>
-                                </div>
-
-                                <div class="control-buttons">
-                                    <button class="btn btn-primary" ng-click="addNewAnswer(question)" type="button">Add new answer</button>
-                                    <button class="btn btn-danger" ng-click="removeSelectedAnswers()" type="button">Remove</button>
+                                    <button class="btn btn-danger answers-delete" ng-click="removeAnswer($index)" type="button">Remove</button>
                                 </div>
                             </fieldset>
                         </form>
