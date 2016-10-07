@@ -52,7 +52,7 @@
     </div>
 
     <ul class="nav nav-pills" ng-controller="IndexController">
-        <li role="presentation" ng-class="getClass('/tasks')"><a href="#tasks">Task defenitions</a></li>
+        <li role="presentation" ng-class="getClass('/tasks')"><a href="#tasks">Task definitions</a></li>
         <li role="presentation" ng-class="getClass('/surveys')"><a href="#surveys">Tests taken</a></li>
     </ul>
 
