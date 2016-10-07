@@ -4,7 +4,7 @@
     <div>
         <ul class="nav nav-tabs">
             <li class="active">
-                <a  href data-target="#general" data-toggle="tab">General</a>
+                <a href data-target="#general" data-toggle="tab">General</a>
             </li>
             <li>
                 <a href data-target="#questions" data-toggle="tab">Questions</a>
@@ -16,23 +16,23 @@
 
         <div class="tab-content" id="task-tab-content">
             <div class="tab-pane active" id="general">
-                <div id="description-group" class="form-group">
+                <div id="description-group">
                     <form>
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <input type="text" class="form-control input-medium" id="name" ng-model="task.name" placeholder="Name">
+                            <input type="text" class="form-control input-large" id="name" ng-model="task.name" placeholder="Name"/>
                         </div>
                         <div class="form-group">
                             <label for="description">Description</label><br/>
-                            <textarea id="description" placeholder="Description" ng-model="task.description" class="textarea-medium"></textarea>
+                            <textarea id="description" placeholder="Description" ng-model="task.description" class="form-control input-large" rows="10"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="daysExpired">Days expired</label>
-                            <input type="text" class="form-control input-small" id="daysExpired" ng-model="task.daysExpired" placeholder="1-31" pattern="[0-9]">
+                            <input type="number" class="form-control input-small" id="daysExpired" ng-model="task.daysExpired" min="1" max="31"/>
                         </div>
                         <div class="form-group">
                             <label for="timeForSolving">Minutes for solving</label>
-                            <input id="timeForSolving" ng-model="task.minutesForSolving" type="text" class="form-control input-small">
+                            <input id="timeForSolving" ng-model="task.minutesForSolving" type="number" min="1" class="form-control input-small"/>
                         </div>
                     </form>
                 </div>
@@ -41,8 +41,8 @@
             <div class="tab-pane" id="questions">
                 <div class="container">
                     <div>
-                        <input class="btn btn-primary" ng-click="addNewQuestion()" type="button" value="Add new question" />
-                        <input class="btn btn-primary" ng-click="removeSelectedQuestions()" type="button" value="Remove selected" />
+                        <button class="btn btn-primary" ng-click="addNewQuestion()" type="button">Add new question</button>
+                        <button class="btn btn-danger" ng-click="removeSelectedQuestions()" type="button">Remove selected</button>
                     </div>
 
                     <div class="list-group" id="questions-list">
@@ -50,46 +50,56 @@
                             <div class="cell-checkbox">
                                 <input ng-model="question.selected" type="checkbox" />
                             </div>
-                            <div class="cell-question">
-                                <li role="presentation" ng-class="getClass(question)" href class="list-group-item"  ng-click="editQuestion(question)">{{ question.text }}</li>
-                            </div>
+                            <ul class="cell-question">
+                                <li ng-class="getClass(question)" class="list-group-item" ng-click="editQuestion(question)">{{ question.text }}</li>
+                            </ul>
                         </div>
                     </div>
                     <div id="question-content" ng-show="question" ng-controller="QuestionController">
-                        <div>
-                            <form>
-                                <div class="form-group">
-                                    <label for="txtText"/>
-                                    <textarea id="txtText" ng-model="question.text" class="textarea-medium" />
-                                </div>
-                                <div class="form-group">
-                                    <input id="multiselect" type="checkbox" ng-model="question.multiSelect">
-                                    <label for="multiselect">multiselect</label>
-                                </div>
-                                <div class="form-group">
-                                    <fieldset>
-                                        <legend>Answers</legend>
-                                        <div ng-repeat="answer in question.answers">
-                                            <input ng-model="answer.selected" type="checkbox" />
-                                            <textarea class="text-answer" type="text" ng-model="answer.text" />
-                                            <input type="checkbox" ng-model="answer.right" />
-                                        </div>
+                        <form>
+                            <div class="form-group">
+                                <label for="txtText">Question text</label>
+                                <textarea id="txtText" ng-model="question.text" class="form-control input-large" rows="10"></textarea>
+                            </div>
+                            <div class="checkbox">
+                                <label for="multiselect">
+                                    <input id="multiselect" type="checkbox" ng-model="question.multiSelect"/>
+                                    Multiselect question
+                                </label>
+                            </div>
 
-                                        <div class="control-buttons">
-                                            <input class="btn btn-primary" ng-click="addNewAnswer(question)" type="button" value="Add new answer">
-                                            <input class="btn btn-primary" ng-click="removeSelectedAnswers()" type="button" value="Remove">
-                                        </div>
-                                    </fieldset>
-                                </div>
-                            </form>
+                            <fieldset>
+                                <legend>Answers</legend>
+                                <div ng-repeat="answer in question.answers">
+                                    <input ng-model="answer.selected" type="checkbox"/>
 
-                        </div>
+                                    <div class="form-group">
+                                        <label>Answer text</label>
+                                        <textarea ng-model="answer.text" class="form-control input-large" rows="2"></textarea>
+                                    </div>
+
+                                    <div class="checkbox">
+                                        <label for="multiselect">
+                                            <input type="checkbox" ng-model="answer.right"/>
+                                            Correct answer
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="control-buttons">
+                                    <button class="btn btn-primary" ng-click="addNewAnswer(question)" type="button">Add new answer</button>
+                                    <button class="btn btn-danger" ng-click="removeSelectedAnswers()" type="button">Remove</button>
+                                </div>
+                            </fieldset>
+                        </form>
                     </div>
                 </div>
             </div>
 
             <div class="tab-pane" id="tests-taken">
                 Tests taken
+
+                <em>TBD</em>
             </div>
         </div>
     </div>
