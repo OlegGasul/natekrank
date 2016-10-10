@@ -99,3 +99,37 @@ a.active {
     opacity: 1;
     transition: all 150ms linear;
 }
+
+
+#sn-position {
+    position: relative;
+}
+
+#sn-position #h1 {
+    position: absolute;
+    letter-spacing: -1px;
+    z-index: 1029;
+    margin: 0px;
+    padding: 0px;
+    font-weight: 300;
+    top: 9px;
+    color: #2a2a2a;
+    text-align: center;
+    width: 100%;
+    left: 0px;
+    font-size: 25.5px;
+}
+
+#sn-position #h1 span {
+    font-weight: 700;
+}
+
+#sn-position #h1 a,
+#sn-position #h1 a:hover {
+    color: #2a2a2a;
+    text-decoration: none;
+}
+
+#sn-position img {
+    max-width: 100%;
+}

@@ -16,16 +16,8 @@ function SurveyController($rootScope, $scope, $location, SurveyService) {
     $scope.init = function(survey) {
         $scope.survey = survey;
 
-        var firstQuestion = $scope.survey.task.questions[0];
-        $scope.selectQuestion(firstQuestion);
-    };
-
-    $scope.start = function() {
-
-    };
-
-    $scope.getClass = function(question) {
-        return question.selected ? 'active' : '';
+        // select first question
+        $scope.selectQuestion($scope.survey.task.questions[0]);
     };
 
     function injectQuestion(question) {
@@ -33,24 +25,29 @@ function SurveyController($rootScope, $scope, $location, SurveyService) {
     }
 
     $scope.selectQuestion = function(question) {
-        if ($scope.selectedQuestion == question)
+        if ($scope.selectedQuestion === question) {
             return;
+        }
 
         question.selected = true;
         injectQuestion(question);
 
-        if ($scope.selectedQuestion)
+        if ($scope.selectedQuestion) {
             $scope.selectedQuestion.selected = false;
+        }
+
         $scope.selectedQuestion = question;
     };
 
-    function getQuestion(question, incr) {
+    function getQuestion(question, offset) {
         var questions = $scope.survey.task.questions;
         var length = questions.length;
         var index = questions.indexOf(question);
-        var newIndex = index + incr;
-        if (newIndex >= length || index <= -1)
+        var newIndex = index + offset;
+
+        if (newIndex >= length || index <= -1) {
             return question;
+        }
 
         return questions[newIndex];
     }
@@ -77,12 +74,11 @@ function SurveyController($rootScope, $scope, $location, SurveyService) {
 function QuestionController($rootScope, $scope, $location, SurveyService) {
     $scope.changeAnswer = function(answer) {
         if (!$scope.question.multiSelect) {
-            for (var i in $scope.question.answers) {
-                var ans = $scope.question.answers[i];
+            $scope.question.answers.forEach((ans) => {
                 if (ans != answer) {
                     ans.checked = false;
                 }
-            }
+            });
         }
     }
 }
