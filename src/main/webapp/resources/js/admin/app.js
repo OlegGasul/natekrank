@@ -120,16 +120,28 @@ function TaskController($scope, $location, TaskService, task) {
 
 function QuestionController($scope) {
     $scope.addNewAnswer = function(question) {
-        if (!question.answers)
+        if (!question.answers) {
             question.answers = [];
-        question.answers.push({ question_id: question.id, text: 'New answer' });
+        }
+
+        question.answers.push({ question_id: question.id, text: 'New answer', selected: false });
+    };
+
+    function removeAnswer(index) {
+        $scope.question.answers.splice(index, 1);
     };
 
     $scope.removeSelectedAnswers = function() {
         for (var i = $scope.question.answers.length - 1; i >= 0; i--) {
             if ($scope.question.answers[i].selected) {
-                $scope.question.answers.splice(i, 1);
+                removeAnswer(i);
             }
+        }
+    };
+
+    $scope.deleteAnswer = function(index) {
+        if (confirm('Are you sure want to delete this answer?')) {
+            removeAnswer(index);
         }
     }
 }

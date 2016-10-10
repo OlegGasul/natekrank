@@ -72,10 +72,30 @@ a.active {
     width: 255px;
 }
 
+
 .taskList {
 
 }
 
 .taskList tbody tr {
     cursor: pointer;
+}
+
+.answers {
+
+}
+.answers-item {
+    padding: 1ex;
+    position: relative;
+}
+.answers-item .answers-delete {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    transition: all 150ms linear;
+}
+.answers-item:hover .answers-delete {
+    opacity: 1;
+    transition: all 150ms linear;
 }
