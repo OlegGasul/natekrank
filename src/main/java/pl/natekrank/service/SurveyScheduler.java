@@ -15,7 +15,10 @@ import pl.natekrank.model.Survey;
 import pl.natekrank.repository.SurveyRepository;
 
 import javax.servlet.ServletContext;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Hashtable;
 
 @Component("surveyScheduler")
 @Transactional
