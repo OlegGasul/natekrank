@@ -79,6 +79,8 @@
 </div>
 <!-- /container -->
 
+<%@ include file="../includes/footer.jsp" %>
+
 <script>
     var _contextPath = "${contextPath}";
 </script>
