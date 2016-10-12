@@ -43,11 +43,12 @@ public class InterviewController {
         }
         
         SurveyDto surveyDto = createSurveyDto(survey);
-        model.addAttribute("survey", generateJson(surveyDto));
 
         if ("1".equals(start) || survey.getStarted() != null) {
+            model.addAttribute("survey", generateJson(surveyDto));
             return "survey/survey";
         } else {
+            model.addAttribute("survey", surveyDto);
             return "survey/welcome";
         }
     }
