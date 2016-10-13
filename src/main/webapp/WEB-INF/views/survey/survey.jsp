@@ -4,7 +4,7 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
-<html lang="en" ng-app="app">
+<html lang="en" ng-app="survey">
 <head>
     <link rel="apple-touch-icon" href="${contextPath}/resources/images/favicon.ico">
 
@@ -29,9 +29,7 @@
     <script src="${contextPath}/resources/js/lib/jquery.min.js"></script>
     <script src="${contextPath}/resources/js/lib/bootstrap.min.js"></script>
 
-    <script src="${contextPath}/resources/js/lib/angular.min.js"></script>
-    <script src="${contextPath}/resources/js/lib/angular-ui-router.js"></script>
-    <script src="${contextPath}/resources/js/survey/app.js"></script>
+    <script src="${contextPath}/resources/js/survey.js"></script>
 </head>
 
 <body>

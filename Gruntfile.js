@@ -1,0 +1,44 @@
+'use strict';
+
+const loadGruntTasks = require('load-grunt-tasks');
+
+let config = {};
+
+try {
+    // create grunt.config.js file to locally override settings
+    config = Object.assign(
+        config,
+        require('./grunt.config')
+    );
+    console.log('Custom devserver config loaded.');
+} catch (e) {
+    if (!e.message.startsWith('Cannot find module')) {
+        console.error('Error loading custom config: ', e);
+    }
+}
+
+module.exports = (grunt) => {
+    loadGruntTasks(grunt);
+
+    config = Object.assign(
+        {
+            pkg: grunt.file.readJSON('package.json'),
+            staticRoot: 'src/main/webapp/resources',
+            jsRoot: 'src/main/webapp/resources/js/src',
+        },
+        config
+    );
+
+    grunt.initConfig(config);
+
+    grunt.loadTasks('grunt/');
+
+
+    grunt.registerTask('default', [
+        'watch',
+    ]);
+
+    grunt.registerTask('build', [
+        'browserify:prod',
+    ]);
+};

@@ -31,7 +31,7 @@
 
     <script src="${contextPath}/resources/js/lib/angular.min.js"></script>
     <script src="${contextPath}/resources/js/lib/angular-ui-router.js"></script>
-    <script src="${contextPath}/resources/js/survey/app.js"></script>
+    <script src="${contextPath}/resources/js/survey.js"></script>
 </head>
 
 <body>
