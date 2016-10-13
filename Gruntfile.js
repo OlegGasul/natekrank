@@ -43,6 +43,9 @@ module.exports = (grunt) => {
 
 
     grunt.registerTask('default', [
+        'browserify:dev',
+        'styles:dev',
+        'copy:liveDeployImages',
         'watch',
     ]);
 
