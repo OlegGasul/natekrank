@@ -2,21 +2,27 @@
 
 module.exports = (grunt) => {
     const config = {
-        styles: {
-            files: '<%= staticRoot%>/css/**/*.css',
-            tasks: ['copy:liveDeployStyles']
+        compileStyles: {
+            files: '<%= cssRoot%>/**/*.css',
+            tasks: ['styles:dev'],
         },
+        deployStyles: {
+            files: ['<%= cssOutAdmin %>', '<%= cssOutSurvey %>'],
+            tasks: ['copy:liveDeployStyles'],
+        },
+
         compileScripts: {
             files: '<%= jsRoot %>/**/*.js',
-            tasks: ['browserify:dev']
+            tasks: ['browserify:dev'],
         },
         deployScripts: {
             files: '<%= staticRoot %>/js/*.js',
-            tasks: ['copy:liveDeployScripts']
+            tasks: ['copy:liveDeployScripts'],
         },
+
         images: {
             files: ['<%= staticRoot %>/images/**/*.*'],
-            tasks: ['copy:liveDeployImages']
+            tasks: ['copy:liveDeployImages'],
         }
     };
 
