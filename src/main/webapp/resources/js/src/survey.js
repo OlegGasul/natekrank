@@ -1,12 +1,17 @@
-/* globals angular, _contextPath */
+/* globals _contextPath */
+
+import angular from 'angular';
+import uiRouter from 'angular-ui-router';
 
 function SurveyService($http) {
+    const endPoint = `${_contextPath}/survey/`;
+
     function submitSurvey(survey) {
-        return $http({ method: 'post', url: _contextPath + '/survey/' + survey.token, data: survey });
+        return $http({method: 'post', url: `${endPoint}${survey.token}`, data: survey});
     }
 
     return {
-        submitSurvey: submitSurvey
+        submitSurvey,
     }
 }
 
@@ -40,10 +45,10 @@ function SurveyController($rootScope, $scope, $location, SurveyService) {
     };
 
     function getQuestion(question, offset) {
-        var questions = $scope.survey.task.questions;
-        var length = questions.length;
-        var index = questions.indexOf(question);
-        var newIndex = index + offset;
+        const questions = $scope.survey.task.questions;
+        const length = questions.length;
+        const index = questions.indexOf(question);
+        const newIndex = index + offset;
 
         if (newIndex >= length || index <= -1) {
             return question;
@@ -65,8 +70,8 @@ function SurveyController($rootScope, $scope, $location, SurveyService) {
     };
 
     $scope.submitSurvey = function() {
-        SurveyService.submitSurvey($scope.survey).then(function() {
-            location.href = _contextPath + '/result/' + $scope.survey.token;
+        SurveyService.submitSurvey($scope.survey).then(() => {
+            location.href = `${_contextPath}/result/${$scope.survey.token}`;
         });
     };
 }
@@ -84,7 +89,7 @@ function QuestionController($rootScope, $scope, $location, SurveyService) {
 }
 
 var app = angular
-    .module('app', ['ui.router'])
+    .module('survey', [uiRouter])
     .controller('SurveyController', SurveyController)
     .controller('QuestionController', QuestionController)
     .factory('SurveyService', SurveyService);
