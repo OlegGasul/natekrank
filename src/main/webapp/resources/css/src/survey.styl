@@ -1,0 +1,215 @@
+@require 'bootstrap/dist/css/bootstrap.css';
+
+#questions {
+  width: 100%;
+}
+
+#questions-list {
+  margin-top: 15px;
+  width: 284px;
+  float: left;
+}
+
+#question-content {
+  width: 800px;
+  margin-top: 15px;
+  margin-left: 20px;
+  float: left;
+}
+
+#logo {
+  float: left;
+}
+
+.tab-pane {
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  border-radius: 0px 0px 5px 5px;
+  padding: 10px;
+}
+
+.nav-tabs {
+  margin-bottom: 0;
+}
+
+.task-tab-content {
+  min-height: 400px;
+}
+
+.control-buttons {
+  margin-top: 20px;
+  padding-right: 10px;
+}
+
+.input-small {
+  width: 100px;
+}
+
+.input-medium {
+  width: 400px;
+}
+
+.textarea-medium {
+  width: 600px;
+  height: 250px;
+}
+
+.text-answer {
+  width: 450px;
+  height: 100%;
+}
+
+a.active {
+  background-color: #337ab7;
+}
+
+.cell-checkbox {
+  float: left;
+  width: 21px;
+}
+
+.cell-question {
+  float: left;
+  width: 255px;
+}
+
+
+.taskList {
+  tbody tr {
+    cursor: pointer;
+  }
+}
+
+.answers {
+  &-item {
+    padding: 1ex;
+    position: relative;
+
+    &:hover .answers-delete {
+      opacity: 1;
+      transition: all 150ms linear;
+    }
+  }
+
+  &-delete {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    transition: all 150ms linear;
+  }
+}
+
+
+#sn-position {
+  position: relative;
+
+  #h1 {
+    position: absolute;
+    letter-spacing: -1px;
+    z-index: 1029;
+    margin: 0px;
+    padding: 0px;
+    font-weight: 300;
+    top: 9px;
+    color: #2a2a2a;
+    text-align: center;
+    width: 100%;
+    left: 0px;
+    font-size: 25.5px;
+
+    span {
+      font-weight: 700;
+    }
+
+
+    & a,
+    & a:hover {
+      color: #2a2a2a;
+      text-decoration: none;
+    }
+  }
+
+  img {
+    max-width: 100%;
+  }
+}
+
+#bot-modules-2 {
+  background-color: #1e1e1e;
+  color: #ffffff;
+
+  > .container {
+    border-bottom: 2px solid #2d2d2d;
+  }
+
+  ul {
+    padding: 3px 0px;
+    margin: 0px;
+    background-image: none;
+    list-style: none;
+
+    li {
+      color: #ffffff;
+      background-image: none;
+      list-style: none;
+
+      a {
+        margin-left: 9px;
+      }
+
+        &::before {
+          content: '>';
+        }
+    }
+  }
+
+  a {
+    color: #0091dc;
+  }
+}
+
+#footer {
+  background-color: #1e1e1e;
+  color: #9d9d9d;
+
+  a {
+    color: #ffffff;
+
+    &:hover {
+      color: #0091dc;
+    }
+  }
+}
+
+.moduletable {
+  margin-bottom: 20px;
+
+  .module-content {
+    padding: 0px 0px 3px 0px;
+  }
+
+  h3 {
+    font-family: 'Arial', Arial, Helvetica, sans-serif;
+    letter-spacing: 0px;
+    font-weight: 300;
+    padding: 0px 0px 20px 0px;
+    font-size: 18px;
+    margin-bottom: 0px;
+    line-height: 1.2em;
+  }
+
+  ul li {
+    margin: 0 0 0 5px;
+  }
+}
+
+#social-icons-footer {
+  margin-left: -8px;
+}
+
+.social-icons-footer {
+  float: left;
+  margin-left: 8px;
+}

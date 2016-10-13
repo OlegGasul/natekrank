@@ -25,6 +25,14 @@ module.exports = (grunt) => {
             pkg: grunt.file.readJSON('package.json'),
             staticRoot: 'src/main/webapp/resources',
             jsRoot: 'src/main/webapp/resources/js/src',
+
+            cssRoot: 'src/main/webapp/resources/css/src',
+            cssOutAdmin: '<%= staticRoot %>/css/admin.css',
+            cssOutSurvey: '<%= staticRoot %>/css/survey.css',
+            autoprefixer: {
+                dev: 'last 1 version',
+                prod: 'last 2 versions'
+            },
         },
         config
     );

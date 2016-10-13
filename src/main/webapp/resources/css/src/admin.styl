@@ -1,0 +1,102 @@
+@require 'bootstrap/dist/css/bootstrap.css';
+
+#questions {
+  width: 100%;
+}
+
+#questions-list {
+  margin-top: 15px;
+  width: 284px;
+  float: left;
+}
+
+#question-content {
+  width: 800px;
+  margin-top: 15px;
+  margin-left: 20px;
+  float: left;
+}
+
+#logo {
+  float: left;
+}
+
+.tab-pane {
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  border-radius: 0px 0px 5px 5px;
+  padding: 10px;
+}
+
+.nav-tabs {
+  margin-bottom: 0;
+}
+
+.task-tab-content {
+  min-height: 400px;
+}
+
+.control-buttons {
+  margin-top: 20px;
+  padding-right: 10px;
+}
+
+.input-small {
+  width: 100px;
+}
+
+.input-medium {
+  width: 400px;
+}
+
+.textarea-medium {
+  width: 600px;
+  height: 250px;
+}
+
+.text-answer {
+  width: 450px;
+  height: 100%;
+}
+
+a.active {
+  background-color: #337ab7;
+}
+
+.cell-checkbox {
+  float: left;
+  width: 21px;
+}
+
+.cell-question {
+  float: left;
+  width: 255px;
+}
+
+
+.taskList {
+  tbody tr {
+    cursor: pointer;
+  }
+}
+
+.answers {
+  &-item {
+    padding: 1ex;
+    position: relative;
+
+    &:hover .answers-delete {
+      opacity: 1;
+      transition: all 150ms linear;
+    }
+  }
+
+  &-delete {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    transition: all 150ms linear;
+  }
+}

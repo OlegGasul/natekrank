@@ -17,8 +17,8 @@
 
     <title>NatekRank - Welcome</title>
 
-    <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="${contextPath}/resources/css/main.css" rel="stylesheet"/>
+
+    <link href="${contextPath}/resources/css/survey.css" rel="stylesheet"/>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -29,8 +29,7 @@
     <script src="${contextPath}/resources/js/lib/jquery.min.js"></script>
     <script src="${contextPath}/resources/js/lib/bootstrap.min.js"></script>
 
-    <script src="${contextPath}/resources/js/lib/angular.min.js"></script>
-    <script src="${contextPath}/resources/js/lib/angular-ui-router.js"></script>
+
     <script src="${contextPath}/resources/js/survey.js"></script>
 </head>
 
