@@ -11,6 +11,9 @@ module.exports = (grunt) => {
             dev: {
                 options: {
                     watch: true,
+                    browserifyOptions: {
+                        debug: true, // adds sourcemaps
+                    },
                     transform: [
                         ['babelify']
                     ]
