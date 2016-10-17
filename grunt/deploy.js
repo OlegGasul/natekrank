@@ -17,8 +17,20 @@ module.exports = (grunt) => {
             liveDeployStyles: {},
             liveDeployImages: {},
             liveDeployScripts: {},
+            liveDeployWar: {},
         }
     };
+
+    if (grunt.config.get('tomcatDir')) {
+        config.copy.war = {
+            src: 'target/<%= pkg.name %>.war',
+            dest: '<%= tomcatDir %>/<%= pkg.name %>.war',
+        };
+
+        grunt.log.writeln(`*.war will be deployed to ${grunt.config.get('tomcatDir')}/${grunt.config.get('pkg.name')}.war`);
+    } else {
+        grunt.log.writeln('`tomcatDir` not specified, *.war will not be deployed automatically');
+    }
 
     if (grunt.config.get('deployPath')) {
         config.copy = Object.assign(config.copy, {
@@ -28,8 +40,10 @@ module.exports = (grunt) => {
 
             liveDeployScripts: deployTaskFactory('js'),
         });
+
+        grunt.log.writeln(`Assets will be deployed to ${grunt.config.get('deployPath')} subdirs`);
     } else {
-        grunt.log.write('`deployPath` not specified, liveDeploy* are noop tasks`');
+        grunt.log.writeln('`deployPath` not specified, liveDeploy* are noop tasks');
     }
 
     grunt.config.merge(config);

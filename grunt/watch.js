@@ -1,32 +1,27 @@
 'use strict';
 
 module.exports = (grunt) => {
-    const config = {
-        watch: {
-            compileStyles: {
-                files: '<%= cssRoot%>/**/*.css',
-                tasks: ['styles:dev'],
-            },
-            deployStyles: {
-                files: ['<%= cssOutAdmin %>', '<%= cssOutSurvey %>'],
-                tasks: ['copy:liveDeployStyles'],
-            },
+    const watch = {
+        compileStyles: {
+            files: '<%= cssRoot%>/**/*.css',
+            tasks: ['styles:dev'],
+        },
 
-            compileScripts: {
-                files: '<%= jsRoot %>/**/*.js',
-                tasks: ['browserify:dev'],
-            },
-            deployScripts: {
-                files: '<%= staticRoot %>/js/*.js',
-                tasks: ['copy:liveDeployScripts'],
-            },
+        deployStyles: {
+            files: ['<%= cssOutAdmin %>', '<%= cssOutSurvey %>'],
+            tasks: ['copy:liveDeployStyles'],
+        },
 
-            images: {
-                files: ['<%= staticRoot %>/images/**/*.*'],
-                tasks: ['copy:liveDeployImages'],
-            }
-        }
+        deployScripts: {
+            files: '<%= staticRoot %>/js/*.js',
+            tasks: ['copy:liveDeployScripts'],
+        },
+
+        images: {
+            files: ['<%= staticRoot %>/images/**/*.*'],
+            tasks: ['copy:liveDeployImages'],
+        },
     };
 
-    grunt.config.merge(config);
+    grunt.config.merge({watch});
 };

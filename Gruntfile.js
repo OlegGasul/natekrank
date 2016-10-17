@@ -10,7 +10,7 @@ try {
         config,
         require('./grunt.config')
     );
-    console.log('Custom devserver config loaded.');
+    console.log('Grunt config override loaded.');
 } catch (e) {
     if (!e.message.startsWith('Cannot find module')) {
         console.error('Error loading custom config: ', e);
@@ -20,9 +20,11 @@ try {
 module.exports = (grunt) => {
     loadGruntTasks(grunt);
 
+    const pkg = grunt.file.readJSON('package.json');
+
     config = Object.assign(
         {
-            pkg: grunt.file.readJSON('package.json'),
+            pkg,
             staticRoot: 'src/main/webapp/resources',
             jsRoot: 'src/main/webapp/resources/js/src',
 
@@ -36,6 +38,12 @@ module.exports = (grunt) => {
         },
         config
     );
+
+    // automatically create deployPath value
+    // please note that *.war filename is taken from package.json, so keep this up to date
+    if (config.tomcatDir && !config.deployPath) {
+        config.deployPath = `${config.tomcatDir}\\${pkg.name}\\resources`;
+    }
 
     grunt.initConfig(config);
 

@@ -48,6 +48,8 @@ module.exports = {
 };
 ```
 
+If there's `tomcatDir` value in config, `deployPath` will be derived automatically and you will receive little helper `grunt copy:war`. 
+
 This can also require root/Admin rights to write to specified directory (or at least same as tomcat has).
 
 ### Production
