@@ -5,8 +5,8 @@ const autoprefixer = require('autoprefixer');
 
 module.exports = (grunt) => {
     const files = {
-        '<%= cssOutAdmin %>': '<%= cssRoot %>/survey.styl',
-        '<%= cssOutSurvey %>': '<%= cssRoot %>/admin.styl',
+        '<%= cssOutSurvey %>': '<%= cssRoot %>/survey.styl',
+        '<%= cssOutAdmin %>': '<%= cssRoot %>/admin.styl',
     };
 
     grunt.config.merge({
