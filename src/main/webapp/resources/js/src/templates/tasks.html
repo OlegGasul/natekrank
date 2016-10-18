@@ -1,5 +1,5 @@
 <div class="control-buttons">
-    <input class="btn btn-primary" ng-click="createTask()" type="button" value="Create task">
+    <a ui-sref="createTask" class="btn btn-primary">Create task</a>
 </div>
 
 <table class="table table-hover taskList">
@@ -12,7 +12,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="task in tasks" ng-click="showTask(task)">
+        <tr ng-repeat="task in $ctrl.tasks" ui-sref="tasksItem({id: task.id})">
             <td>{{task.id}}</td>
             <td>{{task.name}}</td>
             <td>{{task.description}}</td>

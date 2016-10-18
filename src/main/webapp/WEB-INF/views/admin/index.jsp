@@ -4,7 +4,7 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
-<html lang="en" ng-app="app">
+<html lang="en">
 <head>
     <link rel="apple-touch-icon" href="${contextPath}/resources/images/favicon.ico">
 
@@ -27,14 +27,10 @@
 
     <script src="${contextPath}/resources/js/lib/jquery.min.js"></script>
     <script src="${contextPath}/resources/js/lib/bootstrap.min.js"></script>
-
-    <script src="${contextPath}/resources/js/lib/angular.min.js"></script>
-    <script src="${contextPath}/resources/js/lib/angular-ui-router.js"></script>
-    <script src="${contextPath}/resources/js/admin.js"></script>
 </head>
 
 <body>
-<div class="container" ng-controller="IndexController" ng-init="init('${pageContext.request.userPrincipal.name}')">
+<div class="container">
     <div class="container">
         <div id="logo">
             <img src="${contextPath}/resources/images/small-logo.png" border="0" />
@@ -50,19 +46,13 @@
         </c:if>
     </div>
 
-    <ul class="nav nav-pills" ng-controller="IndexController">
-        <li role="presentation" ng-class="getClass('/tasks')"><a href="#tasks">Task definitions</a></li>
-        <li role="presentation" ng-class="getClass('/surveys')"><a href="#surveys">Tests taken</a></li>
-    </ul>
-
-    <div>
-        <div ui-view="content"></div>
-    </div>
+    <admin-index email="'${pageContext.request.userPrincipal.name}'"></admin-index>
 </div>
 
 <script>
     var _contextPath = "${contextPath}";
 </script>
+<script src="${contextPath}/resources/js/admin.js"></script>
 
 </body>
 </html>

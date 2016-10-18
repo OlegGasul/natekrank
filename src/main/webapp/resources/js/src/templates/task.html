@@ -1,0 +1,75 @@
+<form action="#">
+    <input type="hidden" name="id" value="{{$ctrl.task.id}}" />
+
+    <div>
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a href data-target="#general" data-toggle="tab">General</a>
+            </li>
+            <li>
+                <a href data-target="#questions" data-toggle="tab">Questions</a>
+            </li>
+            <li>
+                <a href data-target="#tests-taken" data-toggle="tab">Tests taken</a>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="task-tab-content">
+            <div class="tab-pane active" id="general">
+                <div id="description-group">
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control input-large" id="name" ng-model="$ctrl.task.name" placeholder="Name"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description</label><br/>
+                            <textarea id="description" placeholder="Description" ng-model="$ctrl.task.description" class="form-control input-large" rows="10"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="daysExpired">Days expired</label>
+                            <input type="number" class="form-control input-small" id="daysExpired" ng-model="$ctrl.task.daysExpired" min="1" max="31"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="timeForSolving">Minutes for solving</label>
+                            <input id="timeForSolving" ng-model="$ctrl.task.minutesForSolving" type="number" min="1" class="form-control input-small"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="tab-pane" id="questions">
+                <div class="container">
+                    <div>
+                        <button class="btn btn-primary" ng-click="$ctrl.addNewQuestion()" type="button">Add new question</button>
+                        <button class="btn btn-danger" ng-click="$ctrl.removeSelectedQuestions()" type="button">Remove selected</button>
+                    </div>
+
+                    <div class="list-group" id="questions-list">
+                        <div ng-repeat="question in $ctrl.task.questions">
+                            <div class="cell-checkbox">
+                                <input ng-model="$ctrl.question.selected" type="checkbox"/>
+                            </div>
+                            <ul class="cell-question">
+                                <li ng-class="{active: question === $ctrl.selectedQuestion}" class="list-group-item" ng-click="$ctrl.editQuestion(question)">{{ question.text }}</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <task-question ng-if="$ctrl.selectedQuestion" question="$ctrl.selectedQuestion"></task-question>
+                </div>
+            </div>
+
+            <div class="tab-pane" id="tests-taken">
+                Tests taken
+
+                <em>TBD</em>
+            </div>
+        </div>
+    </div>
+
+    <div class="control-buttons">
+        <button class="btn btn-primary" ng-click="$ctrl.saveTask()" type="button">Save task</button>
+        <button class="btn btn-primary" ng-click="$ctrl.createSurvey()" type="button">Send test</button>
+    </div>
+</form>

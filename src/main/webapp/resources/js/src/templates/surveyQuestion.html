@@ -1,0 +1,14 @@
+<form>
+    <div>
+        {{$ctrl.question.text}}
+    </div>
+
+    <div ng-repeat="answer in $ctrl.question.answers track by $index" ng-show="$ctrl.question.multiSelect">
+        <input id="checkbox{{$index}}" type="checkbox" ng-model="$ctrl.answer.checked"/>
+        <label for="checkbox{{$index}}">{{answer.text}}</label>
+    </div>
+    <div ng-repeat="answer in $ctrl.question.answers track by $index" ng-hide="$ctrl.question.multiSelect">
+        <input id="radio{{$index}}" name="answer" type="radio" ng-value="true" ng-model="answer.checked" ng-change="$ctrl.changeAnswer(answer)"/>
+        <label for="radio{{$index}}">{{answer.text}}</label>
+    </div>
+</form>
