@@ -15,7 +15,7 @@ module.exports = (grunt) => {
                         debug: true, // adds sourcemaps
                     },
                     transform: [
-                        ['babelify']
+                        ['babelify'], ['html2js-browserify']
                     ]
                 },
                 files,
@@ -30,7 +30,7 @@ module.exports = (grunt) => {
                         browserifyInstance._ignore.push('./enable-lr');
                     },
                     transform: [
-                        ['babelify']
+                        ['babelify'], ['html2js-browserify']
                     ]
                 },
                 files,
