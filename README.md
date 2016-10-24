@@ -20,20 +20,21 @@ For Intellij Idea https://plugins.jetbrains.com/plugin/6317
 Open MySQL Workbench. Create database and run script __/resources/db.sql__
 
 4) Set-up properties
+Rename __application.default.properties__ to __application.properties__.
 Open __application.properties__ and set the following:
 
 __jdbc section__
-url - database connection string
-username - database user
-password - database password
+__url__ - database connection string
+__username__ - database user
+__password__ - database password
 
 __mail section__
-host - SMTP host
-port - SMTP port
-user - SMTP user
-password - password for SMTP user
-url - link on application that will be send in mails
-subject - mail subject
+__host__ - SMTP host
+__port__ - SMTP port
+__user__ - SMTP user
+__password__ - password for SMTP user
+__url__ - link on application that will be send in mails
+__subject__ - mail subject
 
 ## Running
 
