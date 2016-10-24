@@ -7,6 +7,7 @@ src/main/webapp/resources/js/admin.js
 src/main/webapp/resources/js/survey.js
 src/main/webapp/resources/css/admin.css
 src/main/webapp/resources/css/survey.css
-
 grunt.config.js
-src/main/resources/application.properties
+
+application.properties
+src/main/resources/schema.mwb.bak
