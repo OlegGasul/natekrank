@@ -1,14 +1,10 @@
-# Registration and Login Example with Spring MVC 4, Spring Security, Spring Data JPA, XML Configuration, Maven, JSP, and MySQL.
-
-## Guide
-https://hellokoding.com/registration-and-login-example-with-spring-xml-configuration-maven-jsp-and-mysql/
-
-## Prerequisites
-- JDK 1.8 or later
-- Maven 3 or later
-- MySQL 5.6 or later
-- Apache Tomcat 9 or later
-- Git
+## Dependencies
+- JDK 1.8 or later  
+- Maven 3 or later  
+- MySQL 5.6 or later  
+- Apache Tomcat 9 or later  
+- Git  
+- NodeJS  
 
 ## Set-up project
 0) Clone the project  
@@ -69,7 +65,7 @@ In order to deploy static without recompiling whole Java app, create file `grunt
 ```js
 module.exports = {
     // Change path accordingly to your setup
-    deployPath: 'C:\\Program Files\\Apache Software Foundation\\Tomcat 7.0\\webapps\\natekrank\\resources',
+    deployPath: '${TOMCAT_HOME}\\Tomcat 7.0\\webapps\\natekrank\\resources',
     // you can also override any value from grunt config here 
 };
 ```
