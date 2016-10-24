@@ -12,4 +12,4 @@ src/main/webapp/resources/css/admin.css
 src/main/webapp/resources/css/survey.css
 
 grunt.config.js
-src/main/resources/application.properties
+node_modules/
