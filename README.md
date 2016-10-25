@@ -36,7 +36,6 @@ __password__ - password for SMTP user
 __url__ - link on application that will be send in mails  
 __subject__ - mail subject  
 
-## Running
 
 ## Running from Maven with embedded Tomcat
 
