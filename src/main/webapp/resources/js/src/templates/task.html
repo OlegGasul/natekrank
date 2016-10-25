@@ -17,46 +17,47 @@
         <div class="tab-content" id="task-tab-content">
             <div class="tab-pane active" id="general">
                 <div id="description-group">
-                    <form>
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" class="form-control input-large" id="name" ng-model="$ctrl.task.name" placeholder="Name"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="description">Description</label><br/>
-                            <textarea id="description" placeholder="Description" ng-model="$ctrl.task.description" class="form-control input-large" rows="10"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="daysExpired">Days expired</label>
-                            <input type="number" class="form-control input-small" id="daysExpired" ng-model="$ctrl.task.daysExpired" min="1" max="31"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="timeForSolving">Minutes for solving</label>
-                            <input id="timeForSolving" ng-model="$ctrl.task.minutesForSolving" type="number" min="1" class="form-control input-small"/>
-                        </div>
-                    </form>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control input-large" id="name" ng-model="$ctrl.task.name" placeholder="Name"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label><br/>
+                        <textarea id="description" placeholder="Description" ng-model="$ctrl.task.description" class="form-control input-large" rows="10"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="daysExpired">Days expired</label>
+                        <input type="number" class="form-control input-small" id="daysExpired" ng-model="$ctrl.task.daysExpired" min="1" max="31"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="timeForSolving">Minutes for solving</label>
+                        <input id="timeForSolving" ng-model="$ctrl.task.minutesForSolving" type="number" min="1" class="form-control input-small"/>
+                    </div>
                 </div>
             </div>
 
             <div class="tab-pane" id="questions">
-                <div class="container">
-                    <div>
-                        <button class="btn btn-primary" ng-click="$ctrl.addNewQuestion()" type="button">Add new question</button>
-                        <button class="btn btn-danger" ng-click="$ctrl.removeSelectedQuestions()" type="button">Remove selected</button>
+                <div class="control-buttons">
+                    <button class="btn btn-primary" ng-click="$ctrl.addNewQuestion()" type="button">Add new question</button>
+                    <button class="btn btn-danger" ng-click="$ctrl.removeSelectedQuestions()" type="button" ng-show="$ctrl.hasMarked">Remove selected</button>
+                </div>
+
+                <div class="row">
+                    <div class="list-group col-md-3" id="questions-list">
+                        <ul class="cell-question">
+                            <li class="list-group-item"
+                                ng-repeat="question in $ctrl.task.questions"
+                                ng-class="{active: question === $ctrl.selectedQuestion}"
+                                ng-click="$ctrl.editQuestion(question)">
+                                <div class="cell-checkbox">
+                                    <input ng-model="question.selected" type="checkbox" ng-change="$ctrl.markQuestion()"/>
+                                </div>
+                                {{ question.text }}
+                            </li>
+                        </ul>
                     </div>
 
-                    <div class="list-group" id="questions-list">
-                        <div ng-repeat="question in $ctrl.task.questions">
-                            <div class="cell-checkbox">
-                                <input ng-model="$ctrl.question.selected" type="checkbox"/>
-                            </div>
-                            <ul class="cell-question">
-                                <li ng-class="{active: question === $ctrl.selectedQuestion}" class="list-group-item" ng-click="$ctrl.editQuestion(question)">{{ question.text }}</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <task-question ng-if="$ctrl.selectedQuestion" question="$ctrl.selectedQuestion"></task-question>
+                    <task-question ng-if="$ctrl.selectedQuestion" question="$ctrl.selectedQuestion" class="col-md-9"></task-question>
                 </div>
             </div>
 

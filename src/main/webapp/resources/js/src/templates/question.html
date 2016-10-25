@@ -1,33 +1,31 @@
-<form>
-    <div class="form-group">
-        <label for="txtText">Question text</label>
-        <textarea id="txtText" ng-model="$ctrl.question.text" class="form-control input-large" rows="10"></textarea>
-    </div>
-    <div class="checkbox">
-        <label for="multiselect">
-            <input id="multiselect" type="checkbox" ng-model="$ctrl.question.multiSelect"/>
-            Multiselect question
-        </label>
-    </div>
+<div class="form-group">
+    <label for="txtText">Question text</label>
+    <textarea id="txtText" ng-model="$ctrl.question.text" class="form-control input-large" rows="10"></textarea>
+</div>
+<div class="checkbox">
+    <label for="multiselect">
+        <input id="multiselect" type="checkbox" ng-model="$ctrl.question.multiSelect"/>
+        Multiselect question
+    </label>
+</div>
 
-    <fieldset class="answers">
-        <legend>
-            Answers
-            <button class="btn btn-primary" ng-click="$ctrl.addNewAnswer()" type="button">Add new</button>
-        </legend>
-        <div ng-repeat="answer in $ctrl.question.answers" class="answers-item">
-            <div class="form-group">
-                <label for="answer-text-{{$index}}">Answer text</label>
-                <textarea id="answer-text-{{$index}}" ng-model="answer.text" class="form-control input-large" rows="2"></textarea>
-            </div>
-
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" ng-model="answer.right"/>
-                    Correct answer
-                </label>
-            </div>
-            <button class="btn btn-danger answers-delete" ng-click="$ctrl.deleteAnswer($index)" type="button">Remove</button>
+<fieldset class="answers">
+    <legend>
+        Answers
+        <button class="btn btn-primary" ng-click="$ctrl.addNewAnswer()" type="button">Add new</button>
+    </legend>
+    <div ng-repeat="answer in $ctrl.question.answers" class="answers-item">
+        <div class="form-group">
+            <label for="answer-text-{{$index}}">Answer text</label>
+            <textarea id="answer-text-{{$index}}" ng-model="answer.text" class="form-control input-large" rows="2"></textarea>
         </div>
-    </fieldset>
-</form>
+
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" ng-model="answer.right"/>
+                Correct answer
+            </label>
+        </div>
+        <button class="btn btn-danger answers-delete" ng-click="$ctrl.deleteAnswer($index)" type="button">Remove</button>
+    </div>
+</fieldset>

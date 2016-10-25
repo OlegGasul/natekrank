@@ -40,6 +40,10 @@ function TaskItemController($state, TaskService) {
                 this.task.questions.splice(i, 1);
             }
         }
+    };
+
+    this.markQuestion = function() {
+        this.hasMarked = this.task.questions.find(q => q.selected);
     }
 }
 
