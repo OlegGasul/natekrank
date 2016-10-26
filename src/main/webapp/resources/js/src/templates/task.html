@@ -39,25 +39,26 @@
             <div class="tab-pane" id="questions">
                 <div class="control-buttons">
                     <button class="btn btn-primary" ng-click="$ctrl.addNewQuestion()" type="button">Add new question</button>
-                    <button class="btn btn-danger" ng-click="$ctrl.removeSelectedQuestions()" type="button" ng-show="$ctrl.hasMarked">Remove selected</button>
                 </div>
 
                 <div class="row">
-                    <div class="list-group col-md-3" id="questions-list">
+                    <div class="list-group col-md-3">
                         <ul class="cell-question">
                             <li class="list-group-item"
                                 ng-repeat="question in $ctrl.task.questions"
                                 ng-class="{active: question === $ctrl.selectedQuestion}"
                                 ng-click="$ctrl.editQuestion(question)">
-                                <div class="cell-checkbox">
-                                    <input ng-model="question.selected" type="checkbox" ng-change="$ctrl.markQuestion()"/>
-                                </div>
                                 {{ question.text }}
                             </li>
                         </ul>
                     </div>
 
-                    <task-question ng-if="$ctrl.selectedQuestion" question="$ctrl.selectedQuestion" class="col-md-9"></task-question>
+                    <div class="col-md-9" ng-if="$ctrl.selectedQuestion">
+                        <div class="clearfix">
+                            <button class="btn btn-danger pull-right" ng-click="$ctrl.removeSelectedQuestion()" type="button">Remove this question</button>
+                        </div>
+                        <task-question question="$ctrl.selectedQuestion"></task-question>
+                    </div>
                 </div>
             </div>
 

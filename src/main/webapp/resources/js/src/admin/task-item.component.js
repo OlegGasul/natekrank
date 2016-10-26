@@ -34,17 +34,19 @@ function TaskItemController($state, TaskService) {
         this.selectedQuestion = question;
     };
 
-    this.removeSelectedQuestions = function() {
-        for (let i = this.task.questions.length - 1; i >= 0; i--) {
-            if (this.task.questions[i].selected) {
-                this.task.questions.splice(i, 1);
+    this.removeSelectedQuestion = function() {
+        if (confirm('Are you sure you want to delete this question?')) {
+            let index = this.task.questions.findIndex(q => q.selected);
+
+            this.task.questions.splice(index, 1);
+
+            if (this.task.questions.length !== 0) {
+                index = Math.max(index--, 0);
+
+                this.editQuestion(this.task.questions[index]);
             }
         }
     };
-
-    this.markQuestion = function() {
-        this.hasMarked = this.task.questions.find(q => q.selected);
-    }
 }
 
 TaskItemController.$inject = ['$state', 'TaskService'];

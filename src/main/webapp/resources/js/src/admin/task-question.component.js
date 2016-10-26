@@ -17,14 +17,6 @@ function TaskQuestionController() {
         this.question.answers.splice(index, 1);
     };
 
-    // this.removeSelectedAnswers = function() {
-    //     for (let i = this.question.answers.length - 1; i >= 0; i--) {
-    //         if (this.question.answers[i].selected) {
-    //             removeAnswer(i);
-    //         }
-    //     }
-    // };
-
     this.deleteAnswer = function(index) {
         if (confirm('Are you sure want to delete this answer?')) {
             removeAnswer(index);
