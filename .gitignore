@@ -3,9 +3,9 @@
 target
 *.DS_Store
 
-src/main/resources/application.properties
 application.properties
 src/main/resources/schema.mwb.bak
+
 src/main/webapp/resources/js/admin.js
 src/main/webapp/resources/js/survey.js
 src/main/webapp/resources/css/admin.css

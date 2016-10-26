@@ -29,20 +29,22 @@
 
 <div class="container">
 
-    <form method="post" action="${contextPath}/login" class="form-signin">
+    <form method="post" action="${contextPath}/login" class="form-signin col-md-6 col-md-offset-3">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <h2 class="form-heading">Log in</h2>
 
         <div class="form-group ${error != null ? 'has-error' : ''}">
-            <span>${message}</span>
+            <span class="help-block">${message}</span>
             <input name="email" type="text" class="form-control" placeholder="Username" autofocus="true"/>
-            <input name="password" type="password" class="form-control" placeholder="Password"/>
-            <span>${error}</span>
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
-            <%--<h4 class="text-center"><a href="${contextPath}/registration">Create an account</a></h4>--%>
+            <span class="help-block">${error}</span>
         </div>
 
+        <div class="form-group ${error != null ? 'has-error' : ''}">
+            <input name="password" type="password" class="form-control" placeholder="Password"/>
+        </div>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
     </form>
 
 </div>

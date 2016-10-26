@@ -1,10 +1,9 @@
 ## Dependencies
-- JDK 1.8 or later  
-- Maven 3 or later  
-- MySQL 5.6 or later  
-- Apache Tomcat 9 or later  
-- Git  
-- NodeJS  
+- JDK 1.8 or later
+- Maven 3 or later
+- MySQL 5.6 or later
+- Apache Tomcat 9 or later
+- GIT
 
 ## Set-up project
 0) Clone the project  
@@ -38,8 +37,7 @@ __url__ - link on application that will be send in mails
 __subject__ - mail subject  
 
 
-## Run
-```mvn jetty:run```
+## Running from Maven with embedded Tomcat
 
 ## Frontend build
 
@@ -65,7 +63,7 @@ In order to deploy static without recompiling whole Java app, create file `grunt
 ```js
 module.exports = {
     // Change path accordingly to your setup
-    deployPath: '${TOMCAT_HOME}\\Tomcat 7.0\\webapps\\natekrank\\resources',
+    deployPath: 'C:\\Program Files\\Apache Software Foundation\\Tomcat 7.0\\webapps\\natekrank\\resources',
     // you can also override any value from grunt config here 
 };
 ```

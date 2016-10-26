@@ -44,6 +44,8 @@ function SurveyIndexController($timeout, SurveyService) {
         // do you still think angular is good framework?
         this.selectQuestion(this.survey.task.questions[0]);
     });
+
+    this.startedAt = Date.now();
 }
 
 SurveyIndexController.$inject = ['$timeout', 'SurveyService'];

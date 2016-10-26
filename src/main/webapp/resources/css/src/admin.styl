@@ -2,12 +2,16 @@
 
 #questions {
   width: 100%;
-}
 
-#questions-list {
-  margin-top: 15px;
-  width: 284px;
-  float: left;
+  .control-buttons {
+    margin-bottom: 15px
+  }
+
+  .list-group-item {
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
+  }
 }
 
 #question-content {
@@ -72,6 +76,10 @@ a.active {
 .cell-question {
   float: left;
   width: 255px;
+
+  li {
+    cursor: pointer;
+  }
 }
 
 
@@ -100,3 +108,5 @@ a.active {
     transition: all 150ms linear;
   }
 }
+
+@import './form-signin.styl'
