@@ -16,6 +16,7 @@ import pl.natekrank.service.SurveyService;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Date;
 
 @Controller
 @RequestMapping("/survey")
@@ -60,7 +61,9 @@ public class InterviewController {
 
     private SurveyDto createSurveyDto(Survey survey) {
         Mapper mapper = new DozerBeanMapper();
-        return mapper.map(survey, SurveyDto.class);
+        SurveyDto surveyDto = mapper.map(survey, SurveyDto.class);
+        surveyDto.setServerRequest(new Date());
+        return surveyDto;
     }
 
     private String generateJson(SurveyDto surveyDto) {

@@ -9,6 +9,8 @@ import java.util.Date;
 public class SurveyDto {
     private Long id;
     private TaskDto task;
+    private Date started;
+    private Date serverRequest;
     private int minutesForSolving;
     private Date dueTo;
     private String token;
