@@ -1,6 +1,5 @@
 package pl.natekrank.web;
 
-import org.apache.commons.beanutils.PropertyUtilsBean;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
@@ -8,14 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import pl.natekrank.model.Survey;
-import pl.natekrank.model.User;
 import pl.natekrank.model.dto.SurveyDto;
 import pl.natekrank.service.SurveyService;
+import pl.natekrank.web.helper.DtoFactory;
+import pl.natekrank.web.helper.JsonFactory;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 
 @Controller
@@ -23,6 +21,10 @@ import java.util.Date;
 public class InterviewController {
     @Autowired
     private SurveyService surveyService;
+    @Autowired
+    private DtoFactory dtoFactory;
+    @Autowired
+    private JsonFactory jsonFactory;
 
     @RequestMapping(value = "/{token}", method = RequestMethod.POST)
     public String submitSurvey(@PathVariable("token") String token, @RequestBody SurveyDto survey) {
@@ -34,19 +36,20 @@ public class InterviewController {
     public String index(@PathVariable("token") String token, @RequestParam(value = "start", required = false) String start, Model model) {
         Survey survey = surveyService.getSurveyByToken(token);
         if (survey == null) {
-            return error(model, "Survey does't exists.");
+            return errorResponse(model, "Survey does't exists.");
         }
         if (survey.getFinished() != null) {
-            return error(model, "Survey has been ended.");
+            return errorResponse(model, "Survey has been ended.");
         }
-        if ("1".equals(start) && survey.getStarted() == null) {
+        if (start != null && survey.getStarted() == null) {
             survey = surveyService.startSurvey(survey);
         }
-        
-        SurveyDto surveyDto = createSurveyDto(survey);
 
-        if ("1".equals(start) || survey.getStarted() != null) {
-            model.addAttribute("survey", generateJson(surveyDto));
+        SurveyDto surveyDto = dtoFactory.createDto(survey);
+        surveyDto.setServerRequest(new Date());
+
+        if (start != null || survey.getStarted() != null) {
+            model.addAttribute("survey", jsonFactory.generateJson(surveyDto));
             return "survey/survey";
         } else {
             model.addAttribute("survey", surveyDto);
@@ -54,27 +57,8 @@ public class InterviewController {
         }
     }
 
-    public String error(Model model, String errorMessage) {
+    public String errorResponse(Model model, String errorMessage) {
         model.addAttribute("errorMessage", errorMessage);
         return "survey/error";
-    }
-
-    private SurveyDto createSurveyDto(Survey survey) {
-        Mapper mapper = new DozerBeanMapper();
-        SurveyDto surveyDto = mapper.map(survey, SurveyDto.class);
-        surveyDto.setServerRequest(new Date());
-        return surveyDto;
-    }
-
-    private String generateJson(SurveyDto surveyDto) {
-        ObjectMapper jsonMapper = new ObjectMapper();
-        String json = "{}";
-        try {
-            json = jsonMapper.writeValueAsString(surveyDto);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return json;
     }
 }
