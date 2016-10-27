@@ -88,6 +88,7 @@ public class SurveyServiceImpl implements SurveyService {
         }
 
         survey.setSurveyAnswers(surveyAnswers);
+        survey.setFinished(new Date());
         surveyRepository.save(survey);
 
         survey.setScore(calculateScore(survey));
