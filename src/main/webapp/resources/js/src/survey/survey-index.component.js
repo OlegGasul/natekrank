@@ -46,6 +46,8 @@ function SurveyIndexController($timeout, SurveyService) {
     });
 
     this.startedAt = Date.now();
+
+    this._contextPath = _contextPath;
 }
 
 SurveyIndexController.$inject = ['$timeout', 'SurveyService'];
