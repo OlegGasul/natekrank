@@ -42,8 +42,6 @@ __url__ - link on application that will be send in mails
 __subject__ - mail subject  
 
 
-## Running from Maven with embedded Tomcat
-
 ## Frontend build
 
 Frontend toolset is nodejs based. Install [nodejs >= 6.x](https://nodejs.org/) to proceed.
@@ -68,7 +66,7 @@ In order to deploy static without recompiling whole Java app, create file `grunt
 ```js
 module.exports = {
     // Change path accordingly to your setup
-    deployPath: 'C:\\Program Files\\Apache Software Foundation\\Tomcat 7.0\\webapps\\natekrank\\resources',
+    deployPath: '${tomcatDir}\\webapps\\natekrank\\resources',
     // you can also override any value from grunt config here 
 };
 ```
