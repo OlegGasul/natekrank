@@ -47,5 +47,6 @@
 
     <div class="control-buttons">
         <button class="btn btn-primary" ng-click="$ctrl.saveSurvey()" type="button">Send test</button>
+        <button class="btn btn-warning" ng-if="survey.sent" ng-click="$ctrl.resendSurvey(survey)">Resend</button>
     </div>
 </form>

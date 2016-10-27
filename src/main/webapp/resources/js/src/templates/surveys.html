@@ -1,4 +1,4 @@
-<table class="table table-hover">
+<table class="table table-hover surveyList">
     <thead>
         <tr>
             <th>#</th>
@@ -6,15 +6,23 @@
             <th>Key</th>
             <th>Started</th>
             <th>Finished</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="survey in $ctrl.surveys" ui-sref="survey({id: survey.id})">
+        <tr ng-repeat="survey in $ctrl.surveys" ui-sref="surveyItem({id: survey.id})">
             <th scope="row">{{survey.id}}</th>
             <td>{{survey.email}}</td>
             <td>{{survey.token}}</td>
             <td>{{survey.started}}</td>
             <td>{{survey.finished}}</td>
+            <td>
+                <button class="btn btn-warning"
+                    ng-if="survey.sent"
+                    ng-click="$ctrl.resendSurvey(survey)">
+                    Resend
+                </button>
+            </td>
         </tr>
     </tbody>
 </table>

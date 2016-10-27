@@ -13,6 +13,14 @@ export function SurveyServiceAdmin($http) {
         return $http({method: 'post', url: endPoint, data: survey});
     }
 
+    function resendSurvey(survey) {
+        return $http({
+            method: 'put',
+            url: `${endPoint}/${survey.id}`,
+            data: Object.assign({}, survey, {sent: false})
+        });
+    }
+
     return {
         getSurveys,
         saveSurvey,
