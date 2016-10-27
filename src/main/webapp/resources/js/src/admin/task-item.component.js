@@ -12,7 +12,7 @@ function TaskItemController($state, TaskService) {
     };
 
     this.createSurvey = function() {
-        $state.go('createSurvey', {id: this.task.id});
+        $state.go('createSurvey', {taskId: this.task.id});
     };
 
     this.addNewQuestion = function() {
