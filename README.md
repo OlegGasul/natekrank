@@ -4,6 +4,8 @@
 - MySQL 5.6 or later
 - Apache Tomcat 9 or later
 - GIT
+- NodeJS 6.x or later
+- npm
 
 ## Set-up project
 0) Clone the project  

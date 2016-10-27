@@ -24,6 +24,11 @@ public class SurveyController {
         return new ResponseEntity<>(surveyService.save(survey), HttpStatus.OK);
     }
 
+    @RequestMapping(method = RequestMethod.PUT)
+    public ResponseEntity<Survey> update(@RequestBody Survey survey) {
+        return new ResponseEntity<>(surveyService.save(survey), HttpStatus.OK);
+    }
+
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<Survey>> getList() {
         return new ResponseEntity<>(surveyService.getAllSurveys(), HttpStatus.OK);
