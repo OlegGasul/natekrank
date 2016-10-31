@@ -1,3 +1,5 @@
+import {minute} from '../util/formatTime';
+
 import surveyIndexTemplate from '../templates/surveyIndex.html';
 
 function SurveyIndexController($timeout, SurveyService) {
@@ -45,7 +47,7 @@ function SurveyIndexController($timeout, SurveyService) {
         this.selectQuestion(this.survey.task.questions[0]);
     });
 
-    this.startedAt = Date.now();
+    this.testDuration = this.survey.minutesForSolving * minute;
 
     this._contextPath = _contextPath;
 }

@@ -2,7 +2,9 @@ import {formatTime} from '../util/formatTime';
 import countDownTemplate from '../templates/countDown.html';
 
 function CountDownController($timeout) {
-    const startedAt = this.startedAt;
+    const timeDiff = Date.now() - this.loadedAt;
+
+    const startedAt = this.startedAt + timeDiff;
     const endingAt = startedAt + this.testDuration;
 
     this.elapsing = false;
@@ -37,7 +39,7 @@ export const CountDown = {
     template: countDownTemplate,
     bindings: {
         startedAt: '<',
-        // pageLoadedAt: '<',
+        loadedAt: '<',
         testDuration: '<',
         onExpire: '&',
     },

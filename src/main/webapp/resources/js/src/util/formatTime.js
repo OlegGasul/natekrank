@@ -1,6 +1,6 @@
-const second = 1000;
-const minute = 60 * second;
-const hour = 60 * minute;
+export const second = 1000;
+export const minute = 60 * second;
+export const hour = 60 * minute;
 
 function pad(value) {
     if (value.toString().length === 1) {
