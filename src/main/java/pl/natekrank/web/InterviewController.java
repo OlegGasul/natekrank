@@ -1,8 +1,5 @@
 package pl.natekrank.web;
 
-import org.codehaus.jackson.map.ObjectMapper;
-import org.dozer.DozerBeanMapper;
-import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +10,6 @@ import pl.natekrank.service.SurveyService;
 import pl.natekrank.web.helper.DtoFactory;
 import pl.natekrank.web.helper.JsonFactory;
 
-import java.io.IOException;
 import java.util.Date;
 
 @Controller
