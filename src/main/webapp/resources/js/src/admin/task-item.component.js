@@ -42,8 +42,9 @@ function TaskItemController($state, TaskService) {
 
             if (this.task.questions.length !== 0) {
                 index = Math.max(index--, 0);
-
                 this.editQuestion(this.task.questions[index]);
+            } else {
+                this.selectedQuestion = null;
             }
         }
     };
