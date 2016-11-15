@@ -49,6 +49,11 @@ public class SurveyServiceImpl implements SurveyService {
     }
 
     @Override
+    public List<Survey> getSurveysByTask(Task task) {
+        return surveyRepository.findByTask(task);
+    }
+
+    @Override
     public Survey getSurveyByToken(String token) {
         return surveyRepository.findByToken(token);
     }

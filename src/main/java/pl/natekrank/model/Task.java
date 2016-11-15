@@ -2,7 +2,6 @@ package pl.natekrank.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -64,4 +63,10 @@ public class Task {
             this.addQuestions(questions);
         }
     }
+
+    @OneToMany
+    @JoinTable(name = "surveys",
+        joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "task_id")
+    )
+    private List<Survey> surveys;
 }

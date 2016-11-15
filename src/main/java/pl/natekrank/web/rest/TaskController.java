@@ -4,6 +4,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import pl.natekrank.model.Question;
 import pl.natekrank.model.Task;
+import pl.natekrank.service.SurveyService;
 import pl.natekrank.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,8 @@ import java.util.List;
 public class TaskController {
     @Autowired
     private TaskService taskService;
+    @Autowired
+    private SurveyService surveyService;
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Task> insert(@RequestBody Task task) {
