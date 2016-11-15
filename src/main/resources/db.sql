@@ -193,3 +193,6 @@ VALUES(1, 'ROLE_ADMIN');
 
 INSERT INTO tasks(owner_id, name, description, days_expired, minutes_for_solving)
 VALUES(1, 'Task #1', 'Task #1 description', 7, 90);
+
+ALTER TABLE surveys
+ADD COLUMN `days_expired` INT NULL;

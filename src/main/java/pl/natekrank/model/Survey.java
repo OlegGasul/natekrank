@@ -54,6 +54,9 @@ public class Survey {
     @Column(name = "last_name")
     private String lastName;
 
+    @Column(name = "days_expired")
+    private int daysExpired;
+
     @Column(name = "minutes_for_solving")
     private int minutesForSolving;
 

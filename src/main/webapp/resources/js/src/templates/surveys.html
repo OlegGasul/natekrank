@@ -11,11 +11,11 @@
     </thead>
     <tbody>
         <tr ng-repeat="survey in $ctrl.surveys" ui-sref="surveyItem({id: survey.id})">
-            <th scope="row">{{survey.id}}</th>
-            <td>{{survey.email}}</td>
-            <td>{{survey.token}}</td>
-            <td>{{survey.started}}</td>
-            <td>{{survey.finished}}</td>
+            <th scope="row" ui-sref="surveyItem({id: survey.id})">{{survey.id}}</th>
+            <td ui-sref="surveyItem({id: survey.id})">{{survey.email}}</td>
+            <td><a href="/natekrank/survey/{{survey.token}}">{{survey.token}}</a></td>
+            <td ui-sref="surveyItem({id: survey.id})">{{survey.started}}</td>
+            <td ui-sref="surveyItem({id: survey.id})">{{survey.finished}}</td>
             <td>
                 <button class="btn btn-warning"
                     ng-if="survey.sent"
