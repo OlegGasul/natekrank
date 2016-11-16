@@ -4,8 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.ApplicationContext;
-import org.springframework.core.env.Environment;
 import org.springframework.mail.MailException;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
@@ -15,10 +13,7 @@ import pl.natekrank.model.Survey;
 import pl.natekrank.repository.SurveyRepository;
 
 import javax.servlet.ServletContext;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Hashtable;
 
 @Component("surveyScheduler")
 @Transactional
@@ -36,7 +31,7 @@ public class SurveyScheduler {
     @Value("${mail.subject}")
     private String mailSubject;
 
-    public void processSurveys() {
+    private void processSendMessage() {
         List<Survey> surveys = repository.findBySentIsFalseOrderByIdAsc();
         for (Survey survey : surveys) {
             try {
@@ -44,19 +39,45 @@ public class SurveyScheduler {
                 message.setFrom(survey.getSender());
                 message.setTo(survey.getEmail());
                 message.setSubject(mailSubject);
-                message.setText(createMessageWithLink(survey));
+                message.setText(createSendToCandidateMessage(survey));
 
                 mailSender.send(message);
 
                 survey.setSent(true);
                 repository.save(survey);
-            } catch (MailException exception) {
+            } catch (Exception exception) {
                 LOGGER.error(exception.getMessage());
             }
         }
     }
 
-    private String createMessageWithLink(Survey survey) {
+    private void processNotifyMessage() {
+        List<Survey> surveys = repository.findByFinishedIsNotNullAndSenderNotifiedIsNull();
+
+        for (Survey survey : surveys) {
+            try {
+                SimpleMailMessage message = new SimpleMailMessage();
+                message.setFrom(survey.getSender());
+                message.setTo(survey.getEmail());
+                message.setSubject(mailSubject);
+                message.setText(createSenderNotificationMessage(survey));
+
+                mailSender.send(message);
+
+                survey.setSenderNotified(true);
+                repository.save(survey);
+            } catch (Exception exception) {
+                LOGGER.error(exception.getMessage());
+            }
+        }
+    }
+
+    public void processSurveys() {
+        processSendMessage();
+        processNotifyMessage();
+    }
+
+    private String createSendToCandidateMessage(Survey survey) {
         String message = survey.getMessage();
 
         StringBuilder builder = new StringBuilder();
@@ -65,6 +86,18 @@ public class SurveyScheduler {
                 .append(applicationUrl)
                 .append(servletContext.getContextPath())
                 .append("/survey/" + survey.getToken());
+        return builder.toString();
+    }
+
+    private String createSenderNotificationMessage(Survey survey) {
+        String message = survey.getMessage();
+
+        StringBuilder builder = new StringBuilder();
+        builder.append(message)
+                .append("\n")
+                .append(applicationUrl)
+                .append(servletContext.getContextPath())
+                .append("/result/" + survey.getToken());
         return builder.toString();
     }
 }

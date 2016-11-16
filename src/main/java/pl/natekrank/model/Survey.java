@@ -32,7 +32,7 @@ public class Survey {
     private String sender;
     private String email;
     private String message;
-    private boolean sent;
+    private Boolean sent;
 
     @Column(name = "token")
     private String token;
@@ -46,7 +46,7 @@ public class Survey {
     private Date finished;
 
     @Column(name = "sender_notified")
-    private boolean senderNotified;
+    private Boolean senderNotified;
 
     @Column(name = "first_name")
     private String firstName;
@@ -55,10 +55,10 @@ public class Survey {
     private String lastName;
 
     @Column(name = "days_expired")
-    private int daysExpired;
+    private Integer daysExpired;
 
     @Column(name = "minutes_for_solving")
-    private int minutesForSolving;
+    private Integer minutesForSolving;
 
     @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
     @Cascade(value = {org.hibernate.annotations.CascadeType.ALL})

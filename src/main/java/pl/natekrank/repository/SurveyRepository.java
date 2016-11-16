@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface SurveyRepository extends JpaRepository<Survey, Long> {
     List<Survey> findBySentIsFalseOrderByIdAsc();
+    List<Survey> findByFinishedIsNotNullAndSenderNotifiedIsNull();
     Survey findByToken(String token);
     List<Survey> findByTask(Task task);
 }
