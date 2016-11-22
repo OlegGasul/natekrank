@@ -20,9 +20,9 @@
     <context:component-scan base-package="pl.natekrank.validator" />
     <context:component-scan base-package="pl.natekrank.web" />
 
-    <task:scheduled-tasks scheduler="myScheduler">
-        <task:scheduled ref="surveyScheduler" method="processSurveys" cron="" fixed-delay="10000" />
-    </task:scheduled-tasks>
+    <!--<task:scheduled-tasks scheduler="myScheduler">-->
+        <!--<task:scheduled ref="surveyScheduler" method="processSurveys" cron="" fixed-delay="10000" />-->
+    <!--</task:scheduled-tasks>-->
 
     <task:scheduler id="myScheduler"/>
 

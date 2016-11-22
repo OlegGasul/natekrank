@@ -192,7 +192,70 @@ INSERT INTO user_roles(user_id, role)
 VALUES(1, 'ROLE_ADMIN');
 
 INSERT INTO tasks(owner_id, name, description, days_expired, minutes_for_solving)
-VALUES(1, 'Task #1', 'Task #1 description', 7, 90);
+VALUES(1, 'Task #1', 'Senior Java Developer interview questions', 7, 90);
+
+INSERT INTO questions(task_id, text, multiselect, orderNum)
+VALUES(1, 'Which four options describe the correct default values for array elements of the types indicated?', true, 0);
+INSERT INTO answers(question_id, text, is_right, orderNum)
+VALUES(1, 'int -> 0', true, 0);
+INSERT INTO answers(question_id, text, is_right, orderNum)
+VALUES(1, 'String -> "null"', false, 1);
+INSERT INTO answers(question_id, text, is_right, orderNum)
+VALUES(1, 'Dog -> null', false, 2);
+INSERT INTO answers(question_id, text, is_right, orderNum)
+VALUES(1, 'char -> ''\u0000''', false, 3);
+INSERT INTO answers(question_id, text, is_right, orderNum)
+VALUES(1, 'float -> 0.0f', false, 4);
+INSERT INTO answers(question_id, text, is_right, orderNum)
+VALUES(1, 'boolean -> true', false, 5);
+
+INSERT INTO questions(task_id, text, multiselect, orderNum)
+VALUES(1, 'Which one of these lists contains only Java programming language keywords?', true, 0);
+INSERT INTO answers(question_id, text, is_right, orderNum)
+VALUES(2, 'class, if, void, long, Int, continue', true, 0);
+INSERT INTO answers(question_id, text, is_right, orderNum)
+VALUES(2, 'goto, instanceof, native, finally, default, throws', false, 1);
+INSERT INTO answers(question_id, text, is_right, orderNum)
+VALUES(2, 'try, virtual, throw, final, volatile, transient', false, 2);
+INSERT INTO answers(question_id, text, is_right, orderNum)
+VALUES(2, 'strictfp, constant, super, implements, do', false, 3);
+INSERT INTO answers(question_id, text, is_right, orderNum)
+VALUES(2, 'byte, break, assert, switch, include', false, 4);
+
+INSERT INTO questions(task_id, text, multiselect, orderNum)
+VALUES(1, 'Which will legally declare, construct, and initialize an array?', true, 0);
+INSERT INTO answers(question_id, text, is_right, orderNum)
+VALUES(3, 'int [] myList = {"1", "2", "3"};', true, 0);
+INSERT INTO answers(question_id, text, is_right, orderNum)
+VALUES(3, 'int [] myList = (5, 8, 2);', false, 1);
+INSERT INTO answers(question_id, text, is_right, orderNum)
+VALUES(3, '	int myList [] [] = {4,9,7,0};', false, 2);
+INSERT INTO answers(question_id, text, is_right, orderNum)
+VALUES(3, 'int myList [] = {4, 3, 7};', false, 3);
+
+INSERT INTO questions(task_id, text, multiselect, orderNum)
+VALUES(1, 'Which is a reserved word in the Java programming language?', true, 0);
+INSERT INTO answers(question_id, text, is_right, orderNum)
+VALUES(4, 'method', true, 0);
+INSERT INTO answers(question_id, text, is_right, orderNum)
+VALUES(4, 'native', false, 1);
+INSERT INTO answers(question_id, text, is_right, orderNum)
+VALUES(4, 'subclasses', false, 2);
+INSERT INTO answers(question_id, text, is_right, orderNum)
+VALUES(4, 'reference', false, 3);
+INSERT INTO answers(question_id, text, is_right, orderNum)
+VALUES(4, 'array', false, 4);
+
+INSERT INTO questions(task_id, text, multiselect, orderNum)
+VALUES(1, 'Which is a valid keyword in java?', true, 0);
+INSERT INTO answers(question_id, text, is_right, orderNum)
+VALUES(5, 'interface', true, 0);
+INSERT INTO answers(question_id, text, is_right, orderNum)
+VALUES(5, 'string', false, 1);
+INSERT INTO answers(question_id, text, is_right, orderNum)
+VALUES(5, 'Float', false, 2);
+INSERT INTO answers(question_id, text, is_right, orderNum)
+VALUES(5, 'unsigned', false, 3);
 
 ALTER TABLE surveys
 ADD COLUMN `days_expired` INT NULL;
