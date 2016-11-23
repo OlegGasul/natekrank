@@ -35,7 +35,7 @@ public class InterviewController {
             return errorResponse(model, "Survey does't exists.");
         }
         if (survey.getFinished() != null) {
-            return errorResponse(model, "Survey has been ended.");
+            return "redirect:/result/" + token;
         }
         if (start != null && survey.getStarted() == null) {
             survey = surveyService.startSurvey(survey);
