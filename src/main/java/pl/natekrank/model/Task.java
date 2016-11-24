@@ -64,9 +64,24 @@ public class Task {
         }
     }
 
-    @OneToMany
-    @JoinTable(name = "surveys",
-        joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "task_id")
-    )
-    private List<Survey> surveys;
+    @OneToMany(fetch = FetchType.LAZY)
+    @Cascade(value = {org.hibernate.annotations.CascadeType.ALL})
+    @JoinColumn(name = "task_id", nullable = false, insertable = false, updatable = false)
+    @JsonManagedReference
+    private List<Survey> surveys = new LinkedList<>();
+
+    private void clearSurveys() {
+        this.surveys.clear();
+    }
+
+    private void addSurveys(Collection<Survey> surveys) {
+        this.surveys.addAll(surveys);
+    }
+
+    public void setSurveys(List<Survey> surveys) {
+        this.clearSurveys();
+        if (surveys != null) {
+            this.addSurveys(surveys);
+        }
+    }
 }

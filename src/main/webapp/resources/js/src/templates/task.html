@@ -63,9 +63,31 @@
             </div>
 
             <div class="tab-pane" id="tests-taken">
-                Tests taken
-
-                <em>TBD</em>
+                <table class="table table-hover taskList">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="survey in $ctrl.task.surveys" ui-sref="surveyItem({id: survey.id})">
+                        <th scope="row" ui-sref="surveyItem({id: survey.id})">{{survey.id}}</th>
+                        <td ui-sref="surveyItem({id: survey.id})">{{survey.email}}</td>
+                        <td><a href="/natekrank/survey/{{survey.token}}">{{survey.token}}</a></td>
+                        <td ui-sref="surveyItem({id: survey.id})">{{survey.started}}</td>
+                        <td ui-sref="surveyItem({id: survey.id})">{{survey.finished}}</td>
+                        <td>
+                            <button class="btn btn-warning"
+                                    ng-if="survey.sent"
+                                    ng-click="$ctrl.resendSurvey(survey)">
+                                Resend
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

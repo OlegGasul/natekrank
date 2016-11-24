@@ -22,7 +22,7 @@ public class Survey {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="task_id")
+    @JoinColumn(name="task_id", insertable = false, updatable = false)
     @JsonBackReference
     private Task task;
 
