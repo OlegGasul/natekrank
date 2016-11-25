@@ -12,6 +12,7 @@ public class SurveyDto {
     private Date started;
     private Date serverRequest;
     private int minutesForSolving;
+    private int taskId;
     private Date dueTo;
     private String token;
     private int score;

@@ -66,7 +66,7 @@ public class Task {
 
     @OneToMany(fetch = FetchType.LAZY)
     @Cascade(value = {org.hibernate.annotations.CascadeType.ALL})
-    @JoinColumn(name = "task_id", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "task_id")
     @JsonManagedReference
     private List<Survey> surveys = new LinkedList<>();
 
