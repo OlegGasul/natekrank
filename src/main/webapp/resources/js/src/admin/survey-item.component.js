@@ -6,7 +6,7 @@ function SurveyController($rootScope, $state, SurveyService) {
 
         SurveyService.saveSurvey(this.survey).then((response) => {
             this.survey = response.data;
-            $state.go('surveyItem', {id: this.survey.id});
+            $state.go('surveys');
         });
     };
 
