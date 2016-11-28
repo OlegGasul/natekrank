@@ -86,17 +86,20 @@ npm run build
 ### REST server interface
 For authentication used Spring security.
 
-#### Create task:
+#### Create task
 POST /rest/task
 
-Response
-Task object as JSON.
-
-#### Get task
+#### Get task:
 GET /rest/task/{id}
 
-Response
-Task object as JSON.
-
 #### Update task
-POST | PUT /rest/task/{id}
+PUT | POST /rest/task/{id}
+
+#### Create survey:
+POST /rest/survey
+
+#### Update survey:
+PUT | POST /rest/survey/{id}
+
+#### Get survey:
+POST /rest/survey
