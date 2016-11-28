@@ -4,6 +4,7 @@ function TaskItemController($state, TaskService) {
     this.saveTask = function() {
         TaskService.saveTask(this.task).then((response) => {
             this.task = response.data;
+            this.selectedQuestion = null;
             $state.go('task', {id: this.task.id});
         }, (response) => {
             console.log('saveTask error!');
