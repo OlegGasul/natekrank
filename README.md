@@ -82,3 +82,21 @@ To build for production (it's longer, but artifact size is smaller):
 ```sh
 npm run build
 ```
+
+### REST server interface
+For authentication used Spring security.
+
+#### Create task:
+POST /rest/task
+
+Response
+Task object as JSON.
+
+#### Get task
+GET /rest/task/{id}
+
+Response
+Task object as JSON.
+
+#### Update task
+POST | PUT /rest/task/{id}
