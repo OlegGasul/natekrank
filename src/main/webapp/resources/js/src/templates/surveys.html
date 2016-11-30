@@ -10,10 +10,10 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="survey in $ctrl.surveys" ui-sref="surveyItem({id: survey.id})">
+        <tr ng-repeat="survey in $ctrl.surveys">
             <th scope="row" ui-sref="surveyItem({id: survey.id})">{{survey.id}}</th>
             <td ui-sref="surveyItem({id: survey.id})">{{survey.email}}</td>
-            <td><a href="/natekrank/survey/{{survey.token}}">{{survey.token}}</a></td>
+            <td><a href="/natekrank/survey/{{survey.token}}" target="_blank">{{survey.token}}</a></td>
             <td ui-sref="surveyItem({id: survey.id})">{{survey.started}}</td>
             <td ui-sref="surveyItem({id: survey.id})">{{survey.finished}}</td>
             <td>
