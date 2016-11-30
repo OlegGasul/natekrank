@@ -1,6 +1,8 @@
 import taskQuestionTemplate from '../templates/question.html';
 
 function TaskQuestionController() {
+    var self = this;
+
     this.addNewAnswer = function() {
         if (!this.question.answers) {
             this.question.answers = [];
@@ -14,7 +16,7 @@ function TaskQuestionController() {
     };
 
     function removeAnswer(index) {
-        this.question.answers.splice(index, 1);
+        self.question.answers.splice(index, 1);
     };
 
     this.deleteAnswer = function(index) {
